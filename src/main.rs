@@ -1,3 +1,5 @@
+mod Q901;
+
 fn main() {
-    println!("Hello, world!");
+    println!("Hello Algo-rust!")
 }
