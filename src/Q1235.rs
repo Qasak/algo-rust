@@ -7,7 +7,8 @@ pub fn job_scheduling(start_time: Vec<i32>, end_time: Vec<i32>, profit: Vec<i32>
     // 小于等于x的最大值(] √
     // Minimum value greater than or equal to x [)
     // maximum value Less than or equal to x    (] √
-    fn bs(jobs: &Vec<Vec<i32>>, index: i32) -> i32 {
+    fn bs(jobs: &Vec<Vec<i32>>, index: usize) -> Option<usize> {
+        let index = index as i32;
         let (mut l, mut r) = (-1, index - 1);
         while l < r {
             let m = l + ((r - l + 1) >> 1);
@@ -17,12 +18,11 @@ pub fn job_scheduling(start_time: Vec<i32>, end_time: Vec<i32>, profit: Vec<i32>
                 l = m;
             }
         }
-        l
+        if l == -1 {None} else {Some(l as usize)}
     }
     for i in 1..n {
         jobs[i][3] = jobs[i][3].max(jobs[i - 1][3]);
-        let j = bs(&jobs, i as i32);
-        if j != -1 {
+        if let Some(j) = bs(&jobs, i) {
             jobs[i][3] = jobs[i][3].max(jobs[j as usize][3] + jobs[i][2]);
         }
         ret = ret.max((jobs[i][3]));
