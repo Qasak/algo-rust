@@ -1,3 +1,4 @@
+// leetcode 2022-10-24 CN
 pub fn partition_disjoint(nums: Vec<i32>) -> i32 {
     let n = nums.len();
     // when max of l <= min of r
