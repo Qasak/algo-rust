@@ -1,4 +1,4 @@
-// O(n^3)
+// O(n^4)
 pub fn largest_overlap(img1: Vec<Vec<i32>>, img2: Vec<Vec<i32>>) -> i32 {
     let mut idxes = vec![];
     let n = img1.len();
@@ -30,7 +30,7 @@ pub fn largest_overlap(img1: Vec<Vec<i32>>, img2: Vec<Vec<i32>>) -> i32 {
     ret
 }
 
-// O(n^2)
+// O(n^4)
 pub fn largest_overlap_n2(img1: Vec<Vec<i32>>, img2: Vec<Vec<i32>>) -> i32 {
     let n = img1.len();
     let idx1: Vec<(usize, usize)> = (0..n*n)
