@@ -47,7 +47,7 @@ pub fn largest_overlap_n2(img1: Vec<Vec<i32>>, img2: Vec<Vec<i32>>) -> i32 {
     // [0, 2 * n]
     for (x1, y1) in idx1 {
         for &(x2, y2) in &idx2 {
-            p[((x1 - x2) + n) % (2 * n)][((y1 - y2) + n) % (2 * n)] += 1;
+            p[(x1 - x2) + n][(y1 - y2) + n] += 1;
         }
     }
     p.into_iter().flatten().max().unwrap()
