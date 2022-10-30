@@ -54,7 +54,7 @@ pub fn shortest_path_dfs(mut grid: Vec<Vec<i32>>, k: i32) -> i32 {
 }
 
 pub fn shortest_path_bfs(grid: Vec<Vec<i32>>, k: i32) -> i32 {
-    let (n, m) = (grid.len() as i32, grid[0].len() as i32);/
+    let (n, m) = (grid.len() as i32, grid[0].len() as i32);
     // good prune!
     if k >= n + m - 2 { return n + m - 2; }
     let mut dq = VecDeque::from([(0,0,k,0)]);
