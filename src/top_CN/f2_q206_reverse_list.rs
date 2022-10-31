@@ -37,12 +37,11 @@ mod test{
         Some(Box::from(ListNode { val: 3, next:
         Some(Box::from(ListNode { val: 4, next:
         Some(Box::from(ListNode { val: 5, next: None })) })) })) })) }));
-        
+
         let mut cur = reverse_list(h);
-        while let Some(cur_node) = cur {
-            let nex = cur_node.next;
+        while let Some(mut cur_node) = cur {
             println!("{}", cur_node.val);
-            cur = nex;
+            cur = cur_node.next;
         }
     }
 }
