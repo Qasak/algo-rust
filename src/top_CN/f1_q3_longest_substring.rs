@@ -20,3 +20,20 @@ pub fn length_of_longest_substring(s: String) -> i32 {
     }
     ret as i32
 }
+
+pub fn length_of_longest_substring_1(s: String) -> i32 {
+    let n = s.len();
+    let mut left: Vec<i32> = vec![-1; 128];
+    let s = s.chars().collect::<Vec<char>>();
+    let mut l = -1;
+    let mut ret = 0;
+    for r in 0..n {
+        // maintain left bound
+        l = l.max(left[s[r] as usize]);
+        // cur len
+        ret = ret.max(r as i32 - l);
+        // update current item's last index
+        left[s[r] as usize] = r as i32;
+    }
+    ret as i32
+}
