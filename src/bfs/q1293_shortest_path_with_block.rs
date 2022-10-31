@@ -53,6 +53,40 @@ pub fn shortest_path_dfs(mut grid: Vec<Vec<i32>>, k: i32) -> i32 {
     if res >= 0x3f3f3f3f {-1} else {res}
 }
 
+pub fn shortest_path_bfs1(grid: Vec<Vec<i32>>, k: i32) -> i32 {
+    let n = grid.len();
+    let m = grid[0].len();
+    let mut q = VecDeque::new();
+    let mut vis = HashSet::new();
+    if k as usize >= n + m - 2 {
+        return (n + m - 2) as i32;
+    }
+    // i j k
+    q.push_back((0, 0, k));
+    let mut step = 0;
+    while !q.is_empty() {
+        let len = q.len();
+        for i in 0..len {
+            if let Some((i, j, k)) = q.pop_front() {
+                if i == n - 1 && j == m - 1 {
+                    return step;
+                }
+                for (ii, jj) in vec![(i - 1, j), (i, j + 1), (i + 1, j), (i, j - 1)] {
+                    if 0 <= ii && ii < n && 0 <= jj && jj < m  {
+                        let kk = k - grid[ii][jj];
+                        if kk >= 0 && !vis.contains(&(ii, jj, kk)) {
+                            q.push_back((ii, jj, kk));
+                            vis.insert((ii, jj, kk));
+                        }
+                    }
+                }
+            }
+        }
+        step += 1;
+    }
+    -1
+}
+
 pub fn shortest_path_bfs(grid: Vec<Vec<i32>>, k: i32) -> i32 {
     let (n, m) = (grid.len() as i32, grid[0].len() as i32);
     // good prune!
@@ -63,7 +97,7 @@ pub fn shortest_path_bfs(grid: Vec<Vec<i32>>, k: i32) -> i32 {
         if i == n-1 && j == m-1 { return step; }
         // nice condition!
         for (ii,jj) in vec![(i+1,j),(i-1,j),(i,j+1),(i,j-1)]{
-            if (0 <= ii && ii < n && 0 <= jj && jj < m){
+            if 0 <= ii && ii < n && 0 <= jj && jj < m {
                 // nice try!
                 let kk = k - grid[ii as usize][jj as usize];
                 if kk >= 0{
