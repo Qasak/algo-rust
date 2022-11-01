@@ -25,3 +25,14 @@ pub fn array_strings_are_equal_1(word1: Vec<String>, word2: Vec<String>) -> bool
     i == word1.len() && j == word2.len()
 }
 
+pub fn array_strings_are_equal_2(word1: Vec<String>, word2: Vec<String>) -> bool {
+    let mut it1 = word1.into_iter().flat_map(|s| s.chars().collect::<Vec<_>>());
+    let mut it2 = word2.into_iter().flat_map(|s| s.chars().collect::<Vec<_>>());
+    loop {
+        match (it1.next(), it2.next()) {
+            (Some(a), Some(b)) => {if a != b {return false;}}
+            (None, None) => return true,
+            _ => return false
+        }
+    }
+}
