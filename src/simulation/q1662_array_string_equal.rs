@@ -26,8 +26,8 @@ pub fn array_strings_are_equal_1(word1: Vec<String>, word2: Vec<String>) -> bool
 }
 
 pub fn array_strings_are_equal_2(word1: Vec<String>, word2: Vec<String>) -> bool {
-    let mut it1 = word1.into_iter().flat_map(|s| s.chars().collect::<Vec<_>>());
-    let mut it2 = word2.into_iter().flat_map(|s| s.chars().collect::<Vec<_>>());
+    let mut it1 = word1.iter().flat_map(|s| s.chars());
+    let mut it2 = word2.iter().flat_map(|s| s.chars());
     loop {
         match (it1.next(), it2.next()) {
             (Some(a), Some(b)) => {if a != b {return false;}}
