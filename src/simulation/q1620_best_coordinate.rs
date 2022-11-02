@@ -32,3 +32,24 @@ pub fn best_coordinate(towers: Vec<Vec<i32>>, radius: i32) -> Vec<i32> {
     }
     ret
 }
+
+// use hypot() and simplify
+pub fn best_coordinate_1(towers: Vec<Vec<i32>>, radius: i32) -> Vec<i32> {
+    let (mut ret, mut max_distance) = (vec![0; 2], 0);
+    for x in 0..=50 {
+        for y in 0..=50 {
+            let mut sum = 0;
+            for tower in towers.iter() {
+                let d = ((tower[0] - x as i32) as f64).hypot((tower[1] - y as i32) as f64);
+                if d <= radius as f64 { sum += ((tower[2] as f64) / (1 as f64 + d)).floor() as i32; }
+            }
+            // simplify dict order check
+            if sum > max_distance || (sum == max_distance && (x < ret[0] || x == ret[0] && y < ret[1])) {
+                max_distance = sum;
+                // simplify ret update
+                ret = vec![x, y];
+            }
+        }
+    }
+    ret
+}
