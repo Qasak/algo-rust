@@ -11,12 +11,11 @@ pub fn best_coordinate(towers: Vec<Vec<i32>>, radius: i32) -> Vec<i32> {
                 let signal = tr[2];
                 let d = (((x - xx) * (x - xx) + (y - yy) * (y - yy)) as f32).sqrt();
                 if d <= (radius as f32) {
-                    let w = signal / (1 + (d as i32));
+                    // error cast `let w = signal / (1 + (d as i32));`
+                    let w = ((signal as f32) / (1.0 + d)) as i32;
                     cur += w;
                 }
-            }
-            if x == 24 && y == 45 {
-                println!("{cur}, {max}");
+
             }
             if cur > max {
                 max = cur;
