@@ -1,8 +1,7 @@
-// use contains
+// bf: use .contains()
 pub fn max_repeating(sequence: String, word: String) -> i32 {
     let (mut cnt, mut ret, mut cur) = (1, 0, String::from(word.as_str()));
     while cur.len() <= sequence.len() {
-        let x = &cur;
         if sequence.contains(&cur) {
             ret = cnt;
         }
@@ -12,7 +11,7 @@ pub fn max_repeating(sequence: String, word: String) -> i32 {
     ret
 }
 
-// hand write O(nm) contains
+// bf: handwritten version O(nm) contains
 pub fn max_repeating_1(sequence: String, word: String) -> i32 {
     fn contains(a: &String, b: &String) -> bool {
         if a.len() < b.len() {
@@ -38,3 +37,19 @@ pub fn max_repeating_1(sequence: String, word: String) -> i32 {
     }
     ret
 }
+
+// dp: O(nm)
+pub fn max_repeating_2(sequence: String, word: String) -> i32 {
+    let (n, m) = (sequence.len(), word.len());
+    // f[i]: The maximum repeat value of `sequence[0..i]` / [0, i)
+    // if m length slice of seq equal to word, f[i] = f[i - m] + 1
+    let mut f = vec![0; n + 1];
+    for i in m..=n {
+        // sequence[0..m) to sequence[(n - m)..n)
+        if &sequence.as_bytes()[(i - m)..i] == word.as_bytes() {
+            f[i] = f[i - m] + 1;
+        }
+    }
+    *f.iter().max().unwrap()
+}
+
