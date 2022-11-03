@@ -1,4 +1,7 @@
-// bf: use .contains()
+// use .contains(), rust use [Two-Way Algorithm](https://en.wikipedia.org/wiki/Two-way_string-matching_algorithm) to implement it.
+// it can be viewed as a combination of the forward-going Knuth–Morris–Pratt algorithm (KMP) and the backward-running Boyer–Moore string-search algorithm (BM)
+// time: O(n)
+// https://github.com/rust-lang/rust/blob/946a88a989acdcc3b0d05a666eaac0db414ec2cd/library/core/src/str/pattern.rs#L1226
 pub fn max_repeating(sequence: String, word: String) -> i32 {
     let (mut cnt, mut ret, mut cur) = (1, 0, String::from(word.as_str()));
     while cur.len() <= sequence.len() {
@@ -52,4 +55,17 @@ pub fn max_repeating_2(sequence: String, word: String) -> i32 {
     }
     *f.iter().max().unwrap()
 }
+
+
+// O(m + n) Rabin-Karp
+// The bottleneck of dp solution is that it takes O(m) complexity to compare the strings each time.
+// This process can be optimised with 'string hashing' ：the Rabin-Karp algo
+
+
+
+// O(m + n) kmp
+
+
+
+
 
