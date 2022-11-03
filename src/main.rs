@@ -5,12 +5,13 @@ mod dfs;
 mod bfs;
 mod queue;
 mod binary_search;
-mod hash;
+mod hash_map;
 mod back_track;
 mod double_ptr;
 mod linked_list;
 mod top_cn;
 mod strings;
+mod greedy;
 
 fn main() {
     println!("Hello algo-rust!")
