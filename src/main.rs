@@ -10,6 +10,7 @@ mod back_track;
 mod double_ptr;
 mod linked_list;
 mod top_cn;
+mod strings;
 
 fn main() {
     println!("Hello algo-rust!")
