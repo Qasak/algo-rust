@@ -1,15 +1,15 @@
 pub fn ambiguous_coordinates(s: String) -> Vec<String> {
     /// add `.` before idx
-    fn create_coord(arr: &[char], idx: usize) -> Option<String> {
+    fn create_coord(arr: &str, idx: usize) -> Option<String> {
         if idx == 0 {
             // has prefix zero(s) => None
-            if arr.len() > 1 && arr[0] == '0' {None} else {Some(arr.iter().collect::<String>())}
+            if arr.len() > 1 && arr.chars().nth(0) == Some('0') {None} else {Some(String::from(arr))}
         } else {
             // pre has prefix zero(s) or suf has suffix zero(s) => None
-            if arr[0..idx].len() > 1 && arr[0] == '0' || arr[arr.len() - 1] == '0' {None} else {Some(format!("{}.{}", arr[0..idx].iter().collect::<String>(), arr[idx..arr.len()].iter().collect::<String>()))}
+            if arr[0..idx].len() > 1 && arr.chars().nth(0) == Some('0') || arr.chars().nth(arr.len() - 1) == Some('0') {None} else {Some(format!("{}.{}", String::from(&arr[0..idx]), String::from(&arr[idx..arr.len()])))}
         }
     }
-    let v = s.as_bytes()[1..s.len() - 1].iter().map(|&c| c as char).collect::<Vec<_>>();
+    let v = &s[1..s.len() - 1];
     let mut ret = vec![];
     // split v to two coordinates
     for i in 1..v.len() {
