@@ -1,43 +1,23 @@
 pub fn ambiguous_coordinates(s: String) -> Vec<String> {
     /// add `.` before idx
-    fn create_frac(arr: &[char], idx: usize) -> Option<String> {
+    fn create_coord(arr: &[char], idx: usize) -> Option<String> {
         if idx == 0 {
-            let all = arr.iter().collect::<String>();
-            let all_val: u32 = all.parse().unwrap();
-            // println!("{all}, {all_val}");
-            // has prefix zero(s)
-            if all_val.to_string().len() != all.len() {
-                None
-            } else {
-                Some(all)
-            }
+            // has prefix zero(s) => None
+            if arr.len() > 1 && arr[0] == '0' {None} else {Some(arr.iter().collect::<String>())}
         } else {
-
-            let (pre, suf) =(arr[0..idx].iter().collect::<String>(), arr[idx..arr.len()].iter().collect::<String>()) ;
-            let pre_val :u32 = pre.parse().unwrap();
-            let suf_val :u32 = suf.parse().unwrap();
-            // println!("{pre}, {pre_val}, {suf}, {suf_val}");
-            // pre has prefix zero(s) or suf has suffix zero(s) or pre == suf == 0
-            if pre_val.to_string().len() != pre.len() || suf_val % 10 == 0 || (pre_val == 0) && (suf_val == 0) {
-                None
-            } else {
-                Some(format!("{}.{}", pre, suf))
-            }
+            // pre has prefix zero(s) or suf has suffix zero(s) => None
+            if arr[0..idx].len() > 1 && arr[0] == '0' || arr[arr.len() - 1] == '0' {None} else {Some(format!("{}.{}", arr[0..idx].iter().collect::<String>(), arr[idx..arr.len()].iter().collect::<String>()))}
         }
     }
-    let mut s = s;
-    let s = s.strip_prefix("(").unwrap();
-    let s = s.strip_suffix(")").unwrap();
-    let v = s.chars().collect::<Vec<_>>();
+    let v = s.as_bytes()[1..s.len() - 1].iter().map(|&c| c as char).collect::<Vec<_>>();
     let mut ret = vec![];
-    // split v to two coordinate
+    // split v to two coordinates
     for i in 1..v.len() {
         let (x, y) = (&v[0..i], &v[i..v.len()]);
-        // println!("{:?} {:?}", x, y);
         // add `.` to each coordinate
         for p in 0..x.len() {
             for q in 0..y.len() {
-                if let (Some(x_co), Some(y_co)) = (create_frac(x, p), create_frac(y, q)) {
+                if let (Some(x_co), Some(y_co)) = (create_coord(x, p), create_coord(y, q)) {
                     ret.push(format!("({}, {})", x_co, y_co));
                 }
             }
