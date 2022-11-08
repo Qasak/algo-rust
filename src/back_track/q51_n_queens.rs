@@ -46,3 +46,5 @@ pub fn solve_n_queens_1(n: i32) -> Vec<Vec<String>> {
     dfs(&mut ret, &mut path, 0, 0, 0, 0);
     ret
 }
+
+
