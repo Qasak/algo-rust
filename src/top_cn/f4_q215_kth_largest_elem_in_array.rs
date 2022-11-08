@@ -6,6 +6,7 @@ pub fn find_kth_largest(mut nums: Vec<i32>, k: i32) -> i32 {
             return;
         }
         let (le, eq) = partition(arr, l, r);
+        // usize overflow
         if k as i32 <= (le as i32 - 1) {
             qss(arr, l, le - 1, k);
         }
@@ -32,6 +33,7 @@ pub fn find_kth_largest(mut nums: Vec<i32>, k: i32) -> i32 {
                 eq += 1; le += 1;
             } else {
                 swap(arr, eq, gt);
+                // usize overflow
                 if gt == 0 {
                     break;
                 }
