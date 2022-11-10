@@ -7,6 +7,7 @@ pub fn remove_duplicates(s: String) -> String {
             stk.push(ch);
         }
     }
+    // same as stk.into_iter().collect()
     stk.into_iter().collect::<String>()
 }
 
