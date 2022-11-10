@@ -1,3 +1,5 @@
+use std::collections::{HashSet, VecDeque};
+
 // dfs bf (TLE)
 pub fn shortest_path_all_keys(grid: Vec<String>) -> i32 {
     let (n, m) = (grid.len(), grid[0].len());
@@ -32,6 +34,7 @@ pub fn shortest_path_all_keys(grid: Vec<String>) -> i32 {
         //     println!("{:?}", ((i, j), &cur_keys, step));
         // }
         let (n, m) = (g.len(), g[0].len());
+        // println!("{}", vis.len());
         let (mut k1, mut k2) = (cur_keys.clone(), keys.clone());
         k1.sort(); k2.sort();
         if k1 == k2 {
@@ -40,8 +43,9 @@ pub fn shortest_path_all_keys(grid: Vec<String>) -> i32 {
             return;
         }
 
-        for (ii, jj) in [(i - 1, j), (i, j + 1), (i + 1, j), (i, j - 1)] {
-            if ii >= 0 && ii < n && jj >= 0 && jj < m {
+        for (ii, jj) in [(i as i32 - 1, j as i32), (i as i32, j as i32 + 1), (i as i32 + 1, j as i32), (i as i32, j as i32 - 1)] {
+            if ii >= 0 && ii < n as i32 && jj >= 0 && jj < m as i32 {
+                let ii = ii as usize; let jj = jj as usize;
                 let nxt_grid = g[ii][jj];
                 // can't move situations is:
                 // nxt_grid
@@ -73,4 +77,19 @@ pub fn shortest_path_all_keys(grid: Vec<String>) -> i32 {
         }
     }
     if ans == i32::MAX {-1} else {ans}
+}
+
+#[cfg(test)]
+mod test{
+    use crate::back_track::q864_shortest_path_all_keys::{shortest_path_all_keys, shortest_path_all_keys_bfs};
+
+    #[test]
+    fn f() {
+        let grid = ["..#.#.#.##",".#.#....#.","..#.......",".......#..","......#...","#..###a...","..##....#A",".....#.#.#",".#......##","#..@.##.#."];
+        // let grid = ["Dd#b@",".fE.e","##.B.","#.cA.","aF.#C"];
+        let g = grid.iter().map(|s| s.to_string()).collect::<Vec<String>>();
+        // println!("{}", shortest_path_all_keys(g));
+        println!("{}", shortest_path_all_keys_bfs(g));
+
+    }
 }
