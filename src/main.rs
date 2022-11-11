@@ -12,6 +12,7 @@ mod linked_list;
 mod top_cn;
 mod strings;
 mod greedy;
+mod weekly_contest;
 
 fn main() {
     println!("Hello algo-rust!")
