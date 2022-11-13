@@ -25,5 +25,6 @@ pub fn reverse_words(s: String) -> String {
 
 // api
 pub fn reverse_words_api(s: String) -> String {
-    s.split_whitespace().rev().collect::<Vec<&str>>().join(" ")
+    // same as `s.split_whitespace().rev().collect::<Vec<&str>>().join(" ")`
+    s.split_whitespace().rev().collect::<Vec<_>>().join(" ")
 }
