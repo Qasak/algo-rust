@@ -13,6 +13,7 @@ mod top_cn;
 mod strings;
 mod greedy;
 mod weekly_contest;
+mod binary_heap;
 
 fn main() {
     println!("Hello algo-rust!")
