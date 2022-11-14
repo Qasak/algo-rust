@@ -14,6 +14,7 @@ mod strings;
 mod greedy;
 mod weekly_contest;
 mod binary_heap;
+mod graph;
 
 fn main() {
     println!("Hello algo-rust!")
