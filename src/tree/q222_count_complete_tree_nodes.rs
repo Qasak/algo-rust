@@ -33,3 +33,34 @@ pub fn count_nodes(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
     dfs(&root, &mut cnt);
     cnt
 }
+
+// naive solution 2
+pub fn count_nodes_1(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+    fn dfs(root: Option<Rc<RefCell<TreeNode>>>, cnt: &mut i32) {
+        if let Some(node) = root {
+            *cnt += 1;
+            let mut node = node.borrow_mut();
+            dfs(node.left.take(), cnt);
+            dfs(node.right.take(), cnt);
+        }
+    }
+    let mut cnt = 0;
+    dfs(root, &mut cnt);
+    cnt
+}
+
+// naive solution 3
+pub fn count_nodes_2(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+    fn dfs(root: &Rc<RefCell<TreeNode>>) -> i32 {
+        1 + if let Some(v) = &root.borrow().left {
+            dfs(&v)
+        } else {0}
+            + if let Some(v) = &root.borrow().right {
+            dfs(&v)
+        } else {0}
+    }
+    if let Some(v) = root {
+        dfs(&v)
+    } else {0}
+}
+
