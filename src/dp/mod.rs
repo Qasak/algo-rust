@@ -8,3 +8,4 @@ mod q132_palindrome_partitioning_ii;
 mod q790_num_tilings;
 mod q805_split_array_same_average;
 mod q416_can_partition;
+mod q1049_last_stone_weight_ii;
