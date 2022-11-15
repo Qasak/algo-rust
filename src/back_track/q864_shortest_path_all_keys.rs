@@ -81,7 +81,7 @@ pub fn shortest_path_all_keys(grid: Vec<String>) -> i32 {
 
 #[cfg(test)]
 mod test{
-    use crate::back_track::q864_shortest_path_all_keys::{shortest_path_all_keys, shortest_path_all_keys_bfs};
+    use crate::back_track::q864_shortest_path_all_keys::{shortest_path_all_keys};
 
     #[test]
     fn f() {
@@ -89,7 +89,6 @@ mod test{
         // let grid = ["Dd#b@",".fE.e","##.B.","#.cA.","aF.#C"];
         let g = grid.iter().map(|s| s.to_string()).collect::<Vec<String>>();
         // println!("{}", shortest_path_all_keys(g));
-        println!("{}", shortest_path_all_keys_bfs(g));
 
     }
 }

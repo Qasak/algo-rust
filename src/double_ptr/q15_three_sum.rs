@@ -22,3 +22,13 @@ pub fn three_sum(nums: Vec<i32>) -> Vec<Vec<i32>> {
     }
     ret
 }
+
+#[cfg(test)]
+mod test {
+    use crate::double_ptr::q15_three_sum::three_sum;
+
+    #[test]
+    fn f() {
+        println!("{:?}", three_sum(vec![-4,-3,-2,1,4,-51,22,32,0,52]));
+    }
+}
