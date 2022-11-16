@@ -1,3 +1,4 @@
+use std::borrow::Borrow;
 use std::cell::RefCell;
 use std::rc::Rc;
 
@@ -18,13 +19,16 @@ impl TreeNode {
     }
   }
 }
-
+type OptNode = Option<Rc<RefCell<TreeNode>>>;
 // naive recursive
-pub fn count_nodes(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-    fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, cnt: &mut i32) {
+pub fn count_nodes(root: OptNode) -> i32 {
+    fn dfs(root: &OptNode, cnt: &mut i32) {
         if let Some(node) = root {
             *cnt += 1;
+            // let node = &**node;
+            // let node = node.as_ref();
             let node = node.borrow();
+
             dfs(&node.left, cnt);
             dfs(&node.right, cnt);
         }
@@ -35,8 +39,8 @@ pub fn count_nodes(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
 }
 
 // naive solution 2
-pub fn count_nodes_1(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-    fn dfs(root: Option<Rc<RefCell<TreeNode>>>, cnt: &mut i32) {
+pub fn count_nodes_1(root: OptNode) -> i32 {
+    fn dfs(root: OptNode, cnt: &mut i32) {
         if let Some(node) = root {
             *cnt += 1;
             let mut node = node.borrow_mut();
@@ -50,7 +54,7 @@ pub fn count_nodes_1(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
 }
 
 // naive solution 3
-pub fn count_nodes_2(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+pub fn count_nodes_2(root: OptNode) -> i32 {
     fn dfs(root: &Rc<RefCell<TreeNode>>) -> i32 {
         1 + if let Some(v) = &root.borrow().left {
             dfs(&v)

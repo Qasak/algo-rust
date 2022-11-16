@@ -16,6 +16,7 @@ mod weekly_contest;
 mod binary_heap;
 mod graph;
 mod tree;
+mod sort;
 
 fn main() {
     println!("Hello algo-rust!")
