@@ -17,6 +17,7 @@ mod binary_heap;
 mod graph;
 mod tree;
 mod sort;
+mod sliding_window;
 
 fn main() {
     println!("Hello algo-rust!")
