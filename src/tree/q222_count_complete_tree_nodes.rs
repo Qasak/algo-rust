@@ -21,16 +21,27 @@ impl TreeNode {
 }
 type OptNode = Option<Rc<RefCell<TreeNode>>>;
 // naive recursive
-pub fn count_nodes(root: OptNode) -> i32 {
-    fn dfs(root: &OptNode, cnt: &mut i32) {
+pub fn count_nodes(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+    fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, cnt: &mut i32) {
         if let Some(node) = root {
             *cnt += 1;
             // let node = &**node;
             // let node = node.as_ref();
             let node = node.borrow();
-
+            let x = &node.left;
             dfs(&node.left, cnt);
             dfs(&node.right, cnt);
+        }
+    }
+    // same as 
+    fn dfs1(root: &Option<Rc<RefCell<TreeNode>>>, cnt: &mut i32) {
+        if root.is_some() {
+            *cnt += 1;
+            let root = root.as_ref().unwrap().borrow();
+            let x = &root.left;
+            let y = &root.right;
+            dfs(x, cnt);
+            dfs(y, cnt);
         }
     }
     let mut cnt = 0;
@@ -54,7 +65,7 @@ pub fn count_nodes_1(root: OptNode) -> i32 {
 }
 
 // naive solution 3
-pub fn count_nodes_2(root: OptNode) -> i32 {
+pub fn count_nodes_2(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
     fn dfs(root: &Rc<RefCell<TreeNode>>) -> i32 {
         1 + if let Some(v) = &root.borrow().left {
             dfs(&v)
@@ -66,5 +77,16 @@ pub fn count_nodes_2(root: OptNode) -> i32 {
     if let Some(v) = root {
         dfs(&v)
     } else {0}
+}
+
+pub fn count_nodes_3(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+    match root {
+        None => 0,
+        Some(node) => {
+            let x = &node.borrow().right;
+            1 + Solution::count_nodes_3(node.as_ref().borrow().right.clone())
+                + Solution::count_nodes_3(node.as_ref().borrow().left.clone())
+        }
+    }
 }
 
