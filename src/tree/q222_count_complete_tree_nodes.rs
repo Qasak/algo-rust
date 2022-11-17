@@ -33,15 +33,12 @@ pub fn count_nodes(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
             dfs(&node.right, cnt);
         }
     }
-    // same as 
+    // same as
     fn dfs1(root: &Option<Rc<RefCell<TreeNode>>>, cnt: &mut i32) {
         if root.is_some() {
             *cnt += 1;
-            let root = root.as_ref().unwrap().borrow();
-            let x = &root.left;
-            let y = &root.right;
-            dfs(x, cnt);
-            dfs(y, cnt);
+            dfs(&root.as_ref().unwrap().borrow().left, cnt);
+            dfs(&root.as_ref().unwrap().borrow().right, cnt);
         }
     }
     let mut cnt = 0;
@@ -83,9 +80,8 @@ pub fn count_nodes_3(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
     match root {
         None => 0,
         Some(node) => {
-            let x = &node.borrow().right;
-            1 + Solution::count_nodes_3(node.as_ref().borrow().right.clone())
-                + Solution::count_nodes_3(node.as_ref().borrow().left.clone())
+            1 + count_nodes_3(node.as_ref().borrow().right.clone())
+                + count_nodes_3(node.as_ref().borrow().left.clone())
         }
     }
 }
