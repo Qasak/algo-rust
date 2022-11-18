@@ -18,6 +18,7 @@ mod graph;
 mod tree;
 mod sort;
 mod sliding_window;
+mod contribution;
 
 fn main() {
     println!("Hello algo-rust!")
