@@ -7,3 +7,4 @@ mod q1706_find_ball;
 mod q1620_best_coordinate;
 mod q764_plus_sign_in_matrix;
 mod q223_rectangle_area;
+mod q263_ugly_number;
