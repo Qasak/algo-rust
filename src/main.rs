@@ -19,6 +19,7 @@ mod tree;
 mod sort;
 mod sliding_window;
 mod contribution;
+mod convex_hull;
 
 fn main() {
     println!("Hello algo-rust!")
