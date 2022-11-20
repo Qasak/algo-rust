@@ -1,3 +1,4 @@
+// use index
 pub fn calculate(s: String) -> i32 {
     // -(a - (b - c))
     let (mut sign, mut stk, cs, n, mut i, mut ans) = (1, vec![], s.chars().collect::<Vec<char>>(), s.len(), 0, 0);
@@ -18,5 +19,32 @@ pub fn calculate(s: String) -> i32 {
         }
         i += 1;
     }
+    ans
+}
+// use match
+pub fn calculate_1(s: String) -> i32 {
+    // -(a - (b - c))
+    let (mut ans, mut cur, mut sign, mut stk) = (0, 0, 1, vec![]);
+    stk.push(sign);
+    for ch in s.chars() {
+        match ch {
+            '(' => {
+                stk.push(sign);
+            }
+            ')' => {
+                stk.pop();
+            }
+            '+' | '-' => {
+                ans += sign * cur;
+                sign = *stk.last().unwrap() * if ch == '+' { 1 } else { -1 };
+                cur = 0;
+            }
+            '0'..='9' => {
+                cur = cur * 10 + (ch as u8 - b'0') as i32;
+            }
+            _ => {}
+        }
+    }
+    ans += sign * cur;
     ans
 }
