@@ -33,5 +33,24 @@ pub fn search_range(nums: Vec<i32>, target: i32) -> Vec<i32> {
             l as i32
         }
     }
+
+    // another bs2, totally same
+    // fn bs2(nums: &Vec<i32>, target: i32) -> i32 {
+    //     let n = nums.len();
+    //     let (mut l, mut r) = (0, n);
+    //     while(l < r) {
+    //         let m = l + (r - l) / 2;
+    //         if(nums[m] <= target) {
+    //             l = m + 1;
+    //         } else {
+    //             r = m;
+    //         }
+    //     }
+    //     if l == 0 || nums[l as usize - 1] != target {
+    //         return -1;
+    //     }
+    //     return l as i32 - 1;
+    // }
+
     vec![bs1(&nums, target), bs2(&nums, target)]
 }
