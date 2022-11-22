@@ -1,5 +1,5 @@
 pub fn nth_magical_number(n: i32, a: i32, b: i32) -> i32 {
-    let g: i64 = 1000000007;
+    let g = 1e9 as i64 + 7;
     let (a, b, n) = (a as i64, b as i64, n as i64);
     fn gcd(a: i64, b: i64) -> i64 {
         if b == 0 {a} else {gcd(b, a % b)}
