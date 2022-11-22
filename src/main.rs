@@ -21,6 +21,7 @@ mod sliding_window;
 mod contribution;
 mod convex_hull;
 mod tricky;
+mod math;
 
 fn main() {
     println!("Hello algo-rust!")
