@@ -22,7 +22,7 @@ pub fn solve_n_queens(n: i32) -> Vec<Vec<String>> {
     ret
 }
 
-// bit_wise
+// bitwise
 pub fn solve_n_queens_1(n: i32) -> Vec<Vec<String>> {
     fn dfs(ret: &mut Vec<Vec<String>>, path: &mut Vec<Vec<char>>, col: i32, d1: i32, d2: i32, i: usize) {
         let n = path.len();
