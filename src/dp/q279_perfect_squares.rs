@@ -23,6 +23,5 @@ pub fn num_squares_1(n: i32) -> i32 {
             .min()
             .unwrap();
     }
-
     f[n]
 }

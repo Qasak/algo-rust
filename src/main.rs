@@ -22,6 +22,7 @@ mod contribution;
 mod convex_hull;
 mod tricky;
 mod math;
+mod bit_wise;
 
 fn main() {
     println!("Hello algo-rust!")
