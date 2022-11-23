@@ -10,3 +10,4 @@ mod q805_split_array_same_average;
 mod q416_can_partition;
 mod q1049_last_stone_weight_ii;
 mod q279_perfect_squares;
+mod q795_num_subarray_bounded_max;
