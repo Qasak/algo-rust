@@ -1,7 +1,6 @@
 pub fn search_range(nums: Vec<i32>, target: i32) -> Vec<i32> {
-    fn bs1(nums: &Vec<i32>, target: i32) -> i32 {
-        let n = nums.len();
-        let (mut l, mut r) = (0, n);
+    fn lb(nums: &Vec<i32>, target: i32) -> usize {
+        let (mut l, mut r) = (0, nums.len());
         while l < r {
             let m = l + (r - l) / 2;
             if nums[m] < target {
@@ -10,47 +9,9 @@ pub fn search_range(nums: Vec<i32>, target: i32) -> Vec<i32> {
                 r = m;
             }
         }
-        return if l == n || nums[l] != target {
-            -1
-        } else {
-            l as i32
-        }
+        l
     }
-    fn bs2(nums: &Vec<i32>, target: i32) -> i32 {
-        let n = nums.len() as i32;
-        let (mut l, mut r) = (-1, n - 1);
-        while l < r {
-            let m = l + (r - l + 1) / 2;
-            if nums[m as usize] > target {
-                r = m - 1;
-            } else {
-                l = m;
-            }
-        }
-        return if l == -1 || nums[l as usize] != target {
-            -1
-        } else {
-            l as i32
-        }
-    }
-
-    // another bs2, totally same
-    // fn bs2(nums: &Vec<i32>, target: i32) -> i32 {
-    //     let n = nums.len();
-    //     let (mut l, mut r) = (0, n);
-    //     while(l < r) {
-    //         let m = l + (r - l) / 2;
-    //         if(nums[m] <= target) {
-    //             l = m + 1;
-    //         } else {
-    //             r = m;
-    //         }
-    //     }
-    //     if l == 0 || nums[l as usize - 1] != target {
-    //         return -1;
-    //     }
-    //     return l as i32 - 1;
-    // }
-
-    vec![bs1(&nums, target), bs2(&nums, target)]
+    let (n, ll, rr) = (nums.len(), lb(&nums, target), lb(&nums, target + 1));
+    vec![if ll != n && nums[ll] == target {ll as i32} else {-1},
+         if rr != 0 && nums[rr - 1] == target {(rr - 1) as i32} else {-1}]
 }
