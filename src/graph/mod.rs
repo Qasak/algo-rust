@@ -1,1 +1,2 @@
 mod q947_remove_stones;
+mod q882_reachable_nodes;
