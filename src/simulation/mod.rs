@@ -9,3 +9,4 @@ mod q764_plus_sign_in_matrix;
 mod q223_rectangle_area;
 mod q263_ugly_number;
 mod q1752_check_reverse_arr;
+mod q1758_min_operations;
