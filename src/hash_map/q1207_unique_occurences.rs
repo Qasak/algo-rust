@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap,HashSet};
 
 pub fn unique_occurrences(arr: Vec<i32>) -> bool {
     // val freq
@@ -16,4 +16,18 @@ pub fn unique_occurrences(arr: Vec<i32>) -> bool {
         r[f] = true;
     }
     true
+}
+
+
+
+pub fn unique_occurrences_1(arr: Vec<i32>) -> bool {
+    let map:HashMap<i32, i32> = arr
+        .into_iter()
+        .fold(
+            HashMap::new(), |mut m, i| {
+                *m.entry(i).or_default() += 1;
+                m
+            });
+    let mut set = HashSet::new();
+    map.into_values().all(|v| set.insert(v))
 }

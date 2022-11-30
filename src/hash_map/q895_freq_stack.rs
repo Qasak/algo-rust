@@ -16,7 +16,7 @@ impl FreqStack {
     }
 
     fn push(&mut self, val: i32) {
-        *self.map.entry(val).or_insert(0) += 1;
+        *self.map.entry(val).or_default() += 1;
         let freq = self.map[&val];
         if freq > self.stacks.len() {
             self.stacks.push(VecDeque::new());
@@ -25,9 +25,8 @@ impl FreqStack {
     }
 
     fn pop(&mut self) -> i32 {
-        let n = self.stacks.len();
-        let val = self.stacks[n - 1].pop_back().unwrap();
-        *self.map.entry(val).or_insert(0) -= 1;
+        let val = self.stacks.last_mut().unwrap().pop_back().unwrap();
+        *self.map.entry(val).or_default() -= 1;
         if self.stacks.last().unwrap().is_empty() {
             self.stacks.pop();
         }
