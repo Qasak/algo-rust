@@ -7,7 +7,7 @@ impl Solution {
             cnt[m[1] as usize] += 1;
             members.insert(m[1] as usize); members.insert(m[0] as usize);
         }
-        let (mut ret, mut a, mut b) = (vec![], vec![], vec![]);
+        let (mut a, mut b) = (vec![], vec![]);
         for i in members {
             if cnt[i] == 0 {
                 a.push(i as i32);
@@ -16,7 +16,6 @@ impl Solution {
             }
         }
         a.sort(); b.sort();
-        ret.push(a); ret.push(b);
-        ret
+        vec![a, b]
     }
 }
