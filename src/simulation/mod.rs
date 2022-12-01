@@ -12,3 +12,4 @@ mod q1752_check_reverse_arr;
 mod q1758_min_operations;
 mod q1779_nearest_valid_point;
 mod q1704_havles_are_alike;
+mod q2225_find_winners;
