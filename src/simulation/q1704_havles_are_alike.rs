@@ -14,3 +14,9 @@ pub fn halves_are_alike(s: String) -> bool {
     }
     cnt(a) == cnt(b)
 }
+
+
+pub fn halves_are_alike_1(s: String) -> bool {
+    let f = |s: &str| s.chars().filter(|&c| "aeiouAEIOU".contains(c)).count();
+    f(&s[..s.len() / 2]) == f(&s[s.len() / 2..])
+}
