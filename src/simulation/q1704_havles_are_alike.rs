@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 pub fn halves_are_alike(s: String) -> bool {
     let n = s.len();
     fn cnt(s :&str) -> i32 {
@@ -15,6 +17,15 @@ pub fn halves_are_alike(s: String) -> bool {
 
 
 pub fn halves_are_alike_1(s: String) -> bool {
-    let f = |s: &str| s.chars().filter(|&c| "aeiouAEIOU".contains(c)).count();
+    let f = |s: &str| s.chars().
+        filter(|&c| "aeiouAEIOU".contains(c)).count();
+    f(&s[..s.len() / 2]) == f(&s[s.len() / 2..])
+}
+
+pub fn halves_are_alike_2(s: String) -> bool {
+    let f = |s: &str| {
+        let set:HashSet<char> = "aeiouAEIOU".chars().fold(HashSet::new(), |mut s, c| {s.insert(c); s});
+        s.chars().filter(|c| set.contains(c)).count()
+    };
     f(&s[..s.len() / 2]) == f(&s[s.len() / 2..])
 }
