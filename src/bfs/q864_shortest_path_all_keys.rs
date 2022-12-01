@@ -79,6 +79,7 @@ pub fn shortest_path_all_keys(grid: Vec<String>) -> i32 {
     if ans == i32::MAX {-1} else {ans}
 }
 
+
 #[cfg(test)]
 mod test{
     use crate::back_track::q864_shortest_path_all_keys::{shortest_path_all_keys};
