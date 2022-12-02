@@ -13,3 +13,4 @@ mod q279_perfect_squares;
 mod q795_num_subarray_bounded_max;
 mod q446_num_arithmetic_slices;
 mod q813_largest_sum_of_averages;
+mod q1769_min_operations;
