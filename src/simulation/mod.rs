@@ -15,3 +15,4 @@ mod q1704_havles_are_alike;
 mod q2225_find_winners;
 mod q1796_second_highest;
 mod q451_frequency_sort;
+mod q2256_min_avg_diff;
