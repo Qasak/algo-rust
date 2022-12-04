@@ -1,4 +1,3 @@
-use std::borrow::Borrow;
 use std::cell::RefCell;
 use std::rc::Rc;
 
@@ -19,62 +18,24 @@ impl TreeNode {
     }
   }
 }
-type OptNode = Option<Rc<RefCell<TreeNode>>>;
+// type OptNode = Option<Rc<RefCell<TreeNode>>>;
 // naive recursive
 pub fn count_nodes(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
     fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, cnt: &mut i32) {
         if let Some(node) = root {
             *cnt += 1;
-            // let node = &**node;
-            // let node = node.as_ref();
-            let node = node.borrow();
-            let x = &node.left;
-            dfs(&node.left, cnt);
-            dfs(&node.right, cnt);
+            let left = &node.borrow().left;
+            let right = &node.borrow().right;
+            dfs(left, cnt);
+            dfs(right, cnt);
         }
     }
-    // same as
-    fn dfs1(root: &Option<Rc<RefCell<TreeNode>>>, cnt: &mut i32) {
-        if root.is_some() {
-            *cnt += 1;
-            dfs(&root.as_ref().unwrap().borrow().left, cnt);
-            dfs(&root.as_ref().unwrap().borrow().right, cnt);
-        }
-    }
+
     let mut cnt = 0;
     dfs(&root, &mut cnt);
     cnt
 }
 
-// naive solution 2
-pub fn count_nodes_1(root: OptNode) -> i32 {
-    fn dfs(root: OptNode, cnt: &mut i32) {
-        if let Some(node) = root {
-            *cnt += 1;
-            let mut node = node.borrow_mut();
-            dfs(node.left.take(), cnt);
-            dfs(node.right.take(), cnt);
-        }
-    }
-    let mut cnt = 0;
-    dfs(root, &mut cnt);
-    cnt
-}
-
-// naive solution 3
-pub fn count_nodes_2(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-    fn dfs(root: &Rc<RefCell<TreeNode>>) -> i32 {
-        1 + if let Some(v) = &root.borrow().left {
-            dfs(&v)
-        } else {0}
-            + if let Some(v) = &root.borrow().right {
-            dfs(&v)
-        } else {0}
-    }
-    if let Some(v) = root {
-        dfs(&v)
-    } else {0}
-}
 
 pub fn count_nodes_3(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
     match root {
