@@ -25,3 +25,23 @@ pub fn num_different_integers(word: String) -> i32 {
     }
     set.len() as i32
 }
+
+// use trim_start_matches api: it returns &str
+pub fn num_different_integers_1(word: String) -> i32 {
+    let mut set = HashSet::new();
+    let mut num = "".to_string();
+    for c in word.chars() {
+        if c.is_ascii_digit() {
+            num.push(c);
+        } else if num.len() != 0 {
+            num.push('x');
+            set.insert(num.trim_start_matches('0').to_string());
+            num = "".to_string();
+        }
+    }
+    if num.len() != 0 {
+        num.push('x');
+        set.insert(num.trim_start_matches('0').to_string());
+    }
+    set.len() as i32
+}
