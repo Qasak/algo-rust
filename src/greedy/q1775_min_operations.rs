@@ -1,3 +1,7 @@
+use std::collections::BinaryHeap;
+use std::mem::swap;
+
+// double ptr solution
 pub fn min_operations(mut nums1: Vec<i32>, mut nums2: Vec<i32>) -> i32 {
 
     fn get_cnt(nums1: &Vec<i32>, nums2: &Vec<i32>, sum1: i32, sum2: i32) -> i32 {
@@ -42,4 +46,26 @@ pub fn min_operations(mut nums1: Vec<i32>, mut nums2: Vec<i32>) -> i32 {
         0
     }
 
+}
+
+// BinaryHeap Solution
+pub fn min_operations_1(mut a: Vec<i32>, mut b: Vec<i32>) -> i32 {
+    let (mut n, mut m) = (a.len(), b.len());
+    if n * 6 < m || m * 6 < n {
+        return -1;
+    }
+    let (mut sum1, mut sum2): (i32, i32) = (a.iter().sum(), b.iter().sum());
+    let mut pq = BinaryHeap::new();
+    if sum1 < sum2 {
+        swap(&mut sum1, &mut sum2);
+        swap(&mut a, &mut b);
+    }
+    a.iter().for_each(|&i| pq.push(i - 1));
+    b.iter().for_each(|&i| pq.push(6 - i));
+    let (mut ret, mut diff) = (0, sum1 - sum2);
+    while diff > 0 {
+        ret += 1;
+        diff -= pq.pop().unwrap();
+    }
+    ret
 }
