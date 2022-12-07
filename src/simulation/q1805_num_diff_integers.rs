@@ -11,7 +11,7 @@ pub fn num_different_integers(word: String) -> i32 {
                 flag = true;
             }
             if flag {
-                num += cs[j].to_string().as_str();
+                num.push(cs[j]);
             }
             j += 1;
         }
