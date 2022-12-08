@@ -6,7 +6,7 @@ type T = Option<Rc<RefCell<TreeNode>>>;
 
 // iterative
 pub fn leaf_similar(root1: T, root2: T) -> bool {
-    Solution::iterative(root1) == Solution::iterative(root2)
+    iterative(root1) == iterative(root2)
 }
 fn iterative(root: T) -> Vec<i32> {
     let mut stack = vec![root];
