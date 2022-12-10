@@ -15,3 +15,4 @@ mod q446_num_arithmetic_slices;
 mod q813_largest_sum_of_averages;
 mod q1769_min_operations;
 mod q1687_box_delivering;
+mod q1691_max_height;
