@@ -17,3 +17,4 @@ mod q1796_second_highest;
 mod q451_frequency_sort;
 mod q2256_min_avg_diff;
 mod q1805_num_diff_integers;
+mod q1781_beauty_sum;
