@@ -1,3 +1,4 @@
 mod q947_remove_stones;
 mod q882_reachable_nodes;
 mod q1697_distance_limited_paths_exist;
+mod q2503_max_points;
