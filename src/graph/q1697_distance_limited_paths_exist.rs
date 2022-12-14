@@ -5,18 +5,14 @@ struct UF {
 
 impl UF {
     fn new(n: usize) -> Self {
-        let mut p = vec![0; n];
-        for i in 0..n {
-            p[i] = i ;
-        }
-        UF {p}
+        UF {p: (0..=n).collect()}
     }
 
     fn union(&mut self, u: usize, v: usize) {
         if self.p[u] != self.p[v] {
             let pu = self.find(u);
             let pv = self.find(v);
-            self.p[pu ] = pv;
+            self.p[pu] = pv;
         }
     }
 
@@ -26,7 +22,7 @@ impl UF {
             u
         } else {
             let pu = self.p[u];
-            let ppu = self.find(pu );
+            let ppu = self.find(pu);
             self.p[u] = ppu;
             self.p[u]
         }
@@ -54,10 +50,10 @@ pub fn distance_limited_paths_exist(n: i32, mut edge_list: Vec<Vec<i32>>, querie
             if w >= limit {
                 break;
             }
-            uf.union(uu , vv );
+            uf.union(uu , vv);
             j += 1;
         }
-        ret[idx] = uf.find(u ) == uf.find(v );
+        ret[idx] = uf.find(u) == uf.find(v);
     }
     ret
 }
