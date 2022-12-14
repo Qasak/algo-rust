@@ -3,3 +3,4 @@ mod q374_guess_number;
 mod q792_num_matching_subseq;
 mod q878_nth_magical_number;
 mod q34_search_range;
+mod q2503_max_point;
