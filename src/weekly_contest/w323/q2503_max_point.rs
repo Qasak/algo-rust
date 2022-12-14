@@ -21,7 +21,7 @@ pub fn max_points(grid: Vec<Vec<i32>>, queries: Vec<i32>) -> Vec<i32> {
             // println!("cached {}", i);
             cnt = cache[&qs[i - 1].0];
         } else {
-            cnt = Solution::bfs(&mut ready, &grid, &mut vis, qs[i - 1].0);
+            cnt = bfs(&mut ready, &grid, &mut vis, qs[i - 1].0);
             *cache.entry(qs[i - 1].0).or_default() = f[i - 1] + cnt;
         };
         if i >= 2 && qs[i - 1].0 > qs[i - 2].0 {
