@@ -13,9 +13,8 @@ pub fn count_restricted_paths(n: i32, edges: Vec<Vec<i32>>) -> i32 {
     }
 
     d[n] = 0; pq.push((Reverse(d[n]), n));
-    while !pq.is_empty() {
-        let item = pq.pop().unwrap();
-        let (du, u) = (item.0.0, item.1);
+    while let Some((du, u)) = pq.pop() {
+        let du = du.0;
         for  (&v, _) in g[&u].iter() {
             let w = g[&u][&v];
             if du + w < d[v] {
