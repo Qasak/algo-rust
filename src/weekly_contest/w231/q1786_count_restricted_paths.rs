@@ -14,16 +14,13 @@ pub fn count_restricted_paths(n: i32, edges: Vec<Vec<i32>>) -> i32 {
     let mut pq = BinaryHeap::new();
     pq.push((Reverse(d[n]), n));
     while !pq.is_empty() {
-        let m = pq.len();
-        for _ in 0..m {
-            let item = pq.pop().unwrap();
-            let (du, u) = (item.0.0, item.1);
-            for  (&v, _) in g[&u].iter() {
-                let w = g[&u][&v];
-                if du + w < d[v] {
-                    d[v] = du + w;
-                    pq.push((Reverse(d[v]), v));
-                }
+        let item = pq.pop().unwrap();
+        let (du, u) = (item.0.0, item.1);
+        for  (&v, _) in g[&u].iter() {
+            let w = g[&u][&v];
+            if du + w < d[v] {
+                d[v] = du + w;
+                pq.push((Reverse(d[v]), v));
             }
         }
     }
