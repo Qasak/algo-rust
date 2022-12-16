@@ -1,0 +1,1 @@
+mod q1786_count_restricted_paths;
