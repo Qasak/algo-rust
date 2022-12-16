@@ -3,16 +3,16 @@ use std::collections::{BinaryHeap, HashMap};
 
 pub fn count_restricted_paths(n: i32, edges: Vec<Vec<i32>>) -> i32 {
     let n = n as usize;
-    let mut g: HashMap<usize, HashMap<usize, i32>> = HashMap::new();
+    let (mut d, mut pq, mut g) = (vec![i32::MAX; n + 1], BinaryHeap::new(), HashMap::new());
+
+
     for e in edges {
         let (u, v, w) = (e[0] as usize, e[1] as usize, e[2]);
         g.entry(u).or_insert(HashMap::new()).insert(v, w);
         g.entry(v).or_insert(HashMap::new()).insert(u, w);
     }
-    let mut d = vec![i32::MAX; n + 1];
-    d[n] = 0;
-    let mut pq = BinaryHeap::new();
-    pq.push((Reverse(d[n]), n));
+
+    d[n] = 0; pq.push((Reverse(d[n]), n));
     while !pq.is_empty() {
         let item = pq.pop().unwrap();
         let (du, u) = (item.0.0, item.1);
@@ -24,12 +24,14 @@ pub fn count_restricted_paths(n: i32, edges: Vec<Vec<i32>>) -> i32 {
             }
         }
     }
-    let mo = 1e9 as i64 + 7;
-    // 从1到i的受限路径数
-    let mut f = vec![0 as i64; n + 1];
+
+    let (mo,  mut f) = (1e9 as i32 + 7, vec![0 as i32; n + 1]);
+    // f: 从1到i的受限路径数
     f[1] = 1;
+
     let mut nodes: Vec<usize> = (1..=n).collect();
     nodes.sort_by(|&a, &b| d[b].cmp(&d[a]));
+
     for u in nodes {
         for (&v, _) in g[&u].iter() {
             if d[v] < d[u] {
@@ -37,5 +39,5 @@ pub fn count_restricted_paths(n: i32, edges: Vec<Vec<i32>>) -> i32 {
             }
         }
     }
-    (f[n] % mo) as i32
+    f[n] % mo
 }
