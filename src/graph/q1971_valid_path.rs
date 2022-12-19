@@ -4,8 +4,7 @@ struct UF {
 
 impl UF {
     fn new(n: usize) -> Self {
-        let p = (0..=n).collect();
-        UF {p}
+        UF {p:(0..=n).collect()}
     }
 
     fn find(&mut self, u: usize) -> usize {
