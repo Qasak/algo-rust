@@ -1,12 +1,11 @@
 pub fn max_distance(mut position: Vec<i32>, m: i32) -> i32 {
     fn is_force_big(pos: &Vec<i32>, target_balls: i32, force: i32) -> bool {
-        let (mut l, mut r, mut balls) = (0, 1, 0);
-        while r < pos.len() {
+        let (mut l, mut balls) = (0, 0);
+        for r in 0..pos.len() {
             if pos[r] - pos[l] >= force {
                 l = r;
                 balls += 1;
             }
-            r += 1;
         }
         balls + 1 < target_balls
     }
