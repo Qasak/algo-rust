@@ -28,14 +28,14 @@ fn reverse_one(head: Option<Box<ListNode>>, k: i32) -> (Option<Box<ListNode>>, O
     }
 
     let mut cur = head;
-    let mut pre = ListNode::new(0);
+    let mut pre = None;
     for _ in 0..k {
         if let Some(mut node) = cur {
-            cur = node.next.take();
-            node.next = pre.next.take();
-            pre.next = Some(node);
+            let nex = node.next;
+            node.next = pre;
+            pre = Some(node);
+            cur = nex;
         }
     }
-
-    (pre.next, cur)
+    (pre, cur)
 }
