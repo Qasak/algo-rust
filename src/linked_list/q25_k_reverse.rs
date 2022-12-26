@@ -1,19 +1,21 @@
 use crate::top_cn::f2_q206_reverse_list::ListNode;
 
 pub fn reverse_k_group(head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNode>> {
-    let mut remain = head;
-    let mut dummy = Box::new(ListNode::new(0));
-    let mut tail = &mut dummy;
-    while remain.is_some() {
-        let (new_head, new_remain) = reverse_one(remain, k);
-        remain = new_remain;
-        tail.next = new_head;
-        while tail.next.as_ref().is_some() {
-            tail = tail.next.as_mut().unwrap();
+    let mut cur = head;
+    let mut d = Box::new(ListNode::new(0));
+    let mut p = &mut d;
+    while cur.is_some() {
+        let (new_head, nex) = reverse_one(cur, k);
+        p.next = new_head;
+        // 某个节点最多只有一个可变引用
+        while p.next.as_ref().is_some() {
+            p = p.next.as_mut().unwrap();
         }
+        // p = cur.as_mut().unwrap();
+        cur = nex;
     }
 
-    dummy.next
+    d.next
 }
 
 // 反转一次，返回反转后的head和remain
