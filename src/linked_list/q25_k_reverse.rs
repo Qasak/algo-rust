@@ -41,3 +41,29 @@ fn reverse_one(head: Option<Box<ListNode>>, k: i32) -> (Option<Box<ListNode>>, O
     }
     (pre, cur)
 }
+
+
+pub fn reverse_k_group_1(mut head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNode>> {
+    let mut next_head = &mut head;
+    for _ in 0..k {
+        if let Some(node) = next_head.as_mut() {
+            next_head = &mut node.next;
+        } else {
+            return head;
+        }
+    }
+    let next_head = reverse_k_group_1(next_head.take(), k);
+    reverse(head, next_head)
+}
+
+// head -> ... -> tail -x-> next_head -> ... 反转链接 ... <- next_head <- head <- ... <- tail 并返回new_head(tail)
+fn reverse(mut head: Option<Box<ListNode>>, mut next_head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+    while let Some(mut node) = head {
+        head = node.next.take();
+        // link head -> next_head
+        node.next = next_head.take();
+        // as tail
+        next_head = Some(node);
+    }
+    next_head
+}
