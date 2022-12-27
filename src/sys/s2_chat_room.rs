@@ -34,9 +34,17 @@ enum Event {
     Message((UserId, TopicId, String)),
 }
 
+fn process_event(event: &Event) {
+    match event {
+        Event::Join((uid, _tid)) => println!("user {:?} joined", uid),
+        Event::Leave((uid, tid)) => println!("user {:?} left {:?}", uid, tid),
+        Event::Message((_, _, msg)) => println!("broadcast: {}", msg),
+    }
+}
+
 #[cfg(test)]
 mod test {
-    use crate::sys::s2_chat_room::{Event, Gender, Topic, TopicId, User, UserId};
+    use crate::sys::s2_chat_room::{Event, Gender, process_event, Topic, TopicId, User, UserId};
 
     #[test]
     fn f() {
@@ -49,5 +57,10 @@ mod test {
         let event3 = Event::Message((alice.id, topic.id, "Hello world!".into()));
 
         println!("event1: {:?}, event2: {:?}, event3: {:?}", event1, event2, event3);
+
+        process_event(&event1);
+        process_event(&event2);
+        process_event(&event3);
+
     }
 }
