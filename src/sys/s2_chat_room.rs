@@ -42,9 +42,16 @@ fn process_event(event: &Event) {
     }
 }
 
+
+fn process_message(event: &Event) {
+    if let Event::Message((_, _, msg)) = event {
+        println!("broadcast: {}", msg);
+    }
+}
+
 #[cfg(test)]
 mod test {
-    use crate::sys::s2_chat_room::{Event, Gender, process_event, Topic, TopicId, User, UserId};
+    use crate::sys::s2_chat_room::{Event, Gender, process_event, process_message, Topic, TopicId, User, UserId};
 
     #[test]
     fn f() {
@@ -61,6 +68,8 @@ mod test {
         process_event(&event1);
         process_event(&event2);
         process_event(&event3);
+
+        process_message(&event3);
 
     }
 }
