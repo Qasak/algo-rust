@@ -8,6 +8,8 @@ pub fn two_out_of_three(nums1: Vec<i32>, nums2: Vec<i32>, nums3: Vec<i32>) -> Ve
         collect::<HashSet<_>>().into_iter().
         collect::<Vec<i32>>()
 }
+
+
 fn get_set(nums: &Vec<i32>) -> HashSet<i32> {
     nums.into_iter().fold(HashSet::new(), |mut set, &i| {
         set.insert(i);
