@@ -20,3 +20,4 @@ mod q1805_num_diff_integers;
 mod q1781_beauty_sum;
 mod q1945_get_lucky;
 mod q1754_largest_merge;
+mod q2032_at_least_two;
