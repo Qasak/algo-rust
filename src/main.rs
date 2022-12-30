@@ -24,6 +24,7 @@ mod tricky;
 mod math;
 mod bitwise;
 mod sys;
+mod composit_ds;
 
 fn main() {
     println!("Hello algo-rust!")
