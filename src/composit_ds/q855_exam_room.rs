@@ -1,4 +1,4 @@
-use std::collections::{HashMap, HashSet, BTreeSet, BinaryHeap, BTreeMap, VecDeque};
+use std::collections::{BTreeSet, BTreeMap};
 struct ExamRoom {
     points: BTreeSet<i32>,
     intervals: BTreeMap<i32, BTreeMap<i32, i32>>,
