@@ -9,6 +9,7 @@ pub struct ExamRoom {
     q: BinaryHeap<(i32, Reverse<i32>, i32)>,
 }
 
+// lazy delete
 impl ExamRoom {
     pub fn new(n: i32) -> Self {
         Self {
