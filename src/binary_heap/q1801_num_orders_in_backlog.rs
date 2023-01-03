@@ -1,22 +1,22 @@
 use std::collections::BinaryHeap;
 use std::cmp::Reverse;
-// struct Order {
-//     price: Price,
-//     amount: Amount,
-//     order_type: OrderType
-// }
+struct Order {
+    price: Price,
+    amount: Amount,
+    order_type: OrderType
+}
 
-// #[derive(Debug, Copy, Clone)]
-// struct Price(i32);
+#[derive(Debug, Copy, Clone)]
+struct Price(i32);
 
-// #[derive(Debug, Copy, Clone)]
-// struct Amount(i32)
+#[derive(Debug, Copy, Clone)]
+struct Amount(i32);
 
-// #[derive(Debug)]
-// enum OrderType {
-//     Buy: 0,
-//     Sell: 1
-// }
+#[derive(Debug)]
+enum OrderType {
+    Buy = 0,
+    Sell = 1
+}
 pub fn get_number_of_backlog_orders(orders: Vec<Vec<i32>>) -> i32 {
     let mo = 1e9 as i32 + 7;
     // q_buy: big
