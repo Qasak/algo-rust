@@ -6,7 +6,13 @@ fn check(m: i64, index: i64, n: i64) -> i64 {
 fn get_sn(a1: i64, n: i64) -> i64 {
     a1 * n + (n - 1) * n / 2
 }
-
+// 111111 = 6 + 1
+// 121111 = 7 + 3
+// 232111 = 10 + 4
+// 343211 = 14 + 5
+// 454321 = 19 + 6
+// 565432 = 25 + 6
+// 676543 = 31 + 6
 pub fn max_value(n: i32, index: i32, max_sum: i32) -> i32 {
     let (mut l, mut r) = (1, max_sum);
     while l < r {
