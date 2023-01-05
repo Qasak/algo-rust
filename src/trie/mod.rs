@@ -1,2 +1,3 @@
 mod q1803_count_pairs_xor_in_range;
 mod q421_max_xor_of_two_members_array;
+mod q1803_array_solution;
