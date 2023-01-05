@@ -1,52 +1,55 @@
+const NUM_LEN: usize = 15;
 #[derive(Default)]
-struct TrieNode {
+struct Trie {
     cnt: i32,
-    children: [Option<Box<TrieNode>>; 2],
+    child: [Option<Box<Trie>>; 2]
 }
-impl TrieNode {
-    pub fn insert(&mut self, x: i32) {
-        let mut temp = self;
-        for i in (0..17).rev() {
-            let j = ((x >> i) & 1) as usize;
-            temp = temp.children[j].get_or_insert(Box::new(TrieNode::default()));
-            temp.cnt += 1;
+impl Trie {
+    fn add(&mut self, num: i32) {
+        let mut root = self;
+        for i in (0..=NUM_LEN).rev() {
+            let bit = ((num >> i) & 1) as usize;
+            root = root.child[bit].get_or_insert(Box::new(Trie::default()));
+            root.cnt += 1;
         }
     }
-    pub fn query(&self, x: i32, right: i32) -> i32 {
-        let mut res = 0;
-        let mut temp = self;
-        for i in (0..17).rev() {
-            let bit_num = ((x >> i) & 1) as usize;
-            let bit_lim = (right >> i) & 1;
-            if bit_lim == 1 {
-                if let Some(next) = temp.children[bit_num].as_ref() {
-                    res += next.cnt ;
+
+    fn query(&self, num: i32, bound: i32) -> i32 {
+        let mut root = self;
+        let mut ret = 0;
+        for i in (0..=NUM_LEN).rev() {
+            let (num_bit, bound_bit)= (((num >> i) & 1) as usize, ((bound >> i) & 1) as usize);
+            if bound_bit == 1 {
+                // num_bit ^ pre_bit = 0 < bound_bit
+                if let Some(l) = root.child[num_bit].as_ref() {
+                    ret += l.cnt;
                 }
-                if let Some(next) = temp.children[1 - bit_num].as_ref() {
-                    temp = next;
+                // num_bit ^ pre_bit = 1 = bound_bit
+                if let Some(r) = root.child[num_bit ^ 1].as_ref() {
+                    root = r;
                 } else {
-                    return res;
+                    return ret;
                 }
             } else {
-                if let Some(next) = temp.children[bit_num].as_ref() {
-                    temp = next;
+                // num_bit ^ pre_bit = 0 < bound_bit
+                if let Some(l) = root.child[num_bit].as_ref() {
+                    root = l;
                 } else {
-                    return res;
+                    return ret;
                 }
             }
         }
-        res += temp.cnt ;
-        return res;
+        ret += root.cnt;
+        ret
     }
 }
-impl Solution {
-    pub fn count_pairs(nums: Vec<i32>, low: i32, high: i32) -> i32 {
-        let mut root = TrieNode::default();
-        let mut ans = 0;
-        for i in nums {
-            root.insert(i);
-            ans += root.query(i, high) - root.query(i, low - 1);
-        }
-        ans
+
+pub fn count_pairs(nums: Vec<i32>, low: i32, high: i32) -> i32 {
+    let mut root = Trie::default();
+    let mut ret = 0;
+    for num in nums {
+        ret += root.query(num, high) - root.query(num, low - 1);
+        root.add(num);
     }
+    ret
 }
