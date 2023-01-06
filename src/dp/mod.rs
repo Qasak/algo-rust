@@ -17,3 +17,4 @@ mod q1769_min_operations;
 mod q1687_box_delivering;
 mod q1691_max_height;
 mod q1799_max_score;
+mod q2140_solving_brainpower;
