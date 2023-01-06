@@ -1,3 +1,18 @@
+pub fn most_points_0(questions: Vec<Vec<i32>>) -> i64 {
+    let n = questions.len();
+    let mut f = vec![0i64; n + 1];
+    for i in (0..n) {
+        let (p, b) = (questions[i][0] as i64, questions[i][1] as usize);
+        // not select cur
+        let j = i + 1;
+        f[j] = f[j].max(f[i]);
+        // select cur
+        f[i] += p;
+        let j = n.min(i + b + 1);
+        f[j] = f[j].max(f[i]);
+    }
+    f[n]
+}
 pub fn most_points_1(questions: Vec<Vec<i32>>) -> i64 {
     let n = questions.len();
     let mut f = vec![0i64; n];
@@ -16,7 +31,7 @@ pub fn most_points_1(questions: Vec<Vec<i32>>) -> i64 {
     }
     f.into_iter().max().unwrap_or(0)
 }
-pub fn most_points(questions: Vec<Vec<i32>>) -> i64 {
+pub fn most_points_2(questions: Vec<Vec<i32>>) -> i64 {
     let n = questions.len();
     let mut f = vec![0i64; n];
     f[n - 1] = questions[n - 1][0] as i64;
