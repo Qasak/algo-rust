@@ -16,7 +16,7 @@ pub fn most_points_0(questions: Vec<Vec<i32>>) -> i64 {
 pub fn most_points_1(questions: Vec<Vec<i32>>) -> i64 {
     let n = questions.len();
     let mut f = vec![0i64; n];
-    for i in (0..n) {
+    for i in 0..n {
         let (p, b) = (questions[i][0] as i64, questions[i][1] as usize);
         let j = i + 1;
         if j < n {
