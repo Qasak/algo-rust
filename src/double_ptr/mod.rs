@@ -6,3 +6,4 @@ mod q809_expressive_words;
 mod q1764_can_choose;
 mod q1759_homogenous_substrings;
 mod q1750_min_len_of_deleting_sim;
+mod q1658_min_operations;
