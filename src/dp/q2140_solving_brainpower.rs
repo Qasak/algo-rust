@@ -13,6 +13,7 @@ pub fn most_points_0(questions: Vec<Vec<i32>>) -> i64 {
     }
     f[n]
 }
+
 pub fn most_points_1(questions: Vec<Vec<i32>>) -> i64 {
     let n = questions.len();
     let mut f = vec![0i64; n];
@@ -31,6 +32,7 @@ pub fn most_points_1(questions: Vec<Vec<i32>>) -> i64 {
     }
     f.into_iter().max().unwrap_or(0)
 }
+
 pub fn most_points_2(questions: Vec<Vec<i32>>) -> i64 {
     let n = questions.len();
     let mut f = vec![0i64; n];
