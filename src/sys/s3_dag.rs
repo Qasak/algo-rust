@@ -24,7 +24,6 @@ impl Node {
 }
 
 #[cfg(test)]
-
 mod test {
     use std::rc::Rc;
     use crate::sys::s3_dag::Node;
@@ -35,8 +34,8 @@ mod test {
         //     1  2
         //     | /
         //     3
-        //      \
-        //       4
+        //     |
+        //     4
         let mut node1 = Node::new(1);
         let mut node2 = Node::new(2);
         let mut node3 = Node::new(3);
@@ -46,5 +45,18 @@ mod test {
         node1.update_downstream(Rc::new(node3));
         node2.update_downstream(node1.get_downstream().unwrap());
         println!("node1: {:?}, node2: {:?}", node1, node2);
+    }
+
+    #[test]
+    fn ff() {
+        use std::cell::RefCell;
+
+        let data = RefCell::new(1);
+        {
+            // 获得 RefCell 内部数据的可变借用
+            let mut v = data.borrow_mut();
+            *v += 1;
+        }
+        println!("data: {:?}", data.borrow());
     }
 }
