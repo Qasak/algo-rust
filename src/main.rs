@@ -26,6 +26,7 @@ mod bitwise;
 mod sys;
 mod composit_ds;
 mod trie;
+mod one_line;
 
 fn main() {
     println!("Hello algo-rust!")
