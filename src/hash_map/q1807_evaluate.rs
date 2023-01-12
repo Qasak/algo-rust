@@ -2,10 +2,8 @@ use std::collections::HashMap;
 
 // use index
 pub fn evaluate(s: String, knowledge: Vec<Vec<String>>) -> String {
-    let (cs, n, mut i, mut map, mut ret) = (s.chars().collect::<Vec<char>>(), s.len(), 0, HashMap::new(), String::new());
-    for p in knowledge.iter() {
-        map.insert(p[0].as_str(), p[1].as_str());
-    }
+    let (cs, n, mut i, mut ret) = (s.chars().collect::<Vec<char>>(), s.len(), 0, String::new());
+    let map = knowledge.iter().map(|v| (v[0].as_str(), v[1].as_str())).collect::<HashMap<_, _>>();
     while i < n {
         if cs[i] == '(' {
             i += 1;
@@ -14,7 +12,7 @@ pub fn evaluate(s: String, knowledge: Vec<Vec<String>>) -> String {
                 t.push(cs[i]);
                 i += 1;
             }
-            if let Some(replace) = map.get(&t.as_str()) {
+            if let Some(replace) = map.get(t.as_str()) {
                 ret.push_str(replace);
             } else {
                 ret.push('?');
