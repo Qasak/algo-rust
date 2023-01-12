@@ -24,3 +24,27 @@ pub fn evaluate(s: String, knowledge: Vec<Vec<String>>) -> String {
     }
     ret
 }
+
+// iter solution
+pub fn evaluate_1(s: String, knowledge: Vec<Vec<String>>) -> String {
+    let (n, mut ret) = (s.len(), String::new());
+    let map = knowledge.iter().map(|v| (v[0].as_str(), v[1].as_str())).collect::<HashMap<_, _>>();
+    let mut it = s.chars();
+    while let Some(c) = it.next() {
+        if c == '(' {
+            let mut t = String::new();
+            while let Some(c) = it.next() {
+                if c == ')' {break;}
+                t.push(c);
+            }
+            if let Some(replace) = map.get(t.as_str()) {
+                ret.push_str(replace);
+            } else {
+                ret.push('?');
+            }
+        } else {
+            ret.push(c);
+        }
+    }
+    ret
+}
