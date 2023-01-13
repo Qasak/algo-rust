@@ -19,3 +19,29 @@ pub fn rearrange_characters(s: String, target: String) -> i32 {
     }
     ret
 }
+
+// iter version
+pub fn rearrange_characters_1(s: String, target: String) -> i32 {
+    let cnt1 = target.bytes().fold(vec![0; 26], |mut v, b| {v[(b - b'a') as usize] += 1; v});
+    let cnt2 = s.bytes().fold(vec![0; 26], |mut v, b| {v[(b - b'a') as usize] += 1; v});
+    cnt1.iter().zip(cnt2.iter()).filter(|(&i, &j)| i > 0).map(|(i, j)| j / i).min().unwrap()
+}
+
+#[cfg(test)]
+mod test {
+    use crate::strings::q2287_rerange_characters::{rearrange_characters, rearrange_characters_1};
+
+    #[test]
+    fn f() {
+        let s = "lrnvlcqukanpdnluowenfxquitzryponxsikhciohyostvmkapkfpglzikitwiraqgchxnpryhwpuwpozacjhmwhjvslprqlnxrk".to_owned();
+        let target = "woijih".to_owned();
+        assert_eq!(2, rearrange_characters(s, target));
+    }
+
+    #[test]
+    fn ff() {
+        let s = "lrnvlcqukanpdnluowenfxquitzryponxsikhciohyostvmkapkfpglzikitwiraqgchxnpryhwpuwpozacjhmwhjvslprqlnxrk".to_owned();
+        let target = "woijih".to_owned();
+        assert_eq!(2, rearrange_characters_1(s, target));
+    }
+}
