@@ -27,6 +27,7 @@ mod sys;
 mod composit_ds;
 mod trie;
 mod one_line;
+mod enumeration;
 
 fn main() {
     println!("Hello algo-rust!")
