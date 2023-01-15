@@ -28,6 +28,7 @@ mod composit_ds;
 mod trie;
 mod one_line;
 mod enumeration;
+mod divide_and_conquer;
 
 fn main() {
     println!("Hello algo-rust!")
