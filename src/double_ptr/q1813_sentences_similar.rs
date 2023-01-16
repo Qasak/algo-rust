@@ -25,3 +25,23 @@ pub fn are_sentences_similar(s1: String, s2: String) -> bool {
 
     ii == jj && (v1[i] == v2[ii] || v1[j] == v2[jj])
 }
+
+// clean code
+pub fn are_sentences_similar_1(sentence1: String, sentence2: String) -> bool {
+    let mut s1 = sentence1.split(' ').collect::<Vec<_>>();
+    let mut s2 = sentence2.split(' ').collect::<Vec<_>>();
+    let n = s1.len();
+    let m = s2.len();
+    let mut i = 0;
+    let mut j = 0;
+
+    while i < n && i < m && s1[i] == s2[i] {
+        i += 1;
+    }
+
+    while j + i < n && j + i < m && s1[n - j - 1] == s2[m - j - 1] {
+        j += 1;
+    }
+
+    i + j == n.min(m)
+}
