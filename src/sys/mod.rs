@@ -3,3 +3,7 @@ mod s2_chat_room;
 mod s3_dag;
 mod s3_dag_refcell;
 mod s4_mem;
+mod s5_type_generic_1;
+mod s5_type_generic_2;
+mod s5_type_trait_1;
+mod s5_type_trait_2;
