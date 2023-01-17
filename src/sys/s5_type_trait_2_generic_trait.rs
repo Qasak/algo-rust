@@ -37,43 +37,56 @@ pub trait Parse {
 // 这样在使用的时候我们就可以用这两个 trait 的方法了
 impl<T> Parse for T
     where
-        T: FromStr + Default,
+        T: FromStr
 {
     type Error = String;
 
     fn parse(s: &str) -> Result<Self, Self::Error> {
-        let re: Regex = Regex::new(r"^[0-9]+(\.[0-9]+)?").unwrap();
+        let re: Regex = Regex::new(r"\d+(\.\d+)?").unwrap();
         // 生成一个创建缺省值的闭包，这里主要是为了简化后续代码
         // Default::default() 返回的类型根据上下文能推导出来，是 Self
         // 而我们约定了 Self，也就是 T 需要实现 Default trait
         if let Some(captures) = re.captures(s) {
+            println!("{:?}", captures);
             captures
+                // get: 没有匹配到第i组时返回None
                 .get(0)
-                .map_or(Err("failed to capture".to_string()), |s| {
+                // 当没匹配上，返回None时，返回自定义的Error；否则拿到Some里面的Match，并apply一个函数
+                // 实际上这里永远不会触发，没匹配上只会触发最外层，除非把get(0)改成get(1)让他报错
+                .map_or(Err("🔥".to_string()), |s| {
                     s.as_str()
+                        // 把Match转成&str, 把&str parse成T，这里就用到了T: FromStr
                         .parse()
-                        .map_err(|_err| "failed to parse captured string".to_string())
+                        // &str转T失败，返回自定义错误
+                        .map_err(|_err| "😡".to_string())
                 })
         } else {
-            Err("failed to parse string".to_string())
+            // 没有匹配时返回None
+            Err("💣".to_string())
         }
     }
 }
 
 mod test {
-    use crate::sys::s5_type_trait_2::Parse;
+    use crate::sys::s5_type_trait_2_generic_trait::Parse;
+    use regex::Regex;
 
     #[test]
     fn parse_should_work() {
-        assert_eq!(u8::parse("123abcd"), Ok(123));
-        assert_eq!(f64::parse("111.234 255.1234 hello world 256"), Ok(111.234));
-        assert_eq!( u32::parse("123.45abcd"), Err("failed to parse captured string".into()) );
+        // 没匹配上
+        assert_eq!(u32::parse("abcd"), Err("💣".into()) );
+        // parse出错
+        assert_eq!(u8::parse("abcd257"), Err("😡".into()) );
+        assert_eq!(f64::parse("xxxx xx114.514 hello world 256"), Ok(114.514));
     }
 
-    // #[test]
-    // fn f () {
-    //     println!("result: {}", u8::parse("11 255 hello world 256"));
-    //     println!("result: {}", f64::parse("111234 255.1234 hello world 256"));
-    // }
+    #[test]
+    fn f () {
+
+        println!("result: {}", u8::parse("11 255 hello world 256").unwrap());
+        println!("result: {}", f64::parse("111234 255.1234 hello world 256").unwrap());
+        println!("result: {}", f64::parse("aaa111").unwrap());
+
+    }
 
 }
