@@ -56,6 +56,7 @@ impl<T> Parse for T
                         // 把Match转成&str, 把&str parse成T，这里就用到了T: FromStr
                         .parse()
                         // &str转T失败，返回自定义错误
+                        // map_err() 传一个处理错误的函数
                         .map_err(|_err| "😡".to_string())
                 })
         } else {
