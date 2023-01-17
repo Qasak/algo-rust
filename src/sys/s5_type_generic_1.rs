@@ -20,9 +20,18 @@ impl<R> MyReader<R> {
 }
 
 // 定义 process 时，我们需要用到 R 的方法，此时我们限制 R 必须实现 Read trait
-impl<R: Read> MyReader<R>
-    // where
-    //     R: Read,
+// impl<R: Read> MyReader<R>
+//     // where
+//     //     R: Read,
+// {
+//     pub fn process(&mut self) -> Result<usize> {
+//         self.reader.read_to_string(&mut self.buf)
+//     }
+// }
+
+impl<R> MyReader<R>
+where
+    R: Read,
 {
     pub fn process(&mut self) -> Result<usize> {
         self.reader.read_to_string(&mut self.buf)
