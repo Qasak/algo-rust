@@ -12,6 +12,7 @@ struct MyReader<R> {
 // 实现 new 函数时，我们不需要限制 R
 impl<R> MyReader<R> {
     pub fn new(reader: R) -> Self {
+        println!("impl1");
         Self {
             reader,
             buf: String::with_capacity(1024),
@@ -34,6 +35,7 @@ where
     R: Read,
 {
     pub fn process(&mut self) -> Result<usize> {
+        println!("impl2");
         self.reader.read_to_string(&mut self.buf)
     }
 }
