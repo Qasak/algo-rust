@@ -1,7 +1,7 @@
 // naive double ptr
 pub fn are_sentences_similar(s1: String, s2: String) -> bool {
     if s1.len() < s2.len() {
-        return Self::are_sentences_similar(s2, s1);
+        return are_sentences_similar(s2, s1);
     }
     let v1 = s1.split_whitespace().map(|x| x.to_string()).collect::<Vec<String>>();
     let v2 = s2.split_whitespace().map(|x| x.to_string()).collect::<Vec<String>>();
