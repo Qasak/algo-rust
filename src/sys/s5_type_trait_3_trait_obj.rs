@@ -89,3 +89,17 @@ fn test_dynamic() {
 
     println!("text: {}", text);
 }
+
+use std::{fs::File, io::Write};
+
+#[test]
+fn main() {
+    let mut f = File::create("/tmp/test_write_trait").unwrap();
+    let w: &mut dyn Write = &mut f;
+    w.write_all(b"hello ").unwrap();
+    // 不安全的trait obj:
+    // 1. 返回Self: by_ref() 返回了一个Self
+    // 2. 不能带泛型参数
+    // let w1 = w.by_ref();
+    // w1.write_all(b"world").unwrap();
+}
