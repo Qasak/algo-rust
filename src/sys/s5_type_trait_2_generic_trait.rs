@@ -43,9 +43,7 @@ impl<T> Parse for T
 
     fn parse(s: &str) -> Result<Self, Self::Error> {
         let re: Regex = Regex::new(r"\d+(\.\d+)?").unwrap();
-        // 生成一个创建缺省值的闭包，这里主要是为了简化后续代码
-        // Default::default() 返回的类型根据上下文能推导出来，是 Self
-        // 而我们约定了 Self，也就是 T 需要实现 Default trait
+        // captures: 匹配最左的第一个
         if let Some(captures) = re.captures(s) {
             println!("{:?}", captures);
             captures
