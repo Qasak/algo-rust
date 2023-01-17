@@ -1,5 +1,68 @@
 use std::str::FromStr;
 use regex::Regex;
+use std::ops::Add;
+
+// 为{具体类型}实现trait
+#[derive(Debug)]
+struct Complex {
+    real: f64,
+    imagine: f64,
+}
+
+impl Complex {
+    pub fn new(real: f64, imagine: f64) -> Self {
+        Self { real, imagine }
+    }
+}
+
+// 对 Complex 类型的实现
+impl Add for Complex {
+    type Output = Self;
+
+    // 注意 add 第一个参数是 self，会移动所有权
+    fn add(self, rhs: Self) -> Self::Output {
+        let real = self.real + rhs.real;
+        let imagine = self.imagine + rhs.imagine;
+        Self::new(real, imagine)
+    }
+}
+
+// ...
+
+// 如果不想移动所有权，可以为 &Complex 实现 add，这样可以做 &c1 + &c2
+impl Add for &Complex {
+    // 注意返回值不应该是 Self 了，因为此时 Self 是 &Complex
+    type Output = Complex;
+
+    fn add(self, rhs: Self) -> Self::Output {
+        let real = self.real + rhs.real;
+        let imagine = self.imagine + rhs.imagine;
+        Complex::new(real, imagine)
+    }
+}
+
+// ...
+
+// 因为 Add<Rhs = Self> 是个泛型 trait，我们可以为 Complex 实现 Add<f64>
+impl Add<f64> for &Complex {
+    type Output = Complex;
+
+    // rhs 现在是 f64 了
+    fn add(self, rhs: f64) -> Self::Output {
+        let real = self.real + rhs;
+        Complex::new(real, self.imagine)
+    }
+}
+
+#[test]
+fn test_complex() {
+    let c1 = Complex::new(1.0, 1f64);
+    let c2 = Complex::new(2 as f64, 3.0);
+    println!("{:?}", &c1 + &c2);
+    println!("{:?}", &c1 + 5.0);
+    println!("{:?}", c1 + c2);
+}
+
 pub trait Parse {
     type Error;
     fn parse(s: &str) -> Result<Self, Self::Error> where Self: Sized;
@@ -33,9 +96,12 @@ pub trait Parse {
 //     }
 // }
 
-// 我们约束 T 必须同时实现了 FromStr 和 Default
-// 这样在使用的时候我们就可以用这两个 trait 的方法了
-impl<T> Parse for T
+
+// 为{泛型}实现trait，这个泛型要满足某一类约束
+// str::parse 是一个泛型函数，它返回任何实现了 FromStr trait 的类型，它必须实现了 FromStr trait。
+
+// 两种约束形式甚至可以一起写
+impl<T: FromStr> Parse for T
     where
         T: FromStr
 {
