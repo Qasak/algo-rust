@@ -29,6 +29,7 @@ mod trie;
 mod one_line;
 mod enumeration;
 mod divide_and_conquer;
+mod ordered_collection;
 
 fn main() {
     println!("Hello algo-rust!")
