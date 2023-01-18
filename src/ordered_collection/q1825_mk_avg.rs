@@ -72,6 +72,7 @@ impl MKAverage {
         if self.dq.len() <= self.m as usize {
             self.mid.insert(cur);
             self.sum += cur as i64;
+            // 初次划分l, mid, r
             if self.dq.len() == self.m as usize {
                 for _ in 0..self.k {
                     //safe m > 2 * k
