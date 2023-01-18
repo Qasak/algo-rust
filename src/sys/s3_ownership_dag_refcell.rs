@@ -30,7 +30,7 @@ impl Node {
 mod test {
     use std::cell::RefCell;
     use std::rc::Rc;
-    use crate::sys::s3_dag_refcell::Node;
+    use crate::sys::s3_ownership_dag_refcell::Node;
     #[test]
     fn f() {
         //     1  2

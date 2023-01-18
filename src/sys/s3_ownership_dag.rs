@@ -26,7 +26,7 @@ impl Node {
 #[cfg(test)]
 mod test {
     use std::rc::Rc;
-    use crate::sys::s3_dag::Node;
+    use crate::sys::s3_ownership_dag::Node;
 
     #[test]
     fn node_test() {
