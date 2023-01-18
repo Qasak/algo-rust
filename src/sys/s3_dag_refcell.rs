@@ -56,7 +56,6 @@ mod test {
         let node3 = node1.get_downstream().unwrap();
         // 获得可变引用，来修改 downstream
         node3.borrow_mut().downstream = Some(Rc::new(RefCell::new(node5)));
-
         println!("node1: {:?}, node2: {:?}", node1, node2);
     }
 }

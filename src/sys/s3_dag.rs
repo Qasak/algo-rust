@@ -29,7 +29,7 @@ mod test {
     use crate::sys::s3_dag::Node;
 
     #[test]
-    fn f() {
+    fn node_test() {
 
         //     1  2
         //     | /
@@ -48,7 +48,7 @@ mod test {
     }
 
     #[test]
-    fn ff() {
+    fn refcell_test() {
         use std::cell::RefCell;
 
         let data = RefCell::new(1);
