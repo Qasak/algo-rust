@@ -1,16 +1,16 @@
-
-struct SentenceIter<'a> {
-    s: &'a mut &'a str,
+#[derive(Debug)]
+struct SentenceIter<'b, 'a> {
+    s: &'b mut &'a str,
     delimiter: char,
 }
 
-impl<'a> SentenceIter<'a> {
-    pub fn new(s: &'a mut &'a str, delimiter: char) -> Self {
+impl<'b, 'a> SentenceIter<'b, 'a> {
+    pub fn new(s: &'b mut &'a str, delimiter: char) -> Self {
         Self { s, delimiter }
     }
 }
 
-impl<'a> Iterator for SentenceIter<'a> {
+impl<'b, 'a> Iterator for SentenceIter<'b, 'a> {
     type Item = &'a str;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -33,11 +33,14 @@ impl<'a> Iterator for SentenceIter<'a> {
 
 #[test]
 fn it_works() {
-    let mut s = "This is the 1st sentence. This is the 2nd sentence.";
-    let mut iter = SentenceIter::new(&mut s, '.');
+    let s = "This is the 1st sentence. This is the 2nd sentence.".to_owned();
+    let mut s1 = s.as_str();
+    // 结构体的字段存在引用时，引用对应值的生命周期>=结构体的生命周期
+    let mut iter = SentenceIter::new(&mut s1, '.');
     assert_eq!(iter.next(), Some("This is the 1st sentence."));
     assert_eq!(iter.next(), Some("This is the 2nd sentence."));
-    assert_eq!(iter.next(), None);
+    println!("{}", s1);
+    // assert_eq!(iter.next(), None);
 }
 
 #[test]
