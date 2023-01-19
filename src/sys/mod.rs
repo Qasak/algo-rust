@@ -11,5 +11,6 @@ mod s5_type_trait_3_trait_obj;
 mod s5_type_trait_4_iterator_trait;
 mod s3_lifetime;
 mod s5_type_trait_5_vtable;
-mod s5_type_trait_6_std;
+mod s5_type_trait_6_clone_copy_drop;
 mod s3_ownership_reborrow;
+mod s5_type_trait_7_convert;
