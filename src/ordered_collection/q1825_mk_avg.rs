@@ -10,18 +10,13 @@ impl MultiSet {
         self.0.contains_key(&x)
     }
     pub fn insert(&mut self, x: i32) {
-        self.0.entry(x).and_modify(|x| *x += 1).or_insert(1);
+        // self.0.entry(x).and_modify(|x| *x += 1).or_insert(1);
+        *self.0.entry(x).or_default() += 1;
     }
-    pub fn remove(&mut self, a: i32) {
-        let temp = self
-            .0
-            .entry(a)
-            .and_modify(|x| {
-                *x -= 1;
-            })
-            .or_default();
-        if *temp == 0 {
-            self.0.remove(&a);
+    pub fn remove(&mut self, x: i32) {
+        *self.0.entry(x).or_default() -= 1;
+        if self.0[&x] == 0 {
+            self.0.remove(&x);
         }
     }
     pub fn first(&self) -> i32 {
