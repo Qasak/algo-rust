@@ -20,3 +20,4 @@ mod q1799_max_score;
 mod q2140_solving_brainpower;
 mod q309_stock_with_cooldown;
 mod q1824_min_sideway_jump;
+mod q1815_max_happy_groups;
