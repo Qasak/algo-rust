@@ -1,7 +1,8 @@
 
 use std::fmt;
 use std::fmt::Formatter;
-use std::io::Write;
+use std::io::{BufWriter, Write};
+use std::net::TcpStream;
 
 // #[derive(Debug)]
 struct BufBuilder {
@@ -39,6 +40,7 @@ impl Write for BufBuilder {
 mod test {
     use std::io::Write;
     use crate::sys::s5_type_trait_1::BufBuilder;
+
     #[test]
     fn write_test() {
         let mut buf = BufBuilder::new();

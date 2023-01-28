@@ -133,8 +133,8 @@ impl<T: FromStr> Parse for T
 }
 
 mod test {
-    use crate::sys::s5_type_trait_2_generic_trait::Parse;
     use regex::Regex;
+    use crate::sys::s5_type_trait_2_generic_trait::Parse;
 
     #[test]
     fn parse_should_work() {
