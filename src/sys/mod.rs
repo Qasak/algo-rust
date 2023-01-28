@@ -18,3 +18,4 @@ mod s5_type_trait_8_mylist;
 mod s6_ds_ptr_1_box;
 mod s6_ds_ptr_2_cow;
 mod s6_ds_ptr_3_mutex_guard;
+mod s6_ds_ptr_4_customized_ptr;
