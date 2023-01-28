@@ -52,3 +52,16 @@ pub fn ways_to_make_fair_1(nums: Vec<i32>) -> i32 {
         }
     ).0
 }
+
+// easy
+pub fn ways_to_make_fair_2(nums: Vec<i32>) -> i32 {
+    let (mut pre, mut sum, mut cnt) = ([0, 0], [0, 0], 0);
+    // 将奇、偶索引对应值的累加和填入 sum[0](偶数位置) 和 sum[1] (奇数位置)；
+    for i in 0..nums.len() { sum[i % 2] += nums[i]; }
+    for i in 0..nums.len() {
+        sum[i % 2] -= nums[i];
+        cnt += if pre[0] + sum[1] == pre[1] + sum[0] { 1 } else { 0 };
+        pre[i % 2] += nums[i];
+    }
+    cnt
+}
