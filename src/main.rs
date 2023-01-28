@@ -30,6 +30,7 @@ mod one_line;
 mod enumeration;
 mod divide_and_conquer;
 mod ordered_collection;
+mod pre_sum;
 
 fn main() {
     println!("Hello algo-rust!")
