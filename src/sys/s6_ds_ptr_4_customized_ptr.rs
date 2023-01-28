@@ -144,11 +144,14 @@ fn q2() {
     println!("{}", s1);
 }
 
-// Cow<[u8]> 和 Cow 的大小
+// Cow<[u8]> 和 Cow<str> 的大小
+// Cow<'a, B> 要求 B 实现 ToOwned，
+// 其Owned变体的数据为 对应的 Owned 类型，即 [T] 对应的是 Vec<T>， str 对应的是 String，
+// 这两个的大小都是24字节，加上枚举占用的一字节以及8字节对齐，就是32字节。
 #[test]
 fn q3() {
-    let len1 = std::mem::size_of::<Cow<u8>>();
-    let len2 = std::mem::size_of::<Cow<()>>();
+    let len1 = std::mem::size_of::<Cow<[u8]>>();
+    let len2 = std::mem::size_of::<Cow<str>>();
 
     println!("{}", len1);
     println!("{}", len2);
