@@ -1,5 +1,8 @@
 use std::{str, ops::Deref};
+use std::borrow::Cow;
 use std::fmt::{Debug, Display, Formatter};
+use regex::internal::Input;
+use crate::sys::s6_ds_ptr_4_customized_ptr::MyString::Standard;
 
 const MINI_STRING_MAX_LEN: usize = 30;
 struct MiniString {
@@ -42,13 +45,34 @@ enum MyString {
     Standard(String)
 }
 
+impl MyString {
+    pub fn push_str(&mut self, string: &str) {
+        match self {
+            // ref用来匹配模式，默认的匹配需要移动，而加了ref就不用
+            MyString::Inline(m) => {
+                let len = m.len as usize;
+                let new_len = string.len() + len;
+                println!("{:?}", (len, string.len(), new_len));
+                if new_len <= MINI_STRING_MAX_LEN {
+                    m.data[len..new_len].copy_from_slice(string.as_bytes());
+                    m.len = new_len as u8;
+                } else {
+                    *self = Standard(string.to_owned());
+                }
+            },
+            MyString::Standard(s) => s.push_str(string),
+        }
+    }
+}
+
 impl Deref for MyString {
     type Target = str;
 
     fn deref(&self) -> &Self::Target {
-        match *self {
-            MyString::Inline(ref v) => v.deref(),
-            MyString::Standard(ref v) => v.deref()
+        match self {
+            // ref用来匹配模式，默认的匹配需要移动，而加了ref就不用
+            MyString::Inline(v) => v.deref(),
+            MyString::Standard(v) => v.deref()
         }
     }
 }
@@ -57,6 +81,15 @@ impl From<&str> for MyString {
     fn from(s: &str) -> Self {
         match s.len() > MINI_STRING_MAX_LEN {
             true => Self::Standard(s.to_owned()),
+            _ => Self::Inline(MiniString::new(s))
+        }
+    }
+}
+
+impl From<String> for MyString {
+    fn from(s: String) -> Self {
+        match s.len() > MINI_STRING_MAX_LEN {
+            true => Self::Standard(s),
             _ => Self::Inline(MiniString::new(s))
         }
     }
@@ -92,4 +125,32 @@ fn f() {
     // MyString 可以使用一切 &str 接口，因为 Rust 可以自动 Deref
     assert!(s1.ends_with("rt"));
     assert!(s2.ends_with("ABAB"));
+}
+
+
+// 支持从 String 中生成一个 MyString
+#[test]
+fn q1() {
+    let s1: MyString = format!("{} tf ?", "what").into();
+    println!("{}, {}", s1, s1.len());
+}
+
+
+// 加上类似 String 的 push_str 接口
+#[test]
+fn q2() {
+    let mut s1: MyString = "what tf ?".into();
+    s1.push_str("🌍");
+    println!("{}", s1);
+}
+
+// Cow<[u8]> 和 Cow 的大小
+#[test]
+fn q3() {
+    let len1 = std::mem::size_of::<Cow<u8>>();
+    let len2 = std::mem::size_of::<Cow<()>>();
+
+    println!("{}", len1);
+    println!("{}", len2);
+
 }
