@@ -33,3 +33,27 @@ fn show_cow(cow: Cow<str>) -> String {
         Cow::Owned(v) => format!("Owned {}", v),
     }
 }
+
+
+
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Deserialize)]
+struct User<'input> {
+    // 必须加上标记，否则是owned
+    #[serde(borrow)]
+    name: Cow<'input, str>,
+    age: u8,
+}
+#[test]
+fn g() {
+    let input = r#"{ "name": "Mario", "age": 18 }"#;
+    let user: User = serde_json::from_str(input).unwrap();
+
+    match user.name {
+        Cow::Borrowed(x) => println!("borrowed {}", x),
+        Cow::Owned(x) => println!("owned {}", x),
+    }
+}
+
+
