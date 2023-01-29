@@ -19,3 +19,5 @@ mod s6_ds_ptr_1_box;
 mod s6_ds_ptr_2_cow;
 mod s6_ds_ptr_3_mutex_guard;
 mod s6_ds_ptr_4_customized_ptr;
+mod s6_ds_collections_1_slice;
+mod s6_ds_collections_1_iter_ext;
