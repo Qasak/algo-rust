@@ -35,7 +35,7 @@ use crate::linked_list::ListNode;
 //     list1
 // }
 
-
+use std::mem;
 pub fn merge_in_between(mut list1: Option<Box<ListNode>>, a: i32, b: i32, mut list2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     let mut d = &mut list1;
 
@@ -44,13 +44,16 @@ pub fn merge_in_between(mut list1: Option<Box<ListNode>>, a: i32, b: i32, mut li
         d = &mut d.as_mut().unwrap().next;
         i += 1;
     }
-
+    // d指向a下标的前一个节点
+    // p当前指向a下标的节点
     let mut p = d.as_mut().unwrap().next.take();
     while i <= b {
         p = p.as_mut().unwrap().next.take();
         i += 1;
     }
+    // while跑完，p指向b+1下标的节点，中间的节点全部用None填充
 
+    // q指向list2最后一个节点
     let mut q = &mut list2;
     while q.as_ref().unwrap().next.is_some() {
         q = &mut q.as_mut().unwrap().next;
@@ -61,6 +64,8 @@ pub fn merge_in_between(mut list1: Option<Box<ListNode>>, a: i32, b: i32, mut li
 
     list1
 }
+
+
 
 
 fn show_list(head: Option<Box<ListNode>>) {
