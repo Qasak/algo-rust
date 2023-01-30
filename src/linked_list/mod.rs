@@ -29,7 +29,10 @@ impl ListNode {
     pub fn add_node(&mut self, val: i32) {
         let mut current_node = self;
         while let Some(ref mut next_node) = current_node.next {
+            // 这里应该是用到了Deref Coercion自动解引用
+            // current_node = &mut **next_node;
             current_node = next_node;
+
         }
         current_node.next = Some(Box::new(ListNode::new(val)));
     }
