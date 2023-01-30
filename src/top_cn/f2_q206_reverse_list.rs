@@ -1,19 +1,5 @@
-// Definition for singly-linked list.
-#[derive(PartialEq, Eq, Clone, Debug)]
-pub struct ListNode {
-  pub val: i32,
-  pub next: Option<Box<ListNode>>
-}
+use crate::linked_list::ListNode;
 
-impl ListNode {
-  #[inline]
-  pub(crate) fn new(val: i32) -> Self {
-    ListNode {
-      next: None,
-      val
-    }
-  }
-}
 pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     let mut cur = head;
     let mut pre = None;
@@ -28,6 +14,7 @@ pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
 }
 #[cfg(test)]
 mod test{
+    use crate::linked_list::ListNode;
     use crate::top_cn::f2_q206_reverse_list::{ListNode, reverse_list};
 
     #[test]

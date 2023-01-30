@@ -1,4 +1,4 @@
-use crate::top_cn::f2_q206_reverse_list::ListNode;
+use crate::linked_list::ListNode;
 
 pub fn middle_node(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     let mut slow = head.as_ref();
