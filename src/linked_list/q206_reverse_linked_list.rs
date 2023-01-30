@@ -1,3 +1,4 @@
+use crate::linked_list::ListNode;
 
 pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     let mut cur = head;
