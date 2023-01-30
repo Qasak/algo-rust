@@ -15,7 +15,7 @@ pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
 #[cfg(test)]
 mod test{
     use crate::linked_list::ListNode;
-    use crate::top_cn::f2_q206_reverse_list::{ListNode, reverse_list};
+    use crate::top_cn::f2_q206_reverse_list::{reverse_list};
 
     #[test]
     pub fn t() {
