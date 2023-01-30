@@ -1,3 +1,5 @@
+use std::ops::Deref;
+
 mod q876_middle_of_linked_list;
 mod q0202_get_kth_from_end;
 mod d_list;
@@ -20,5 +22,15 @@ impl ListNode {
             next: None,
             val
         }
+    }
+}
+
+impl ListNode {
+    pub fn add_node(&mut self, val: i32) {
+        let mut current_node = self;
+        while let Some(ref mut next_node) = current_node.next {
+            current_node = next_node;
+        }
+        current_node.next = Some(Box::new(ListNode::new(val)));
     }
 }

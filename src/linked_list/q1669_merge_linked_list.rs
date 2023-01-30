@@ -1,39 +1,8 @@
 use std::ops::Deref;
 use crate::linked_list::ListNode;
 
-// pub fn merge_in_between(mut list1: Option<Box<ListNode>>, a: i32, b: i32, list2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-//     let (a, b) = (a as usize, b as usize);
-//     let mut v = vec![];
-//     let mut head = &mut list1;
-//     while head.is_some() {
-//         v.push(head.as_mut().unwrap().val);
-//         head = &mut head.as_mut().unwrap().next;
-//     }
-//     let mut d = Box::new(ListNode::new(0));
-//     let mut p = &mut d;
-//
-//     for i in 0..a {
-//         let mut cur = Box::new(ListNode::new(v[i]));
-//         let nxt = &mut cur;
-//         p.next = Some(cur);
-//         p = nxt;
-//     }
-//
-//     d.next
-// }
 
-// pub fn merge_in_between(mut list1: Option<Box<ListNode>>, a: i32, b: i32, mut list2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-//     let mut start = &mut list1;
-//     for _ in 1..a { start = &mut start.as_deref_mut().unwrap().next; }
-//
-//     let mut end = &mut start.clone();
-//     for _ in a - 2..b { end = &mut end.as_deref_mut().unwrap().next; }
-//     core::mem::swap(&mut start.as_deref_mut().unwrap().next, &mut list2);
-//
-//     while start.as_ref().unwrap().next.is_some() { start = &mut start.as_deref_mut().unwrap().next; }
-//     core::mem::swap(&mut start.as_deref_mut().unwrap().next, &mut end);
-//     list1
-// }
+
 
 use std::mem;
 pub fn merge_in_between(mut list1: Option<Box<ListNode>>, a: i32, b: i32, mut list2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
@@ -64,6 +33,20 @@ pub fn merge_in_between(mut list1: Option<Box<ListNode>>, a: i32, b: i32, mut li
 
     list1
 }
+
+pub fn merge_in_between_1(mut list1: Option<Box<ListNode>>, a: i32, b: i32, mut list2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+    let mut start = &mut list1;
+    for _ in 1..a { start = &mut start.as_deref_mut().unwrap().next; }
+
+    let mut end = &mut start.clone();
+    for _ in a - 2..b { end = &mut end.as_deref_mut().unwrap().next; }
+    core::mem::swap(&mut start.as_deref_mut().unwrap().next, &mut list2);
+
+    while start.as_ref().unwrap().next.is_some() { start = &mut start.as_deref_mut().unwrap().next; }
+    core::mem::swap(&mut start.as_deref_mut().unwrap().next, &mut end);
+    list1
+}
+
 
 
 
@@ -103,5 +86,17 @@ fn f() {
         }));
     // [0,1,2,1000000,1000001,1000002,5]
     show_list(merge_in_between(list1, 3, 4, list2));
+}
 
+#[test]
+fn test_add_node() {
+    let mut list1 = ListNode::new(0);
+    for i in 1..6 {
+        list1.add_node(i);
+    }
+    let mut list2 = ListNode::new(100000);
+    list2.add_node(100001);
+    list2.add_node(100002);
+
+    show_list(merge_in_between(Some(Box::new(list1)), 3, 4, Some(Box::new(list2))));
 }
