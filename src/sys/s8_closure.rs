@@ -3,7 +3,7 @@ use std::marker::PhantomData;
 use std::ptr::NonNull;
 
 #[test]
-fn f() {
+fn test_fn_once() {
     // 长度0
     let c1 = || println!("nihao!");
     // 长度0 参数无关
@@ -31,7 +31,7 @@ fn f() {
         size_of_val(&c3),
         size_of_val(&c4),
         size_of_val(&c5),
-        size_of_val(&f),
+        size_of_val(&test_fn_once),
     );
 
     println!("map {}", size_of::<HashMap<&str, &str>>());
@@ -45,7 +45,7 @@ fn f() {
 }
 
 #[test]
-fn g() {
+fn test_call_once() {
     let name = String::from("Tyr");
 
     // 这个闭包会 clone 内部的数据返回，所以它不是 FnOnce
@@ -72,4 +72,86 @@ fn call_once(arg: String, c: impl FnOnce(String) -> (String, String)) -> (String
 
 fn not_closure(arg: String) -> (String, String) {
     (arg, "Rosie".into())
+}
+
+
+#[test]
+fn test_fn_mut() {
+    let mut name = String::from("hello");
+    let mut name1 = String::from("hola");
+
+    // 捕获 &mut name
+    let mut c = || {
+        name.push_str(" Tyr");
+        println!("c: {}", name);
+    };
+
+    // 捕获 mut name1，注意 name1 需要声明成 mut
+    let mut c1 = move || {
+        name1.push_str("!");
+        println!("c1: {}", name1);
+    };
+
+    c();
+    c1();
+
+    call_mut(&mut c);
+    call_mut(&mut c1);
+
+    call_once_1(c);
+    call_once_1(c1);
+}
+
+// 在作为参数时，FnMut 也要显式地使用 mut，或者 &mut
+fn call_mut(c: &mut impl FnMut()) {
+    c();
+}
+
+// 由于FnOnce trait中的call_once函数签名的第一个参数是 self，它会转移 self 的所有权到 call_once 函数中。
+// extern "rust-call" fn call_once(self, args: Args) -> Self::Output;
+// 所以这里给多态参数时不需要 &mut, 如果给的是 &mut c, 则会 mismatched types
+
+// 至于
+// call_once_1(mut c: impl FnOnce())
+// call_once_1(c: impl FnOnce())
+// 两种都是可以的
+fn call_once_1(c: impl FnOnce()) {
+    c();
+}
+
+#[test]
+fn test_fn() {
+    let v = vec![0u8; 1024];
+    let v1 = vec![0u8; 1023];
+
+    // Fn，不移动所有权
+    let mut c = |x: u64| v.len() as u64 * x;
+    // Fn，移动所有权
+    let mut c1 = move |x: u64| v1.len() as u64 * x;
+
+    println!("direct call: {}", c(2));
+    println!("direct call: {}", c1(2));
+
+
+    println!("call: {}", call(3, &c));
+    println!("call: {}", call(3, &c1));
+
+    println!("call_mut: {}", call_mut_2(4, &mut c));
+    println!("call_mut: {}", call_mut_2(4, &mut c1));
+
+    println!("call_once: {}", call_once_2(5, c));
+    println!("call_once: {}", call_once_2(5, c1));
+
+}
+
+fn call(arg: u64, c: &impl Fn(u64) -> u64) -> u64 {
+    c(arg)
+}
+
+fn call_mut_2(arg: u64, c: &mut impl FnMut(u64) -> u64) -> u64 {
+    c(arg)
+}
+
+fn call_once_2(arg: u64, c: impl FnOnce(u64) -> u64) -> u64 {
+    c(arg)
 }
