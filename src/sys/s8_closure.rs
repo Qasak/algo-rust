@@ -123,7 +123,6 @@ fn call_once_1(c: impl FnOnce()) {
 fn test_fn() {
     let v = vec![0u8; 1024];
     let v1 = vec![0u8; 1023];
-
     // Fn，不移动所有权
     let mut c = |x: u64| v.len() as u64 * x;
     // Fn，移动所有权
@@ -154,4 +153,44 @@ fn call_mut_2(arg: u64, c: &mut impl FnMut(u64) -> u64) -> u64 {
 
 fn call_once_2(arg: u64, c: impl FnOnce(u64) -> u64) -> u64 {
     c(arg)
+}
+
+
+
+
+use std::ops::Mul;
+#[test]
+fn test_closure_ret() {
+    let c1 = curry(5);
+    println!("5 multiply 2 is: {}", c1(2));
+
+    let adder2 = curry(3.14);
+    println!("pi multiply 4^2 is: {}", adder2(4. * 4.));
+}
+
+fn curry<T>(x: T) -> impl Fn(T) -> T
+    where
+        T: Mul<Output = T> + Copy,
+{
+    move |y| x * y
+}
+
+
+// struct Closure<'a, 'b: 'a> {
+// 	data: (i32, i32, i32, i32),
+// 	v: &'a [&'b str],
+// 	name: String,
+// }
+#[test]
+fn test_closure_lifetime() {
+    let name = String::from("Tyr");
+    let vec = vec!["Rust", "Elixir", "Javascript"];
+    let v = &vec[..];
+    let data = (1, 2, 3, 4);
+    let c = move || {
+        println!("data: {:?}", data);
+        println!("v: {:?}, name: {:?}", v, name.clone());
+    };
+    c();
+    // 请问在这里，还能访问 name 么？为什么？
 }
