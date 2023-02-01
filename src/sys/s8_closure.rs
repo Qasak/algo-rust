@@ -49,13 +49,13 @@ fn test_call_once() {
     let name = String::from("Tyr");
 
     // 这个闭包会 clone 内部的数据返回，所以它不是 FnOnce
-    let c = move |greeting: String| (greeting, name.clone());
-
     // 所以 c1 可以被调用多次
+    // 但是name仍然被强制move了，如果后续再使用会报错
+    let c = move |greeting: String| (greeting, name.clone());
+    // println!("{}", name);
 
     println!("c1 call once: {:?}", c("qiao".into()));
     println!("c1 call twice: {:?}", c("bonjour".into()));
-
     // 然而一旦它被当成 FnOnce 被调用，就无法被再次调用
     println!("result: {:?}", call_once("hi".into(), c));
 
