@@ -5,3 +5,4 @@ mod q2503_max_points;
 mod q1971_valid_path;
 mod q753_cracking_safe_eulerian_path;
 mod q332_reconstruct_itinerary_eulerian_path;
+mod q1129_shortest_alternating_path;
