@@ -13,13 +13,19 @@ impl From<MyString> for i32 {
     }
 }
 
+impl From<i32> for MyString {
+    fn from(value: i32) -> Self {
+        MyString(value.to_string())
+    }
+}
+
 #[test]
 fn convert_test() {
     let x = i32::from(MyString("456".to_string()));
     println!("{}", x);
+    let s: MyString = x.into();
 
     // MyString自动实现Into
-    let s = MyString("123".to_string());
     let y: i32 = s.into();
     println!("{}", y);
 }
