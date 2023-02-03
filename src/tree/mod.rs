@@ -3,3 +3,4 @@ mod q124_max_path_sum;
 mod q938_range_sum_bst;
 mod q872_leaf_similar;
 mod q124_binary_tree_max_path_sum;
+mod q1145_tree_winning_move;
