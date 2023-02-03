@@ -1,23 +1,8 @@
 use std::cell::RefCell;
 use std::rc::Rc;
+use crate::tree::TreeNode;
 
-#[derive(Debug, PartialEq, Eq)]
-pub struct TreeNode {
-  pub val: i32,
-  pub left: Option<Rc<RefCell<TreeNode>>>,
-  pub right: Option<Rc<RefCell<TreeNode>>>,
-}
 
-impl TreeNode {
-  #[inline]
-  pub fn new(val: i32) -> Self {
-    TreeNode {
-      val,
-      left: None,
-      right: None
-    }
-  }
-}
 // type OptNode = Option<Rc<RefCell<TreeNode>>>;
 // naive recursive
 pub fn count_nodes(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {

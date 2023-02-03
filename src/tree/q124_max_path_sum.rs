@@ -1,6 +1,6 @@
 use std::rc::Rc;
 use std::cell::RefCell;
-use crate::tree::q222_count_complete_tree_nodes::TreeNode;
+use crate::tree::TreeNode;
 
 pub fn max_path_sum(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
     fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut i32) -> i32 {

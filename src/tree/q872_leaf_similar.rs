@@ -1,6 +1,6 @@
 use std::rc::Rc;
 use std::cell::RefCell;
-use crate::tree::q222_count_complete_tree_nodes::TreeNode;
+use crate::tree::TreeNode;
 
 type T = Option<Rc<RefCell<TreeNode>>>;
 

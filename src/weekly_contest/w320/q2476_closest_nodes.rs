@@ -1,6 +1,6 @@
 use std::cell::RefCell;
 use std::rc::Rc;
-use crate::tree::q222_count_complete_tree_nodes::TreeNode;
+use crate::tree::TreeNode;
 
 
 // NAIVE search: TLE
