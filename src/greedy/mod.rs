@@ -5,3 +5,4 @@ mod q1657_close_strings;
 mod q1775_min_operations;
 mod q1703_min_moves;
 mod q1753_max_score;
+mod q1798_max_num_of_consecutive;
