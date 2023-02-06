@@ -7,6 +7,7 @@ mod q938_range_sum_bst;
 mod q872_leaf_similar;
 mod q124_binary_tree_max_path_sum;
 mod q1145_tree_winning_move;
+mod q2331_evaluate_bool;
 
 
 #[derive(Debug, PartialEq, Eq)]
