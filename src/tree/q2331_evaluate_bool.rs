@@ -1,4 +1,3 @@
-use std::borrow::Borrow;
 use std::cell::RefCell;
 use std::rc::Rc;
 use crate::tree::TreeNode;
@@ -6,7 +5,7 @@ use crate::tree::TreeNode;
 type OptNode = Option<Rc<RefCell<TreeNode>>>;
 // post_order traverse
 pub fn evaluate_tree(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
-    fn dfs(node: &OptNode) -> bool {
+    fn dfs(node: &Option<Rc<RefCell<TreeNode>>>) -> bool {
         let val = node.as_ref().unwrap().borrow().val;
         if val == 1 || val == 0 {
             val == 1
