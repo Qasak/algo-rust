@@ -103,3 +103,42 @@ fn main() {
     // let w1 = w.by_ref();
     // w1.write_all(b"world").unwrap();
 }
+
+
+
+// another example
+trait Draw {
+    fn draw(&self);
+}
+
+struct Circle {
+    radius: i32,
+}
+
+impl Draw for Circle {
+    fn draw(&self) {
+        println!("Drawing a circle with radius {}", self.radius);
+    }
+}
+
+struct Square {
+    side: i32,
+}
+
+impl Draw for Square {
+    fn draw(&self) {
+        println!("Drawing a square with side {}", self.side);
+    }
+}
+
+#[test]
+fn another_trait_obj() {
+    let c = Circle { radius: 5 };
+    let s = Square { side: 10 };
+
+    let objects = vec![&c as &dyn Draw, &s as &dyn Draw];
+
+    for object in objects {
+        object.draw();
+    }
+}
