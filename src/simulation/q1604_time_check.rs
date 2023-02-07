@@ -1,10 +1,10 @@
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, HashMap};
 
 pub fn alert_names(key_name: Vec<String>, key_time: Vec<String>) -> Vec<String> {
-    let mut arr: Vec<(String, String)> = key_name.iter().zip(key_time.iter()).map(|(x, y)| (x.to_string(), y.to_string())).collect();
+    let mut arr: Vec<(&String, &String)> = key_name.iter().zip(key_time.iter()).map(|(x, y)| (x, y)).collect();
 
     arr.sort_by(|a, b| a.1.cmp(&b.1));
-    let mut map = BTreeMap::new();
+    let mut map = HashMap::new();
     for (k, v) in arr {
         let mut entry = map.entry(k).or_insert(Vec::new());
         entry.push(v);
@@ -31,13 +31,14 @@ pub fn alert_names(key_name: Vec<String>, key_time: Vec<String>) -> Vec<String> 
         let mut second = iter.next().unwrap();
         for third in iter {
             if time_cmp(first, third) {
-                ret.push(k.into());
+                ret.push(k.to_string());
                 break;
             }
             first = second;
             second = third;
         }
     }
+    ret.sort();
     ret
 }
 
@@ -51,7 +52,6 @@ fn hour_to_min(t: &str) -> i32 {
     t[0..2].parse::<i32>().unwrap() * 60 + t[3..5].parse::<i32>().unwrap()
 }
 
-
 #[cfg(test)]
 mod test {
     use crate::simulation::q1604_time_check::alert_names;
@@ -61,7 +61,7 @@ mod test {
         let key_name = vec!["daniel".to_string(),"daniel".to_string(),"daniel".to_string(),"luis".to_string(),"luis".to_string(),"luis".to_string(),"luis".to_string()];
         let key_time = vec!["10:00".to_string(),"10:40".to_string(),"11:00".to_string(),"09:00".to_string(),"11:00".to_string(),"13:00".to_string(),"15:00".to_string()];
         let ret = alert_names(key_name, key_time);
-        println!("{:?}", ret);
+        println!("1 {:?}", ret);
 
     }
 
@@ -70,7 +70,7 @@ mod test {
         let key_name = vec!["alice".to_string(),"alice".to_string(),"alice".to_string(),"bob".to_string(),"bob".to_string(),"bob".to_string(),"bob".to_string()];
         let key_time = vec!["12:01".to_string(),"12:00".to_string(),"18:00".to_string(),"21:00".to_string(),"21:20".to_string(),"21:30".to_string(),"23:00".to_string()];
         let ret = alert_names(key_name, key_time);
-        println!("{:?}", ret);
+        println!("2 {:?}", ret);
 
     }
 
@@ -79,7 +79,7 @@ mod test {
         let key_name = vec!["leslie".to_string(),"leslie".to_string(),"leslie".to_string(),"clare".to_string(),"clare".to_string(),"clare".to_string(),"clare".to_string()];
         let key_time = vec!["13:00".to_string(),"13:20".to_string(),"14:00".to_string(),"18:00".to_string(),"18:51".to_string(),"19:30".to_string(),"19:49".to_string()];
         let ret = alert_names(key_name, key_time);
-        println!("{:?}", ret);
+        println!("3 {:?}", ret);
 
     }
 }
