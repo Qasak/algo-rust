@@ -7,6 +7,7 @@ mod q141_has_cycle;
 mod q25_k_reverse;
 mod q206_reverse_linked_list;
 mod q1669_merge_linked_list;
+mod q445_add_two;
 
 // Definition for singly-linked list.
 #[derive(PartialEq, Eq, Clone, Debug)]
@@ -35,5 +36,25 @@ impl ListNode {
 
         }
         current_node.next = Some(Box::new(ListNode::new(val)));
+    }
+
+    pub fn print_list(self) {
+        let mut current = &Some(Box::new(self));
+        while let Some(node) = current {
+            print!("{} ", node.val);
+            current = &node.next;
+        }
+        println!();
+    }
+}
+
+impl From<Vec<i32>> for ListNode {
+    fn from(vec: Vec<i32>) -> Self {
+        let mut current = None;
+        for &val in vec.iter().rev() {
+            let node = ListNode { val, next: current };
+            current = Some(Box::new(node));
+        }
+        ListNode { val: 0, next: current }
     }
 }
