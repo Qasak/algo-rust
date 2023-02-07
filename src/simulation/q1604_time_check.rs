@@ -11,18 +11,6 @@ pub fn alert_names(key_name: Vec<String>, key_time: Vec<String>) -> Vec<String> 
     }
 
     let mut ret: Vec<String> = vec![];
-    // for (k, v) in map.iter() {
-    //     let n = v.len();
-    //     if n < 3 {continue;}
-    //     let mut i = 0;
-    //     while  i + 2 < n {
-    //         if time_cmp(&v[i], &v[i + 2]) {
-    //             ret.push(k.into());
-    //             break;
-    //         }
-    //         i += 1;
-    //     }
-    // }
     for (k, v) in map.iter() {
         let n = v.len();
         if n < 3 {continue;}
