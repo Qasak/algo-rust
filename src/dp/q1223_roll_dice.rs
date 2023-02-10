@@ -16,7 +16,7 @@ pub fn die_simulator(n: i32, roll_max: Vec<i32>) -> i32 {
     // i == 0 return 1
 
     // 三元组cache
-    // let mut cache = vec![vec![vec![; ]; ]; ];
+    // let mut cache = vec![vec![vec![; roll_max.max]; m]; n];
     fn dfs(i: i32, last: usize, left: i32, roll_max: &Vec<i32>, cache: &mut Vec<Vec<Vec<i64>>>) -> i64{
         const mo: i64 = 1e9 as i64 + 7;
         if i == 0 {
