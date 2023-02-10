@@ -46,3 +46,38 @@ pub fn die_simulator(n: i32, roll_max: Vec<i32>) -> i32 {
     }
     (ret % mo) as i32
 }
+
+pub fn die_simulator_dp(n: i32, roll_max: Vec<i32>) -> i32 {
+    const MO: i64 = 1e9 as i64 + 7;
+
+    // 1.dfs 改成 f 数组；
+    // 2.递归改成循环（每个参数都对应一层循环）
+    // 3.递归边界改成 f 数组的初始值。
+    let m = roll_max.len();
+    let n = n as usize;
+    let mut f = vec![vec![vec![-1 as i64; 15]; m]; n as usize];
+    for i in 0..n {
+        for last in 0..m {
+            for left in 0..(roll_max[last] as usize) {
+                let mut res = 0_i64;
+                for j in 0..m {
+                    if i == 0 {
+                        res = 1;
+                    } else {
+                        if j != last {
+                            res += f[i - 1][j][roll_max[j] as usize - 1];
+                        } else if left > 0 {
+                            res += f[i - 1][j][left - 1];
+                        }
+                    }
+                }
+                f[i][last][left] = res % MO;
+            }
+        }
+    }
+    let mut ans = 0_i64;
+    for j in 0..m {
+        ans += f[n - 1][j][roll_max[j] as usize - 1] % MO;
+    }
+    (ans % MO) as i32 
+}
