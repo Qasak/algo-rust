@@ -1,6 +1,5 @@
 use crate::linked_list::ListNode;
 
-
 pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     // a: prev, b: curr, c: next
     let mut b = head;
@@ -29,10 +28,9 @@ pub fn reverse_list_rec(head: OptNode) -> OptNode {
     reverse(None, head)
 }
 
-
 #[test]
 fn test() {
-    let v = vec![1,2,3,4,5];
+    let v = vec![1, 2, 3, 4, 5];
     let vv = v.clone();
     let list1: ListNode = vv.into();
     list1.print_list();

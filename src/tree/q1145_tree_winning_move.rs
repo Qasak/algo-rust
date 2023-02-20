@@ -1,6 +1,6 @@
+use crate::tree::TreeNode;
 use std::cell::RefCell;
 use std::rc::Rc;
-use crate::tree::TreeNode;
 type OptNode = Option<Rc<RefCell<TreeNode>>>;
 
 pub fn btree_game_winning_move(root: Option<Rc<RefCell<TreeNode>>>, n: i32, x: i32) -> bool {

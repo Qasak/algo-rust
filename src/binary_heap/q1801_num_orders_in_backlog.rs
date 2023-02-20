@@ -1,9 +1,9 @@
-use std::collections::BinaryHeap;
 use std::cmp::Reverse;
+use std::collections::BinaryHeap;
 struct Order {
     price: Price,
     amount: Amount,
-    order_type: OrderType
+    order_type: OrderType,
 }
 
 #[derive(Debug, Copy, Clone)]
@@ -15,18 +15,19 @@ struct Amount(i32);
 #[derive(Debug)]
 enum OrderType {
     Buy = 0,
-    Sell = 1
+    Sell = 1,
 }
 pub fn get_number_of_backlog_orders(orders: Vec<Vec<i32>>) -> i32 {
     let mo = 1e9 as i32 + 7;
     // q_buy: big
     // q_sell: small
-    let (mut q_buy, mut q_sell): (BinaryHeap<(i32, i32)>, BinaryHeap<(Reverse<i32>, i32)>) = (BinaryHeap::new(), BinaryHeap::new());
+    let (mut q_buy, mut q_sell): (BinaryHeap<(i32, i32)>, BinaryHeap<(Reverse<i32>, i32)>) =
+        (BinaryHeap::new(), BinaryHeap::new());
     for item in orders {
         let (price, mut amount, order_type) = (item[0], item[1], item[2]);
         // 0 == buy
         if order_type == 0 {
-            if q_sell.is_empty() || q_sell.peek().unwrap().0.0 > price {
+            if q_sell.is_empty() || q_sell.peek().unwrap().0 .0 > price {
                 q_buy.push((price, amount));
             } else {
                 while let Some((Reverse(sp), sa)) = q_sell.pop() {
@@ -70,8 +71,6 @@ pub fn get_number_of_backlog_orders(orders: Vec<Vec<i32>>) -> i32 {
             }
         }
     }
-
-
 
     let mut ret = 0;
     while let Some((Reverse(p), a)) = q_sell.pop() {

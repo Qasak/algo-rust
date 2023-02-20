@@ -27,8 +27,6 @@ struct S4 {
     b: u16,
 }
 
-
-
 enum E {
     A(f64),
     B(HashMap<String, String>),
@@ -55,19 +53,17 @@ macro_rules! show_size {
     };
 }
 
-
 #[cfg(test)]
 mod test {
+    use crate::sys::s4_mem::{E, S1, S2, S3, S4};
     use std::collections::HashMap;
     use std::mem::{align_of, size_of};
-    use crate::sys::s4_mem::{S1, S2, S3, S4, E};
 
     #[test]
     fn g() {
         println!("sizeof S1: {}, S2: {}", size_of::<S1>(), size_of::<S2>());
         println!("alignof S1: {}, S2: {}", align_of::<S1>(), align_of::<S2>());
     }
-
 
     #[test]
     fn f() {

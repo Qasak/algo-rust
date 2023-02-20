@@ -34,8 +34,6 @@ fn show_cow(cow: Cow<str>) -> String {
     }
 }
 
-
-
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Deserialize)]
@@ -55,5 +53,3 @@ fn g() {
         Cow::Owned(x) => println!("owned {}", x),
     }
 }
-
-

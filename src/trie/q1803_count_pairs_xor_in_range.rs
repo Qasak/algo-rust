@@ -2,7 +2,7 @@ const NUM_LEN: usize = 15;
 #[derive(Default)]
 struct Trie {
     cnt: i32,
-    child: [Option<Box<Trie>>; 2]
+    child: [Option<Box<Trie>>; 2],
 }
 impl Trie {
     fn add(&mut self, num: i32) {
@@ -18,7 +18,7 @@ impl Trie {
         let mut root = self;
         let mut ret = 0;
         for i in (0..=NUM_LEN).rev() {
-            let (num_bit, bound_bit)= (((num >> i) & 1) as usize, ((bound >> i) & 1) as usize);
+            let (num_bit, bound_bit) = (((num >> i) & 1) as usize, ((bound >> i) & 1) as usize);
             if bound_bit == 1 {
                 // num_bit ^ pre_bit = 0 < bound_bit
                 if let Some(l) = root.child[num_bit].as_ref() {

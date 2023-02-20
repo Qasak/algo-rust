@@ -2,10 +2,24 @@ use std::collections::{HashSet, VecDeque};
 
 pub fn min_mutation(start: String, end: String, bank: Vec<String>) -> i32 {
     fn compare(s1: &String, s2: &String) -> bool {
-        let cnt = s1.chars().zip(s2.chars()).fold(0, |cnt, (ch1, ch2)| if ch1 == ch2 { cnt } else { cnt + 1 });
-        if cnt > 1 { false } else { true }
+        let cnt = s1
+            .chars()
+            .zip(s2.chars())
+            .fold(0, |cnt, (ch1, ch2)| if ch1 == ch2 { cnt } else { cnt + 1 });
+        if cnt > 1 {
+            false
+        } else {
+            true
+        }
     }
-    fn dfs<'a>(ans: &mut i32, cnt: i32, cur: &String, end: &String, bank: &'a Vec<String>, vis: &mut HashSet<&'a String>) {
+    fn dfs<'a>(
+        ans: &mut i32,
+        cnt: i32,
+        cur: &String,
+        end: &String,
+        bank: &'a Vec<String>,
+        vis: &mut HashSet<&'a String>,
+    ) {
         if cur == end {
             *ans = (*ans).min(cnt);
             return;
@@ -20,12 +34,23 @@ pub fn min_mutation(start: String, end: String, bank: Vec<String>) -> i32 {
     }
     let ans = &mut i32::MAX;
     dfs(ans, 0, &start, &end, &bank, &mut HashSet::new());
-    if *ans == i32::MAX {-1} else {*ans}
+    if *ans == i32::MAX {
+        -1
+    } else {
+        *ans
+    }
 }
 pub fn min_mutation_bfs(start: String, end: String, bank: Vec<String>) -> i32 {
     fn compare(s1: &String, s2: &String) -> bool {
-        let cnt = s1.chars().zip(s2.chars()).fold(0, |cnt, (ch1, ch2)| if ch1 == ch2 { cnt } else { cnt + 1 });
-        if cnt > 1 { false } else { true }
+        let cnt = s1
+            .chars()
+            .zip(s2.chars())
+            .fold(0, |cnt, (ch1, ch2)| if ch1 == ch2 { cnt } else { cnt + 1 });
+        if cnt > 1 {
+            false
+        } else {
+            true
+        }
     }
     let mut q = VecDeque::new();
     let mut vis = HashSet::new();

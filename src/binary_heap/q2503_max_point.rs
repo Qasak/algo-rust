@@ -1,5 +1,5 @@
-use std::collections::BinaryHeap;
 use std::cmp::Reverse;
+use std::collections::BinaryHeap;
 pub fn max_points(mut grid: Vec<Vec<i32>>, queries: Vec<i32>) -> Vec<i32> {
     let mut qs = vec![];
     for (i, &q) in queries.iter().enumerate() {
@@ -17,7 +17,7 @@ pub fn max_points(mut grid: Vec<Vec<i32>>, queries: Vec<i32>) -> Vec<i32> {
     for q in qs {
         let (limit, idx) = (q.0, q.1);
         // println!("{:?}", &pq);
-        while !pq.is_empty() && pq.peek().unwrap().0.0 < limit {
+        while !pq.is_empty() && pq.peek().unwrap().0 .0 < limit {
             let item = pq.pop().unwrap();
             let (x, y) = (item.1, item.2);
             cnt += 1;

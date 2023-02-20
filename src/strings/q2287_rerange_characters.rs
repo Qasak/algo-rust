@@ -22,9 +22,20 @@ pub fn rearrange_characters(s: String, target: String) -> i32 {
 
 // iter version
 pub fn rearrange_characters_1(s: String, target: String) -> i32 {
-    let cnt1 = target.bytes().fold(vec![0; 26], |mut v, b| {v[(b - b'a') as usize] += 1; v});
-    let cnt2 = s.bytes().fold(vec![0; 26], |mut v, b| {v[(b - b'a') as usize] += 1; v});
-    cnt1.iter().zip(cnt2.iter()).filter(|(&i, &j)| i > 0).map(|(i, j)| j / i).min().unwrap()
+    let cnt1 = target.bytes().fold(vec![0; 26], |mut v, b| {
+        v[(b - b'a') as usize] += 1;
+        v
+    });
+    let cnt2 = s.bytes().fold(vec![0; 26], |mut v, b| {
+        v[(b - b'a') as usize] += 1;
+        v
+    });
+    cnt1.iter()
+        .zip(cnt2.iter())
+        .filter(|(&i, &j)| i > 0)
+        .map(|(i, j)| j / i)
+        .min()
+        .unwrap()
 }
 
 #[cfg(test)]

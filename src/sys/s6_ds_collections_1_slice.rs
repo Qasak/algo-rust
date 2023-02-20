@@ -3,13 +3,13 @@ use std::fmt;
 #[test]
 fn f() {
     {
-        let v = vec![1,2,3,4];
+        let v = vec![1, 2, 3, 4];
         let v1 = &v;
         let v2 = v.as_slice();
         let v3 = &v[..];
     }
-    let arr = [1,2,3,4,5];
-    let vec = vec![1,2,3,4,5];
+    let arr = [1, 2, 3, 4, 5];
+    let vec = vec![1, 2, 3, 4, 5];
     let s1 = &arr[..2];
     let s2 = &vec[..2];
     println!("s1: {:?}, s2: {:?}", s1, s2);
@@ -20,12 +20,11 @@ fn f() {
     assert_eq!(&vec[..], arr);
 }
 
-
-fn print_slice<T: fmt::Debug> (s: &[T]) {
+fn print_slice<T: fmt::Debug>(s: &[T]) {
     println!("{:?}", s);
 }
 
-fn print_slice1<T, U> (s: T)
+fn print_slice1<T, U>(s: T)
 where
     T: AsRef<[U]>,
     U: fmt::Debug,
@@ -35,7 +34,7 @@ where
 
 #[test]
 fn g() {
-    let v = vec![1,2,3,4];
+    let v = vec![1, 2, 3, 4];
     // Vec 实现了 Deref，&Vec 会被自动解引用为 &[T]，符合接口定义
     print_slice(&v);
     // 直接是 &[T]，符合接口定义
@@ -55,14 +54,13 @@ fn g() {
     print_slice1(&arr);
     print_slice1(&arr[..]);
     print_slice1(arr);
-
 }
 
 #[test]
 fn iter_std() {
     // 这里 Vec<T> 在调用 iter() 时被解引用成 &[T]，所以可以访问 iter()
     let result = vec![1, 2, 3, 4]
-    .iter()
+        .iter()
         .map(|v| v * v)
         .filter(|v| *v < 16)
         // 取前n个元素
@@ -113,17 +111,17 @@ fn print_str_slice(s: &str) {
 // }
 
 fn print_str_slice1<T, U: ?Sized>(s: T)
-    where
-        T: AsRef<U>,
-        U: fmt::Debug,
+where
+    T: AsRef<U>,
+    U: fmt::Debug,
 {
     println!("1 {:?}", s.as_ref());
 }
 
 fn print_str_slice2<T, U>(s: T)
-    where
-        T: AsRef<[U]>,
-        U: fmt::Debug,
+where
+    T: AsRef<[U]>,
+    U: fmt::Debug,
 {
     println!("2 {:?}", s.as_ref());
 }
@@ -177,4 +175,3 @@ fn box_slice() {
     assert!(b2 == b3);
     // assert!(b3.deref() == v2);
 }
-

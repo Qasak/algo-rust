@@ -20,7 +20,10 @@ pub fn reverse_k_group(head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNo
 
 // 反转一次，返回反转后的head和remain
 // 如果为最后一次不足以反转，remain为None
-fn reverse_one(head: Option<Box<ListNode>>, k: i32) -> (Option<Box<ListNode>>, Option<Box<ListNode>>) {
+fn reverse_one(
+    head: Option<Box<ListNode>>,
+    k: i32,
+) -> (Option<Box<ListNode>>, Option<Box<ListNode>>) {
     let mut cur = head.as_ref();
     for _ in 0..k {
         if cur.is_none() {
@@ -42,7 +45,6 @@ fn reverse_one(head: Option<Box<ListNode>>, k: i32) -> (Option<Box<ListNode>>, O
     (pre, cur)
 }
 
-
 pub fn reverse_k_group_1(mut head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNode>> {
     let mut next_head = &mut head;
     for _ in 0..k {
@@ -57,7 +59,10 @@ pub fn reverse_k_group_1(mut head: Option<Box<ListNode>>, k: i32) -> Option<Box<
 }
 
 // head -> ... -> tail -x-> next_head -> ... 反转链接 ... <- next_head <- head <- ... <- tail 并返回new_head(tail)
-fn reverse(mut head: Option<Box<ListNode>>, mut next_head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+fn reverse(
+    mut head: Option<Box<ListNode>>,
+    mut next_head: Option<Box<ListNode>>,
+) -> Option<Box<ListNode>> {
     while let Some(mut node) = head {
         head = node.next.take();
         // link head -> next_head

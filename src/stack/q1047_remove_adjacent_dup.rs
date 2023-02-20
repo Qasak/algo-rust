@@ -1,7 +1,7 @@
 pub fn remove_duplicates(s: String) -> String {
     let mut stk = vec![];
     for ch in s.chars() {
-        if !stk.is_empty() && stk.last().unwrap() == &ch{
+        if !stk.is_empty() && stk.last().unwrap() == &ch {
             stk.pop();
         } else {
             stk.push(ch);

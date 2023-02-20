@@ -1,7 +1,6 @@
+use crate::tree::TreeNode;
 use std::cell::RefCell;
 use std::rc::Rc;
-use crate::tree::TreeNode;
-
 
 // type OptNode = Option<Rc<RefCell<TreeNode>>>;
 // naive recursive
@@ -21,7 +20,6 @@ pub fn count_nodes(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
     cnt
 }
 
-
 pub fn count_nodes_3(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
     match root {
         None => 0,
@@ -31,4 +29,3 @@ pub fn count_nodes_3(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
         }
     }
 }
-

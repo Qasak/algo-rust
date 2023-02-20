@@ -11,7 +11,8 @@ pub fn interpret(command: String) -> String {
                 ret.push('o');
                 i += 2;
             } else {
-                ret.push('a'); ret.push('l');
+                ret.push('a');
+                ret.push('l');
                 i += 4;
             }
         }

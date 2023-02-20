@@ -1,4 +1,4 @@
-use std::collections::{HashSet, VecDeque, HashMap};
+use std::collections::{HashMap, HashSet, VecDeque};
 pub fn max_points(grid: Vec<Vec<i32>>, queries: Vec<i32>) -> Vec<i32> {
     let mut qs = vec![];
     let n = queries.len();
@@ -37,7 +37,12 @@ pub fn max_points(grid: Vec<Vec<i32>>, queries: Vec<i32>) -> Vec<i32> {
     }
     ret
 }
-fn bfs(mut ready: &mut HashSet<(usize, usize)>, grid: &Vec<Vec<i32>>, vis: &mut Vec<Vec<bool>>, cur: i32) -> i32{
+fn bfs(
+    mut ready: &mut HashSet<(usize, usize)>,
+    grid: &Vec<Vec<i32>>,
+    vis: &mut Vec<Vec<bool>>,
+    cur: i32,
+) -> i32 {
     // println!("{}", cur);
     let mut q = VecDeque::new();
     for &pair in ready.iter() {
@@ -54,7 +59,9 @@ fn bfs(mut ready: &mut HashSet<(usize, usize)>, grid: &Vec<Vec<i32>>, vis: &mut 
                 ready.insert((i, j));
                 continue;
             }
-            if vis[i][j] {continue;}
+            if vis[i][j] {
+                continue;
+            }
             vis[i][j] = true;
             // println!("vised {:?}", (i, j));
             step += 1;

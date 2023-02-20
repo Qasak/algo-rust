@@ -1,4 +1,4 @@
-use::std::collections::VecDeque;
+use ::std::collections::VecDeque;
 
 pub fn shortest_bridge(mut grid: Vec<Vec<i32>>) -> i32 {
     let n = grid.len() as i32;

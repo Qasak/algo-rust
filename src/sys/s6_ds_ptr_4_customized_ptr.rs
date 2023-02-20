@@ -1,13 +1,13 @@
-use std::{str, ops::Deref};
+use crate::sys::s6_ds_ptr_4_customized_ptr::MyString::Standard;
+use regex::internal::Input;
 use std::borrow::Cow;
 use std::fmt::{Debug, Display, Formatter};
-use regex::internal::Input;
-use crate::sys::s6_ds_ptr_4_customized_ptr::MyString::Standard;
+use std::{ops::Deref, str};
 
 const MINI_STRING_MAX_LEN: usize = 30;
 struct MiniString {
     len: u8,
-    data: [u8; MINI_STRING_MAX_LEN]
+    data: [u8; MINI_STRING_MAX_LEN],
 }
 
 impl MiniString {
@@ -42,7 +42,7 @@ impl Debug for MiniString {
 #[derive(Debug)]
 enum MyString {
     Inline(MiniString),
-    Standard(String)
+    Standard(String),
 }
 
 impl MyString {
@@ -59,7 +59,7 @@ impl MyString {
                 } else {
                     *self = Standard(string.to_owned());
                 }
-            },
+            }
             MyString::Standard(s) => s.push_str(string),
         }
     }
@@ -72,7 +72,7 @@ impl Deref for MyString {
         match self {
             // ref用来匹配模式，默认的匹配需要移动，而加了ref就不用
             MyString::Inline(v) => v.deref(),
-            MyString::Standard(v) => v.deref()
+            MyString::Standard(v) => v.deref(),
         }
     }
 }
@@ -81,7 +81,7 @@ impl From<&str> for MyString {
     fn from(s: &str) -> Self {
         match s.len() > MINI_STRING_MAX_LEN {
             true => Self::Standard(s.to_owned()),
-            _ => Self::Inline(MiniString::new(s))
+            _ => Self::Inline(MiniString::new(s)),
         }
     }
 }
@@ -90,7 +90,7 @@ impl From<String> for MyString {
     fn from(s: String) -> Self {
         match s.len() > MINI_STRING_MAX_LEN {
             true => Self::Standard(s),
-            _ => Self::Inline(MiniString::new(s))
+            _ => Self::Inline(MiniString::new(s)),
         }
     }
 }
@@ -106,7 +106,6 @@ fn f() {
     let len1 = std::mem::size_of::<MyString>();
     let len2 = std::mem::size_of::<MiniString>();
     println!("{:?}", (len1, len2));
-
 
     let s1: MyString = "short".into();
     let s2: MyString = "如果我没记错的话，秘籍应该是⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️ABAB".into();
@@ -127,14 +126,12 @@ fn f() {
     assert!(s2.ends_with("ABAB"));
 }
 
-
 // 支持从 String 中生成一个 MyString
 #[test]
 fn q1() {
     let s1: MyString = format!("{} tf ?", "what").into();
     println!("{}, {}", s1, s1.len());
 }
-
 
 // 加上类似 String 的 push_str 接口
 #[test]
@@ -155,5 +152,4 @@ fn q3() {
 
     println!("{}", len1);
     println!("{}", len2);
-
 }

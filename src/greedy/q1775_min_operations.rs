@@ -3,7 +3,6 @@ use std::mem::swap;
 
 // double ptr solution
 pub fn min_operations(mut nums1: Vec<i32>, mut nums2: Vec<i32>) -> i32 {
-
     fn get_cnt(nums1: &Vec<i32>, nums2: &Vec<i32>, sum1: i32, sum2: i32) -> i32 {
         let mut ret = 0;
         let mut diff = sum1 - sum2;
@@ -36,7 +35,8 @@ pub fn min_operations(mut nums1: Vec<i32>, mut nums2: Vec<i32>) -> i32 {
             ret
         }
     }
-    nums1.sort(); nums2.sort();
+    nums1.sort();
+    nums2.sort();
     let (sum1, sum2) = (nums1.iter().sum::<i32>(), nums2.iter().sum::<i32>());
     if sum1 > sum2 {
         get_cnt(&nums1, &nums2, sum1, sum2)
@@ -45,7 +45,6 @@ pub fn min_operations(mut nums1: Vec<i32>, mut nums2: Vec<i32>) -> i32 {
     } else {
         0
     }
-
 }
 
 // BinaryHeap Solution

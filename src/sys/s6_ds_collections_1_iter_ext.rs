@@ -1,8 +1,8 @@
 // IteratorExt 「继承」Iterator，这样可以使用 Iterator 的全部功能
 pub trait IteratorExt: Iterator {
     fn window_count(self, count: u32) -> WindowCount<Self>
-        where
-            Self: Sized,
+    where
+        Self: Sized,
     {
         WindowCount { iter: self, count }
     }
@@ -34,9 +34,7 @@ impl<I: Iterator> Iterator for WindowCount<I> {
 #[test]
 fn f() {
     let data = vec![1, 2, 3, 4, 5, 6, 7, 8, 9];
-    let result = data.iter()
-        .window_count(2)
-        .collect::<Vec<Vec<_>>>();
+    let result = data.iter().window_count(2).collect::<Vec<Vec<_>>>();
 
     // [[1, 2], [3, 4], [5, 6], [7, 8], [9]]
     println!("{:?}", result);

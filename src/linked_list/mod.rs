@@ -1,28 +1,25 @@
 use std::ops::Deref;
 
-mod q876_middle_of_linked_list;
-mod q0202_get_kth_from_end;
 mod d_list;
+mod q0202_get_kth_from_end;
 mod q141_has_cycle;
-mod q25_k_reverse;
-mod q206_reverse_linked_list;
 mod q1669_merge_linked_list;
+mod q206_reverse_linked_list;
+mod q25_k_reverse;
 mod q445_add_two;
+mod q876_middle_of_linked_list;
 
 // Definition for singly-linked list.
 #[derive(PartialEq, Eq, Clone, Debug)]
 pub struct ListNode {
     pub val: i32,
-    pub next: Option<Box<ListNode>>
+    pub next: Option<Box<ListNode>>,
 }
 
 impl ListNode {
     #[inline]
     pub(crate) fn new(val: i32) -> Self {
-        ListNode {
-            next: None,
-            val
-        }
+        ListNode { next: None, val }
     }
 }
 
@@ -33,7 +30,6 @@ impl ListNode {
             // 这里应该是用到了Deref Coercion自动解引用
             // current_node = &mut **next_node;
             current_node = next_node;
-
         }
         current_node.next = Some(Box::new(ListNode::new(val)));
     }
@@ -55,6 +51,9 @@ impl From<Vec<i32>> for ListNode {
             let node = ListNode { val, next: current };
             current = Some(Box::new(node));
         }
-        ListNode { val: 0, next: current }
+        ListNode {
+            val: 0,
+            next: current,
+        }
     }
 }

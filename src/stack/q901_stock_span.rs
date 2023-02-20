@@ -1,18 +1,14 @@
 use std::collections::VecDeque;
 struct StockSpanner {
     stk: VecDeque<(i32, i32)>,
-    day: i32
+    day: i32,
 }
 
 impl StockSpanner {
-
     fn new() -> StockSpanner {
         let mut stk = VecDeque::new();
         stk.push_back((-1, 0x3f3f3f3f));
-        StockSpanner {
-            stk,
-            day: 0
-        }
+        StockSpanner { stk, day: 0 }
     }
 
     fn next(&mut self, price: i32) -> i32 {

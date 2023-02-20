@@ -1,10 +1,12 @@
 struct UF {
-    p: Vec<usize>
+    p: Vec<usize>,
 }
 
 impl UF {
     fn new(n: usize) -> Self {
-        UF {p:(0..=n).collect()}
+        UF {
+            p: (0..=n).collect(),
+        }
     }
 
     fn find(&mut self, u: usize) -> usize {
@@ -26,7 +28,6 @@ impl UF {
         }
     }
 }
-
 
 pub fn valid_path(n: i32, edges: Vec<Vec<i32>>, source: i32, destination: i32) -> bool {
     let n = n as usize;

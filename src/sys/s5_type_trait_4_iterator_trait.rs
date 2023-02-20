@@ -19,7 +19,8 @@ impl<'b, 'a> Iterator for SentenceIter<'b, 'a> {
             Some(i) => {
                 let s = &self.s[..i + self.delimiter.len_utf8()];
                 *self.s = &self.s[i + self.delimiter.len_utf8()..];
-                if let Some((start, _)) = s.as_bytes().iter().enumerate().find(|(_, &b)| b != b' ') {
+                if let Some((start, _)) = s.as_bytes().iter().enumerate().find(|(_, &b)| b != b' ')
+                {
                     Some(&s[start..])
                 } else {
                     None
@@ -28,8 +29,6 @@ impl<'b, 'a> Iterator for SentenceIter<'b, 'a> {
         }
     }
 }
-
-
 
 #[test]
 fn it_works() {

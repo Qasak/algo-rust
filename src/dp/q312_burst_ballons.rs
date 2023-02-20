@@ -8,7 +8,8 @@ pub fn max_coins(nums: Vec<i32>) -> i32 {
             return f[l][r];
         }
         for i in (l + 1)..=(r - 1) {
-            f[l][r] = f[l][r].max(nums[i] * nums[l] * nums[r] + dfs(l, i, nums, f) + dfs(i, r, nums, f));
+            f[l][r] =
+                f[l][r].max(nums[i] * nums[l] * nums[r] + dfs(l, i, nums, f) + dfs(i, r, nums, f));
         }
         return f[l][r];
     }

@@ -5,5 +5,9 @@ pub fn reach_number(target: i32) -> i32 {
         step += 1;
         diff -= step;
     }
-    if diff % 2 == 0 {step} else {step + 1 + step % 2}
+    if diff % 2 == 0 {
+        step
+    } else {
+        step + 1 + step % 2
+    }
 }

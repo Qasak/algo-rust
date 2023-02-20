@@ -1,6 +1,6 @@
-use std::rc::Rc;
-use std::cell::RefCell;
 use crate::tree::TreeNode;
+use std::cell::RefCell;
+use std::rc::Rc;
 
 pub fn max_path_sum(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
     fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, ans: &mut i32) -> i32 {
@@ -13,7 +13,9 @@ pub fn max_path_sum(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
             let cross = cur + 0.max(l) + 0.max(r);
             *ans = (*ans).max(no_cross).max(cross);
             no_cross
-        } else {0}
+        } else {
+            0
+        }
     }
     let mut ans = root.as_ref().unwrap().borrow().val;
     dfs(&root, &mut ans);

@@ -9,15 +9,16 @@ pub fn orderly_queue(s: String, k: i32) -> String {
         let mut cur = bs.iter().map(|ch| *ch).collect::<String>();
         for i in 1..s.len() {
             cur = cur.min(
-                bs[i..s.len()].iter().map(|b| *b)
+                bs[i..s.len()]
+                    .iter()
+                    .map(|b| *b)
                     .chain(bs[0..i].iter().map(|b| *b))
-                    .collect::<String>()
+                    .collect::<String>(),
             );
         }
         cur
     }
 }
-
 
 // use .windows()
 pub fn orderly_queue_1(s: String, k: i32) -> String {
@@ -45,5 +46,4 @@ mod test {
         assert_eq!("aacab".to_string(), orderly_queue("baaca".to_string(), 1));
         assert_eq!("aaabc".to_string(), orderly_queue("baaca".to_string(), 3));
     }
-
 }

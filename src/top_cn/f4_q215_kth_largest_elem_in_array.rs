@@ -30,7 +30,8 @@ pub fn find_kth_largest(mut nums: Vec<i32>, k: i32) -> i32 {
                 eq += 1;
             } else if arr[eq] < pivot {
                 swap(arr, eq, le);
-                eq += 1; le += 1;
+                eq += 1;
+                le += 1;
             } else {
                 swap(arr, eq, gt);
                 // usize overflow
@@ -43,7 +44,6 @@ pub fn find_kth_largest(mut nums: Vec<i32>, k: i32) -> i32 {
 
         swap(arr, eq, r);
         (le, eq)
-
     }
     fn swap(arr: &mut Vec<i32>, i: usize, j: usize) {
         let t = arr[i];
@@ -57,19 +57,41 @@ pub fn find_kth_largest(mut nums: Vec<i32>, k: i32) -> i32 {
 }
 
 #[cfg(test)]
-mod test{
+mod test {
     use crate::top_cn::f4_q215_kth_largest_elem_in_array::find_kth_largest;
 
     #[test]
     fn f() {
         for i in 0..20 {
-            println!("{}", find_kth_largest([3,2,13,2,3,3,2,13,2,3,1,2,4,5,5,6,5,6,43,2,13,2,3,1,2,4,5,5,6,5,6,41,2,4,5,5,6,5,6,4].to_vec(), 11));
+            println!(
+                "{}",
+                find_kth_largest(
+                    [
+                        3, 2, 13, 2, 3, 3, 2, 13, 2, 3, 1, 2, 4, 5, 5, 6, 5, 6, 43, 2, 13, 2, 3, 1,
+                        2, 4, 5, 5, 6, 5, 6, 41, 2, 4, 5, 5, 6, 5, 6, 4
+                    ]
+                    .to_vec(),
+                    11
+                )
+            );
         }
         for i in 0..20 {
-            println!("{}", find_kth_largest([3,2,13,2,3,1,2,4,53,2,13,2,3,3,2,13,2,3,1,2,4,5,5,6,5,6,43,2,13,2,3,1,2,4,5,5,6,5,6,41,2,4,5,5,6,5,6,43,2,13,2,3,3,2,13,2,3,1,2,4,5,5,6,5,6,43,2,13,2,3,1,2,4,5,5,6,5,6,41,2,4,5,5,6,5,6,4,5,6,5,6,4].to_vec(), 1));
+            println!(
+                "{}",
+                find_kth_largest(
+                    [
+                        3, 2, 13, 2, 3, 1, 2, 4, 53, 2, 13, 2, 3, 3, 2, 13, 2, 3, 1, 2, 4, 5, 5, 6,
+                        5, 6, 43, 2, 13, 2, 3, 1, 2, 4, 5, 5, 6, 5, 6, 41, 2, 4, 5, 5, 6, 5, 6, 43,
+                        2, 13, 2, 3, 3, 2, 13, 2, 3, 1, 2, 4, 5, 5, 6, 5, 6, 43, 2, 13, 2, 3, 1, 2,
+                        4, 5, 5, 6, 5, 6, 41, 2, 4, 5, 5, 6, 5, 6, 4, 5, 6, 5, 6, 4
+                    ]
+                    .to_vec(),
+                    1
+                )
+            );
         }
         for i in 0..20 {
-            println!("{}", find_kth_largest([2,1].to_vec(), 1));
+            println!("{}", find_kth_largest([2, 1].to_vec(), 1));
         }
     }
 }

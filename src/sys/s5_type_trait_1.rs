@@ -1,4 +1,3 @@
-
 use std::fmt;
 use std::fmt::Formatter;
 use std::io::{BufWriter, Write};
@@ -38,8 +37,8 @@ impl Write for BufBuilder {
 }
 #[cfg(test)]
 mod test {
-    use std::io::Write;
     use crate::sys::s5_type_trait_1::BufBuilder;
+    use std::io::Write;
 
     #[test]
     fn write_test() {
@@ -48,4 +47,3 @@ mod test {
         println!("{:?}", buf);
     }
 }
-

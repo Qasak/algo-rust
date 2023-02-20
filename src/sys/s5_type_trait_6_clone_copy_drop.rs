@@ -1,9 +1,8 @@
-
 #[derive(Clone, Debug)]
 struct Developer {
     name: String,
     age: u8,
-    lang: Language
+    lang: Language,
 }
 
 #[allow(dead_code)]
@@ -12,7 +11,7 @@ enum Language {
     Rust,
     TypeScript,
     Elixir,
-    Haskell
+    Haskell,
 }
 
 #[test]
@@ -20,20 +19,16 @@ fn test_clone() {
     let dev = Developer {
         name: "Tyr".to_string(),
         age: 18,
-        lang: Language::Rust
+        lang: Language::Rust,
     };
     let dev1 = dev.clone();
     println!("dev: {:?}, addr of dev name: {:p}", dev, dev.name.as_str());
-    println!("dev1: {:?}, addr of dev1 name: {:p}", dev1, dev1.name.as_str());
+    println!(
+        "dev1: {:?}, addr of dev1 name: {:p}",
+        dev1,
+        dev1.name.as_str()
+    );
 }
-
-
-
-
-
-
-
-
 
 use std::{fmt, slice};
 // 注意这里，我们实现了 Copy，这是因为 *mut u8/usize 都支持 Copy
@@ -57,12 +52,10 @@ impl From<Vec<u8>> for RawBuffer {
     }
 }
 
-
 // 如果 RawBuffer 实现了 Drop trait，就可以在所有者退出时释放堆内存
 // 然后，Drop trait 会跟 Copy trait 冲突，要么不实现 Copy，要么不实现 Drop
 // 如果不实现 Drop，那么就会导致内存泄漏，但它不会对正确性有任何破坏
 // 比如不会出现 use after free 这样的问题。
-
 
 // error[E0184]: the trait `Copy` may not be implemented for this type; the type has a destructor
 impl Drop for RawBuffer {
@@ -105,5 +98,3 @@ fn use_buffer(buf: RawBuffer) {
     // 这里不用特意 drop，写出来只是为了说明 Copy 出来的 buf 被 Drop 了
     // drop(buf)
 }
-
-

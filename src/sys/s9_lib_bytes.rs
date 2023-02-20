@@ -1,7 +1,6 @@
 use bytes::{Buf, BufMut, Bytes, BytesMut};
 #[test]
 fn f() {
-
     let mut buf = BytesMut::with_capacity(1024);
     buf.put(b"hello world".as_slice());
     buf.put_u16(1234);
@@ -15,14 +14,10 @@ fn f() {
     assert_eq!(b, b"goodbye world"[..]);
 
     assert_eq!(buf.capacity(), 998);
-
 }
-
-
 
 #[test]
 fn test_u8_slice_buf_trait() {
-
     use bytes::Buf;
 
     let mut buf = b"hello world".as_slice();
@@ -39,7 +34,6 @@ fn test_u8_slice_buf_trait() {
 
 #[test]
 fn test_buf_struct() {
-
     let mut mem = Bytes::from("Hello world");
     let a = mem.slice(0..5);
 

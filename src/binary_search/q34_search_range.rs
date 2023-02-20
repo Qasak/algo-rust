@@ -12,6 +12,16 @@ pub fn search_range(nums: Vec<i32>, target: i32) -> Vec<i32> {
         l
     }
     let (n, ll, rr) = (nums.len(), lb(&nums, target), lb(&nums, target + 1));
-    vec![if ll != n && nums[ll] == target {ll as i32} else {-1},
-         if rr != 0 && nums[rr - 1] == target {(rr - 1) as i32} else {-1}]
+    vec![
+        if ll != n && nums[ll] == target {
+            ll as i32
+        } else {
+            -1
+        },
+        if rr != 0 && nums[rr - 1] == target {
+            (rr - 1) as i32
+        } else {
+            -1
+        },
+    ]
 }

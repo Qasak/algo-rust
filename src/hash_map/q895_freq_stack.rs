@@ -3,13 +3,12 @@ struct FreqStack {
     // val: freq
     map: HashMap<i32, usize>,
     // stacks
-    stacks: Vec<VecDeque<i32>>
+    stacks: Vec<VecDeque<i32>>,
 }
 
 impl FreqStack {
-
     fn new() -> Self {
-        FreqStack{
+        FreqStack {
             map: HashMap::new(),
             stacks: Vec::new(),
         }

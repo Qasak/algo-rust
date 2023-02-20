@@ -46,7 +46,6 @@ struct MKAverage {
     sum: i64,
 }
 
-
 impl MKAverage {
     fn new(m: i32, k: i32) -> Self {
         MKAverage {
@@ -61,7 +60,6 @@ impl MKAverage {
     }
 
     fn add_element(&mut self, cur: i32) {
-
         // cur加入dq
         self.dq.push_back(cur);
         if self.dq.len() <= self.m as usize {
@@ -127,7 +125,6 @@ impl MKAverage {
                 self.sum -= temp as i64;
             }
         }
-
     }
 
     fn calculate_mk_average(&self) -> i32 {

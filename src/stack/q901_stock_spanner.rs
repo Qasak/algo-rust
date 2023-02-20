@@ -1,6 +1,6 @@
 use std::collections::VecDeque;
 
-struct Pair{
+struct Pair {
     pub p: i32,
     pub i: usize,
 }
@@ -15,11 +15,10 @@ struct StockSpanner {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl StockSpanner {
-
     fn new() -> Self {
-        StockSpanner{
+        StockSpanner {
             s: VecDeque::new(),
-            cur: 0
+            cur: 0,
         }
     }
     // 单调递减栈
@@ -29,8 +28,15 @@ impl StockSpanner {
             self.s.pop_back().unwrap();
         }
         self.cur += 1;
-        let len = if self.s.is_empty() {self.cur} else {self.cur - self.s.back().unwrap().i};
-        self.s.push_back(Pair{p: price, i: self.cur});
+        let len = if self.s.is_empty() {
+            self.cur
+        } else {
+            self.cur - self.s.back().unwrap().i
+        };
+        self.s.push_back(Pair {
+            p: price,
+            i: self.cur,
+        });
         len as i32
     }
 }
@@ -39,9 +45,9 @@ impl StockSpanner {
 mod test {
     use crate::stack::q901_stock_spanner::StockSpanner;
     /**
-     ["StockSpanner","next","next","next","next","next","next","next"]
-        [[],[100],[80],[60],[70],[60],[75],[85]]
-     */
+    ["StockSpanner","next","next","next","next","next","next","next"]
+       [[],[100],[80],[60],[70],[60],[75],[85]]
+    */
     #[test]
     fn t() {
         let mut s = StockSpanner::new();

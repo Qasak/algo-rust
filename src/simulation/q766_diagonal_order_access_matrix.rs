@@ -8,7 +8,8 @@ pub fn is_toeplitz_matrix(matrix: Vec<Vec<i32>>) -> bool {
             if v != matrix[x][y] {
                 return false;
             }
-            x += 1; y += 1;
+            x += 1;
+            y += 1;
         }
     }
     for i in 0..m {
@@ -18,7 +19,8 @@ pub fn is_toeplitz_matrix(matrix: Vec<Vec<i32>>) -> bool {
             if v != matrix[x][y] {
                 return false;
             }
-            x += 1; y += 1;
+            x += 1;
+            y += 1;
         }
     }
     true

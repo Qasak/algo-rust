@@ -24,9 +24,15 @@ pub fn max_repeating_1(sequence: String, word: String) -> i32 {
         let mut skip = 0;
         loop {
             match (it1.next(), it2.next()) {
-                (Some(ch1), Some(ch2)) => if ch1 != ch2 { skip += 1; it1 = a.chars().skip(skip);it2 = b.chars()} ,
+                (Some(ch1), Some(ch2)) => {
+                    if ch1 != ch2 {
+                        skip += 1;
+                        it1 = a.chars().skip(skip);
+                        it2 = b.chars()
+                    }
+                }
                 (_, None) => return true,
-                (None, _) => return false
+                (None, _) => return false,
             }
         }
     }
@@ -56,16 +62,8 @@ pub fn max_repeating_2(sequence: String, word: String) -> i32 {
     *f.iter().max().unwrap()
 }
 
-
 // O(m + n) Rabin-Karp
 // The bottleneck of dp solution is that it takes O(m) complexity to compare the strings each time.
 // This process can be optimised with 'string hashing' ：the Rabin-Karp algo
 
-
-
 // O(m + n) kmp
-
-
-
-
-

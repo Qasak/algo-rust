@@ -73,7 +73,6 @@ fn test_static() {
     println!("{}", name(cat));
 }
 
-
 // 在运行时，构造一个 Formatter 的列表
 // Trait Object 的底层逻辑就是胖指针。其中，一个指针指向数据本身，另一个则指向虚函数表
 #[test]
@@ -103,8 +102,6 @@ fn main() {
     // let w1 = w.by_ref();
     // w1.write_all(b"world").unwrap();
 }
-
-
 
 // another example
 trait Draw {

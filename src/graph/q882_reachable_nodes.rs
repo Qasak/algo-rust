@@ -26,9 +26,8 @@ pub fn reachable_nodes(edges: Vec<Vec<i32>>, max_moves: i32, n: i32) -> i32 {
         }
     }
     for edge in &edges {
-        answer += edge[2].min(
-            remains[edge[0] as usize].unwrap_or(0) + remains[edge[1] as usize].unwrap_or(0),
-        );
+        answer += edge[2]
+            .min(remains[edge[0] as usize].unwrap_or(0) + remains[edge[1] as usize].unwrap_or(0));
     }
     answer
 }

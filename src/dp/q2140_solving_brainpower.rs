@@ -38,13 +38,9 @@ pub fn most_points_2(questions: Vec<Vec<i32>>) -> i64 {
     let mut f = vec![0i64; n];
     f[n - 1] = questions[n - 1][0] as i64;
     for i in (0..n - 1).rev() {
-        let (p, b) = (questions[i][0] as i64,  questions[i][1] as usize);
+        let (p, b) = (questions[i][0] as i64, questions[i][1] as usize);
         let j = i + b + 1;
-        f[i] = if j >= n {
-            p
-        } else {
-            p + f[j]
-        }.max(f[i + 1]);
+        f[i] = if j >= n { p } else { p + f[j] }.max(f[i + 1]);
     }
     f.into_iter().max().unwrap_or(0)
 }

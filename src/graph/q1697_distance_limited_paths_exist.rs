@@ -1,11 +1,13 @@
 // UnionFind
 struct UF {
-    p: Vec<usize>
+    p: Vec<usize>,
 }
 
 impl UF {
     fn new(n: usize) -> Self {
-        UF {p: (0..=n).collect()}
+        UF {
+            p: (0..=n).collect(),
+        }
     }
 
     fn union(&mut self, u: usize, v: usize) {
@@ -17,7 +19,6 @@ impl UF {
     }
 
     fn find(&mut self, u: usize) -> usize {
-
         if self.p[u] == u {
             u
         } else {
@@ -29,8 +30,11 @@ impl UF {
     }
 }
 
-
-pub fn distance_limited_paths_exist(n: i32, mut edge_list: Vec<Vec<i32>>, queries: Vec<Vec<i32>>) -> Vec<bool> {
+pub fn distance_limited_paths_exist(
+    n: i32,
+    mut edge_list: Vec<Vec<i32>>,
+    queries: Vec<Vec<i32>>,
+) -> Vec<bool> {
     let mut qs = vec![];
     for (i, q) in queries.iter().enumerate() {
         qs.push((q[0] as usize, q[1] as usize, q[2] as usize, i));
@@ -46,11 +50,15 @@ pub fn distance_limited_paths_exist(n: i32, mut edge_list: Vec<Vec<i32>>, querie
     for i in 0..nq {
         let (u, v, limit, idx) = (qs[i].0, qs[i].1, qs[i].2, qs[i].3);
         while j < ne {
-            let (uu, vv, w) = (edge_list[j][0] as usize, edge_list[j][1] as usize, edge_list[j][2] as usize);
+            let (uu, vv, w) = (
+                edge_list[j][0] as usize,
+                edge_list[j][1] as usize,
+                edge_list[j][2] as usize,
+            );
             if w >= limit {
                 break;
             }
-            uf.union(uu , vv);
+            uf.union(uu, vv);
             j += 1;
         }
         ret[idx] = uf.find(u) == uf.find(v);

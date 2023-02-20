@@ -1,5 +1,5 @@
 struct Allocator {
-    mem: Vec<i32>
+    mem: Vec<i32>,
 }
 
 /**
@@ -14,10 +14,9 @@ struct Allocator {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl Allocator {
-
     fn new(n: i32) -> Self {
-        Allocator{
-            mem: vec![0; n as usize]
+        Allocator {
+            mem: vec![0; n as usize],
         }
     }
 

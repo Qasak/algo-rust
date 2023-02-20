@@ -1,6 +1,6 @@
+use crate::tree::TreeNode;
 use std::cell::RefCell;
 use std::rc::Rc;
-use crate::tree::TreeNode;
 
 type OptNode = Option<Rc<RefCell<TreeNode>>>;
 // post_order traverse

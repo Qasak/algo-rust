@@ -1,7 +1,14 @@
-
 fn check(m: i64, index: i64, n: i64) -> i64 {
     let (l, r) = (index, n - 1 - index);
-    m + if m > l {get_sn(m - l, l)} else {get_sn(1, m - 1) + l - m + 1} + if m > r {get_sn(m - r, r)} else {get_sn(1, m - 1) + r - m + 1}
+    m + if m > l {
+        get_sn(m - l, l)
+    } else {
+        get_sn(1, m - 1) + l - m + 1
+    } + if m > r {
+        get_sn(m - r, r)
+    } else {
+        get_sn(1, m - 1) + r - m + 1
+    }
 }
 fn get_sn(a1: i64, n: i64) -> i64 {
     a1 * n + (n - 1) * n / 2
@@ -50,6 +57,5 @@ mod test {
 
         let (n, idx, max_sum) = (666666, 321321, 99887766);
         assert_eq!(9961, max_value(n, idx, max_sum));
-
     }
 }

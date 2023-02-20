@@ -24,16 +24,24 @@ pub fn num_matching_subseq(s: String, words: Vec<String>) -> i32 {
                     let m = l + (r - l) / 2;
                     if list[m] as i32 <= idx {
                         l = m + 1;
-                    } else {r = m;}
+                    } else {
+                        r = m;
+                    }
                 }
                 if l == m || list[l] as i32 <= idx {
-                    find = false; break;
+                    find = false;
+                    break;
                 } else {
                     idx = list[l] as i32;
                 }
-            } else {find = false; break;}
+            } else {
+                find = false;
+                break;
+            }
         }
-        if find {cnt += 1;}
+        if find {
+            cnt += 1;
+        }
     }
     cnt
 }

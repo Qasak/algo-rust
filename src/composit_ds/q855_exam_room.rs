@@ -31,9 +31,7 @@ impl ExamRoom {
         while let Some(&(d, Reverse(l), r)) = self.q.peek() {
             if
             // !self.seats.contains(&l)||
-            !self.seats.contains(&r) ||
-                *self.seats.range(l + 1..).next().unwrap() != r
-            {
+            !self.seats.contains(&r) || *self.seats.range(l + 1..).next().unwrap() != r {
                 self.q.pop();
                 continue;
             }
@@ -47,7 +45,8 @@ impl ExamRoom {
             return l + d;
         }
         if right > left {
-            self.q.push(((self.n - 1 - last) / 2, Reverse(last), self.n - 1));
+            self.q
+                .push(((self.n - 1 - last) / 2, Reverse(last), self.n - 1));
             self.seats.insert(self.n - 1);
             self.n - 1
         } else {

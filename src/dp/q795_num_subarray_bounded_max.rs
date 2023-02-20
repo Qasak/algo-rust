@@ -17,13 +17,16 @@ pub fn num_subarray_bounded_max(nums: Vec<i32>, left: i32, right: i32) -> i32 {
     f.into_iter().sum::<usize>() as i32
 }
 
-
 pub fn num_subarray_bounded_max_1(nums: Vec<i32>, left: i32, right: i32) -> i32 {
     // bound: subarray count, satisfy nums's elements <= k
     fn bound(nums: &Vec<i32>, k: i32) -> i32 {
         let (mut ret, mut cnt) = (0, 0);
         for &num in nums {
-            if num <= k {cnt += 1;} else {cnt = 0;}
+            if num <= k {
+                cnt += 1;
+            } else {
+                cnt = 0;
+            }
             ret += cnt;
         }
         ret

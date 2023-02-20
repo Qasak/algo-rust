@@ -1,6 +1,8 @@
 pub fn job_scheduling(start_time: Vec<i32>, end_time: Vec<i32>, profit: Vec<i32>) -> i32 {
     let n = start_time.len();
-    let mut jobs = (0..n).map(|i| vec![start_time[i], end_time[i], profit[i]]).collect::<Vec<_>>();
+    let mut jobs = (0..n)
+        .map(|i| vec![start_time[i], end_time[i], profit[i]])
+        .collect::<Vec<_>>();
     jobs.sort_by(|a, b| a[1].cmp(&b[1]));
     // define f[i] as the maximum profit for the first i jobs sorted by end time
     let mut f = (0..n).map(|i| jobs[i][2]).collect::<Vec<_>>();
@@ -20,7 +22,11 @@ pub fn job_scheduling(start_time: Vec<i32>, end_time: Vec<i32>, profit: Vec<i32>
                 l = m;
             }
         }
-        if l == -1 {None} else {Some(l as usize)}
+        if l == -1 {
+            None
+        } else {
+            Some(l as usize)
+        }
     }
     for i in 1..n {
         // not select job i
@@ -36,22 +42,27 @@ pub fn job_scheduling(start_time: Vec<i32>, end_time: Vec<i32>, profit: Vec<i32>
 
 // dfs solution
 pub fn job_scheduling_1(st: Vec<i32>, et: Vec<i32>, pr: Vec<i32>) -> i32 {
-    let mut jobs: Vec<(i32,i32,i32)> = st.into_iter()
+    let mut jobs: Vec<(i32, i32, i32)> = st
+        .into_iter()
         .zip(et.into_iter())
         .zip(pr.into_iter())
-        .map(|((s,e),p)| (s,e,p))
+        .map(|((s, e), p)| (s, e, p))
         .collect();
 
     jobs.sort();
 
-    let mut dp = vec![-1;jobs.len()];
+    let mut dp = vec![-1; jobs.len()];
 
-    fn dfs(i: usize, jobs: &Vec<(i32,i32,i32)>, dp: &mut Vec<i32>) -> i32 {
-        if i >= jobs.len() { return 0; }
-        if dp[i] >= 0      { return dp[i]; }
+    fn dfs(i: usize, jobs: &Vec<(i32, i32, i32)>, dp: &mut Vec<i32>) -> i32 {
+        if i >= jobs.len() {
+            return 0;
+        }
+        if dp[i] >= 0 {
+            return dp[i];
+        }
 
         let k = jobs.partition_point(|&job| job.0 < jobs[i].1);
-        dp[i] = dfs(i+1, jobs, dp).max(jobs[i].2 + dfs(k, jobs, dp));
+        dp[i] = dfs(i + 1, jobs, dp).max(jobs[i].2 + dfs(k, jobs, dp));
         return dp[i];
     }
 

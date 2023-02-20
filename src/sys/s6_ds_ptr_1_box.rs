@@ -1,7 +1,6 @@
 //  (signal: 4, SIGILL: illegal instruction)
 //  Process finished with exit code 101
 
-
 // use std::alloc::{GlobalAlloc, Layout, System};
 //
 // struct MyAllocator;
@@ -34,8 +33,6 @@
 //     }
 // }
 
-
-
 #[test]
 fn my_allocator_test() {
     // let data = Box::new(Matrix::default());
@@ -52,5 +49,3 @@ fn box_test() {
     let boxed = Box::new([0u8; 1 << 24]);
     println!("len: {}", boxed.len());
 }
-
-

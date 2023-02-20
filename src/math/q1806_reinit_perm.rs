@@ -30,7 +30,7 @@ pub fn reinitialize_permutation(n: i32) -> i32 {
 pub fn reinitialize_permutation_1(n: i32) -> i32 {
     let mut i = 1;
     let mut ret = 0;
-    loop  {
+    loop {
         ret += 1;
         if i <= (n - 1) / 2 {
             i = i * 2;

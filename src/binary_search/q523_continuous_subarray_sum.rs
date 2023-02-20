@@ -1,4 +1,4 @@
-use::std::collections::HashMap;
+use ::std::collections::HashMap;
 pub fn check_subarray_sum(nums: Vec<i32>, k: i32) -> bool {
     let mut map = HashMap::new();
     map.insert(0, -1);

@@ -1,14 +1,13 @@
 use std::collections::HashSet;
 
 pub fn crack_safe(n: i32, k: i32) -> String {
-
-    fn dfs(node:i32, mo:i32, k:i32, seen:&mut HashSet<i32>, ans:&mut String){
+    fn dfs(node: i32, mo: i32, k: i32, seen: &mut HashSet<i32>, ans: &mut String) {
         for x in 0..k {
             let mut e = node * 10 + x;
             if !seen.contains(&e) {
                 seen.insert(e);
                 // e % mo: 取后面n - 1个数字
-                dfs(e % mo, mo, k,  seen,  ans);
+                dfs(e % mo, mo, k, seen, ans);
                 ans.push((x as u8 + b'0') as char);
                 // println!("{:?}",ans);
                 // println!("{:?}",seen);

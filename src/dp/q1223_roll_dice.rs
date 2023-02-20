@@ -18,7 +18,13 @@ pub fn die_simulator(n: i32, roll_max: Vec<i32>) -> i32 {
     // 三元组cache
     // 「先掷 111 后掷 333」和「先掷 222 后掷 333」，都会递归到dfs(n−2,3,rollMax[3]−1)
     // let mut cache = vec![vec![vec![-1; roll_max.max]; m]; n];
-    fn dfs(i: i32, last: usize, left: i32, roll_max: &Vec<i32>, cache: &mut Vec<Vec<Vec<i64>>>) -> i64{
+    fn dfs(
+        i: i32,
+        last: usize,
+        left: i32,
+        roll_max: &Vec<i32>,
+        cache: &mut Vec<Vec<Vec<i64>>>,
+    ) -> i64 {
         const mo: i64 = 1e9 as i64 + 7;
         if i == 0 {
             return 1;
@@ -79,5 +85,5 @@ pub fn die_simulator_dp(n: i32, roll_max: Vec<i32>) -> i32 {
     for j in 0..m {
         ans += f[n - 1][j][roll_max[j] as usize - 1] % MO;
     }
-    (ans % MO) as i32 
+    (ans % MO) as i32
 }

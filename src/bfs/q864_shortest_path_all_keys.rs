@@ -24,39 +24,67 @@ pub fn shortest_path_all_keys(grid: Vec<String>) -> i32 {
         for j in 0..m {
             if g[i][j] == '@' {
                 vis.insert((i, j, Vec::new()));
-                dfs(i, j, &mut g, &mut vis, &mut cur_keys, &mut keys, 0, &mut ans);
+                dfs(
+                    i,
+                    j,
+                    &mut g,
+                    &mut vis,
+                    &mut cur_keys,
+                    &mut keys,
+                    0,
+                    &mut ans,
+                );
                 break;
             }
         }
     }
-    fn dfs(i: usize, j : usize, g: &mut Vec<Vec<char>>, vis: &mut HashSet<(usize, usize, Vec<char>)>, cur_keys: &mut Vec<char>, keys: &Vec<char>, step: i32, ans: &mut i32) {
+    fn dfs(
+        i: usize,
+        j: usize,
+        g: &mut Vec<Vec<char>>,
+        vis: &mut HashSet<(usize, usize, Vec<char>)>,
+        cur_keys: &mut Vec<char>,
+        keys: &Vec<char>,
+        step: i32,
+        ans: &mut i32,
+    ) {
         // if cur_keys.len() >= 6 {
         //     println!("{:?}", ((i, j), &cur_keys, step));
         // }
         let (n, m) = (g.len(), g[0].len());
         // println!("{}", vis.len());
         let (mut k1, mut k2) = (cur_keys.clone(), keys.clone());
-        k1.sort(); k2.sort();
+        k1.sort();
+        k2.sort();
         if k1 == k2 {
             // println!("{:?}", ((i, j), &cur_keys, step));
             *ans = (*ans).min(step);
             return;
         }
 
-        for (ii, jj) in [(i as i32 - 1, j as i32), (i as i32, j as i32 + 1), (i as i32 + 1, j as i32), (i as i32, j as i32 - 1)] {
+        for (ii, jj) in [
+            (i as i32 - 1, j as i32),
+            (i as i32, j as i32 + 1),
+            (i as i32 + 1, j as i32),
+            (i as i32, j as i32 - 1),
+        ] {
             if ii >= 0 && ii < n as i32 && jj >= 0 && jj < m as i32 {
-                let ii = ii as usize; let jj = jj as usize;
+                let ii = ii as usize;
+                let jj = jj as usize;
                 let nxt_grid = g[ii][jj];
                 // can't move situations is:
                 // nxt_grid
                 // 1. #
                 // 2. no match key to unlock
 
-                if nxt_grid == '#' || (nxt_grid.is_ascii_uppercase() && !cur_keys.contains(&(nxt_grid.to_ascii_lowercase()))) {
+                if nxt_grid == '#'
+                    || (nxt_grid.is_ascii_uppercase()
+                        && !cur_keys.contains(&(nxt_grid.to_ascii_lowercase())))
+                {
                     continue;
                 }
                 let mut pick = false;
-                if nxt_grid.is_ascii_lowercase()  {
+                if nxt_grid.is_ascii_lowercase() {
                     pick = true;
                 }
                 if !vis.contains(&(ii, jj, cur_keys.clone())) {
@@ -76,20 +104,33 @@ pub fn shortest_path_all_keys(grid: Vec<String>) -> i32 {
             }
         }
     }
-    if ans == i32::MAX {-1} else {ans}
+    if ans == i32::MAX {
+        -1
+    } else {
+        ans
+    }
 }
 
-
 #[cfg(test)]
-mod test{
+mod test {
     use crate::bfs::q864_shortest_path_all_keys::shortest_path_all_keys;
 
     #[test]
     fn f() {
-        let grid = ["..#.#.#.##",".#.#....#.","..#.......",".......#..","......#...","#..###a...","..##....#A",".....#.#.#",".#......##","#..@.##.#."];
+        let grid = [
+            "..#.#.#.##",
+            ".#.#....#.",
+            "..#.......",
+            ".......#..",
+            "......#...",
+            "#..###a...",
+            "..##....#A",
+            ".....#.#.#",
+            ".#......##",
+            "#..@.##.#.",
+        ];
         // let grid = ["Dd#b@",".fE.e","##.B.","#.cA.","aF.#C"];
         let g = grid.iter().map(|s| s.to_string()).collect::<Vec<String>>();
         println!("{}", shortest_path_all_keys(g));
-
     }
 }

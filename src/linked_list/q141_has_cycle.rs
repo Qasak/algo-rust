@@ -14,7 +14,6 @@ impl ListNode {
     }
 }
 
-
 struct Solution;
 impl Solution {
     pub fn has_cycle(head: Option<Rc<RefCell<ListNode>>>) -> bool {

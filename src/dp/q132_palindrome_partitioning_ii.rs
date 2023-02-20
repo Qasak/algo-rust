@@ -10,10 +10,12 @@ pub fn min_cut(s: String) -> i32 {
     for len in 2..(n + 1) {
         for i in 0..n {
             let j = i + len - 1;
-            if j >= n {break;}
+            if j >= n {
+                break;
+            }
             if j - i == 1 {
                 f[i][j] = cs[i] == cs[j];
-            } else if j - i > 1{
+            } else if j - i > 1 {
                 f[i][j] = cs[i] == cs[j] && f[i + 1][j - 1];
             }
         }
@@ -47,10 +49,12 @@ pub fn min_cut_1(s: String) -> i32 {
     for len in 2..(n + 1) {
         for i in 0..n {
             let j = i + len - 1;
-            if j >= n {break;}
+            if j >= n {
+                break;
+            }
             if j - i == 1 {
                 f[i][j] = cs[i] == cs[j];
-            } else if j - i > 1{
+            } else if j - i > 1 {
                 f[i][j] = cs[i] == cs[j] && f[i + 1][j - 1];
             }
         }

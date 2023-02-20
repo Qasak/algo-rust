@@ -33,15 +33,27 @@ pub fn reverse_vowels_1(mut s: String) -> String {
     let vwls = "aeiouAEIOU";
     let mut stack: Vec<char> = s.chars().filter(|&c| vwls.contains(c)).collect();
     s.chars()
-        .map(|c| if vwls.contains(c) { stack.pop().unwrap() } else { c })
+        .map(|c| {
+            if vwls.contains(c) {
+                stack.pop().unwrap()
+            } else {
+                c
+            }
+        })
         .collect()
 }
 
 // use set collect vowels
 pub fn reverse_vowels_2(mut s: String) -> String {
-    let vwls: HashSet<char> = HashSet::from(['a','e','i','o','u','A','E','I','O','U']);
+    let vwls: HashSet<char> = HashSet::from(['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']);
     let mut stack: Vec<char> = s.chars().filter(|c| vwls.contains(c)).collect();
     s.chars()
-        .map(|c| if vwls.contains(&c) { stack.pop().unwrap() } else { c })
+        .map(|c| {
+            if vwls.contains(&c) {
+                stack.pop().unwrap()
+            } else {
+                c
+            }
+        })
         .collect()
 }

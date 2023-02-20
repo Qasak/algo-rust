@@ -1,4 +1,3 @@
-
 #[derive(Debug)]
 enum Gender {
     Unspecified = 0,
@@ -42,7 +41,6 @@ fn process_event(event: &Event) {
     }
 }
 
-
 fn process_message(event: &Event) {
     if let Event::Message((_, _, msg)) = event {
         println!("broadcast: {}", msg);
@@ -51,25 +49,41 @@ fn process_message(event: &Event) {
 
 #[cfg(test)]
 mod test {
-    use crate::sys::s2_chat_room::{Event, Gender, process_event, process_message, Topic, TopicId, User, UserId};
+    use crate::sys::s2_chat_room::{
+        process_event, process_message, Event, Gender, Topic, TopicId, User, UserId,
+    };
 
     #[test]
     fn f() {
-        let alice = User { id: UserId(1), name: "Alice".into(), gender: Gender::Female };
-        let bob = User { id: UserId(2), name: "Bob".into(), gender: Gender::Male };
+        let alice = User {
+            id: UserId(1),
+            name: "Alice".into(),
+            gender: Gender::Female,
+        };
+        let bob = User {
+            id: UserId(2),
+            name: "Bob".into(),
+            gender: Gender::Male,
+        };
 
-        let topic = Topic { id: TopicId(1), name: "rust".into(), owner: UserId(1) };
+        let topic = Topic {
+            id: TopicId(1),
+            name: "rust".into(),
+            owner: UserId(1),
+        };
         let event1 = Event::Join((alice.id, topic.id));
         let event2 = Event::Join((bob.id, topic.id));
         let event3 = Event::Message((alice.id, topic.id, "Hello world!".into()));
 
-        println!("event1: {:?}, event2: {:?}, event3: {:?}", event1, event2, event3);
+        println!(
+            "event1: {:?}, event2: {:?}, event3: {:?}",
+            event1, event2, event3
+        );
 
         process_event(&event1);
         process_event(&event2);
         process_event(&event3);
 
         process_message(&event3);
-
     }
 }

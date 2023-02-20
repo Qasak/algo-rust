@@ -1,4 +1,3 @@
-
 use std::io::{BufWriter, Write};
 use std::net::TcpStream;
 
@@ -9,22 +8,18 @@ struct MyWriter<W> {
 
 impl<W: Write> MyWriter<W> {
     pub fn new(writer: W) -> Self {
-
-        Self {
-            writer
-        }
+        Self { writer }
     }
     pub fn write(&mut self, buf: &str) -> std::io::Result<()> {
         self.writer.write_all(buf.as_bytes())
     }
 }
 
-
 #[cfg(test)]
 mod test {
+    use crate::sys::s5_type_generic_2::MyWriter;
     use std::io::{BufWriter, Write};
     use std::net::TcpStream;
-    use crate::sys::s5_type_generic_2::MyWriter;
 
     #[test]
     fn ff() {

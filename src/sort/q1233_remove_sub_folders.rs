@@ -1,5 +1,5 @@
-use std::collections::HashSet;
 use regex::internal::Input;
+use std::collections::HashSet;
 
 pub fn remove_subfolders(mut folder: Vec<String>) -> Vec<String> {
     let mut set = HashSet::new();

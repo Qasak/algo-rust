@@ -24,8 +24,12 @@ pub fn check(nums: Vec<i32>) -> bool {
 pub fn check_1(nums: Vec<i32>) -> bool {
     let (mut cnt, mut n) = (0, nums.len());
     for i in 0..n {
-        if nums[i] > nums[(i + 1) % n] { cnt += 1; }
-        if cnt > 1 { return false; }
+        if nums[i] > nums[(i + 1) % n] {
+            cnt += 1;
+        }
+        if cnt > 1 {
+            return false;
+        }
     }
     true
 }

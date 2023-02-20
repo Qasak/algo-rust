@@ -14,11 +14,13 @@ pub fn soup_servings(n: i32) -> f64 {
     }
     for i in 1..=n {
         for j in 1..=n {
-            let i = i as i32; let j = j as i32;
-            f[i as usize][j as usize] = 0.25 * (f[(i - 4).max(0) as usize][j as usize] +
-                f[(i - 3).max(0) as usize][(j - 1).max(0) as usize] +
-                f[(i - 2).max(0) as usize][(j - 2).max(0) as usize] +
-                f[(i - 1).max(0) as usize][(j - 3).max(0) as usize])
+            let i = i as i32;
+            let j = j as i32;
+            f[i as usize][j as usize] = 0.25
+                * (f[(i - 4).max(0) as usize][j as usize]
+                    + f[(i - 3).max(0) as usize][(j - 1).max(0) as usize]
+                    + f[(i - 2).max(0) as usize][(j - 2).max(0) as usize]
+                    + f[(i - 1).max(0) as usize][(j - 3).max(0) as usize])
         }
     }
     f[n][n]

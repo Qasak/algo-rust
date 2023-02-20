@@ -1,6 +1,6 @@
-use std::str::FromStr;
 use regex::Regex;
 use std::ops::Add;
+use std::str::FromStr;
 
 // 为{具体类型}实现trait
 #[derive(Debug)]
@@ -65,7 +65,9 @@ fn test_complex() {
 
 pub trait Parse {
     type Error;
-    fn parse(s: &str) -> Result<Self, Self::Error> where Self: Sized;
+    fn parse(s: &str) -> Result<Self, Self::Error>
+    where
+        Self: Sized;
 }
 
 // impl Parse for u8 {
@@ -96,14 +98,13 @@ pub trait Parse {
 //     }
 // }
 
-
 // 为{泛型}实现trait，这个泛型要满足某一类约束
 // str::parse 是一个泛型函数，它返回任何实现了 FromStr trait 的类型，它必须实现了 FromStr trait。
 
 // 两种约束形式甚至可以一起写
 impl<T: FromStr> Parse for T
-    where
-        T: FromStr
+where
+    T: FromStr,
 {
     type Error = String;
 
@@ -133,25 +134,25 @@ impl<T: FromStr> Parse for T
 }
 
 mod test {
-    use regex::Regex;
     use crate::sys::s5_type_trait_2_generic_trait::Parse;
+    use regex::Regex;
 
     #[test]
     fn parse_should_work() {
         // 没匹配上
-        assert_eq!(u32::parse("abcd"), Err("💣".into()) );
+        assert_eq!(u32::parse("abcd"), Err("💣".into()));
         // parse出错
-        assert_eq!(u8::parse("abcd257"), Err("😡".into()) );
+        assert_eq!(u8::parse("abcd257"), Err("😡".into()));
         assert_eq!(f64::parse("xxxx xx114.514 hello world 256"), Ok(114.514));
     }
 
     #[test]
-    fn f () {
-
+    fn f() {
         println!("result: {}", u8::parse("11 255 hello world 256").unwrap());
-        println!("result: {}", f64::parse("111234 255.1234 hello world 256").unwrap());
+        println!(
+            "result: {}",
+            f64::parse("111234 255.1234 hello world 256").unwrap()
+        );
         println!("result: {}", f64::parse("aaa111").unwrap());
-
     }
-
 }

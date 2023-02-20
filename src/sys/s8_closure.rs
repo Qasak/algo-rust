@@ -1,6 +1,6 @@
-use std::{collections::HashMap, mem::size_of_val, mem::size_of};
 use std::marker::PhantomData;
 use std::ptr::NonNull;
+use std::{collections::HashMap, mem::size_of, mem::size_of_val};
 
 #[test]
 fn test_fn_once() {
@@ -22,7 +22,6 @@ fn test_fn_once() {
         let x = 1;
         let name3 = "ling".to_owned();
         println!("hello: {}, {:?}, {:?}", x, name2, name3);
-
     };
     println!(
         "c1: {}, c2: {}, c3: {}, c4: {}, c5: {}, f: {}",
@@ -41,7 +40,6 @@ fn test_fn_once() {
     println!("u32 {}", size_of::<u32>());
     println!("i32 {}", size_of::<i32>());
     println!("PhantomData<T> {}", size_of::<PhantomData<i32>>());
-
 }
 
 #[test]
@@ -73,7 +71,6 @@ fn call_once(arg: String, c: impl FnOnce(String) -> (String, String)) -> (String
 fn not_closure(arg: String) -> (String, String) {
     (arg, "Rosie".into())
 }
-
 
 #[test]
 fn test_fn_mut() {
@@ -131,7 +128,6 @@ fn test_fn() {
     println!("direct call: {}", c(2));
     println!("direct call: {}", c1(2));
 
-
     println!("call: {}", call(3, &c));
     println!("call: {}", call(3, &c1));
 
@@ -140,7 +136,6 @@ fn test_fn() {
 
     println!("call_once: {}", call_once_2(5, c));
     println!("call_once: {}", call_once_2(5, c1));
-
 }
 
 fn call(arg: u64, c: &impl Fn(u64) -> u64) -> u64 {
@@ -155,9 +150,6 @@ fn call_once_2(arg: u64, c: impl FnOnce(u64) -> u64) -> u64 {
     c(arg)
 }
 
-
-
-
 use std::ops::Mul;
 #[test]
 fn test_closure_ret() {
@@ -169,12 +161,11 @@ fn test_closure_ret() {
 }
 
 fn curry<T>(x: T) -> impl Fn(T) -> T
-    where
-        T: Mul<Output = T> + Copy,
+where
+    T: Mul<Output = T> + Copy,
 {
     move |y| x * y
 }
-
 
 // struct Closure<'a, 'b: 'a> {
 // 	data: (i32, i32, i32, i32),
@@ -195,8 +186,6 @@ fn test_closure_lifetime() {
     // 请问在这里，还能访问 name 么？为什么？
 }
 
-
-
 pub trait Executor {
     fn execute(&self, cmd: &str) -> Result<String, &'static str>;
 }
@@ -215,8 +204,8 @@ impl Executor for BashExecutor {
 }
 
 impl<F> Executor for F
-    where
-        F: Fn(&str) -> Result<String, &'static str>
+where
+    F: Fn(&str) -> Result<String, &'static str>,
 {
     fn execute(&self, cmd: &str) -> Result<String, &'static str> {
         self(cmd)
@@ -242,7 +231,6 @@ fn execute(cmd: &str, exec: impl Executor) -> Result<String, &'static str> {
     exec.execute(cmd)
 }
 
-
 // 闭包模拟
 struct ClosureOnce<Captured, Args, Output> {
     // 捕获的数据
@@ -266,8 +254,6 @@ fn greeting_code1(args: (String,), captured: (String,)) -> (String, String) {
 fn greeting_code2(args: (String, String), captured: (String, u8)) -> (String, String, String, u8) {
     (args.0, args.1, captured.0, captured.1)
 }
-
-
 
 #[test]
 fn closure_simulate() {

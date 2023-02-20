@@ -1,7 +1,7 @@
+use crate::tree::TreeNode;
 use std::cell::RefCell;
 use std::collections::VecDeque;
 use std::rc::Rc;
-use crate::tree::TreeNode;
 
 type OptNode = Option<Rc<RefCell<TreeNode>>>;
 // recursive

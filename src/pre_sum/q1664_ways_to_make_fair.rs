@@ -23,7 +23,7 @@ pub fn ways_to_make_fair(nums: Vec<i32>) -> i32 {
         // [偶数和] == [奇数和] ==
         // [(当前偶数和 - 当前元素) + (后半段奇数和 == (奇数总和 - 前半段奇数和))] == [前半段奇数和 + 后半段偶数和]
         // 反之亦然
-        if i % 2 == 0        && (e_pre - nums[i]) + (o_sum - o_pre) == o_pre + (e_sum - e_pre) {
+        if i % 2 == 0 && (e_pre - nums[i]) + (o_sum - o_pre) == o_pre + (e_sum - e_pre) {
             ret += 1;
         } else if i % 2 == 1 && (o_pre - nums[i]) + (e_sum - e_pre) == e_pre + (o_sum - o_pre) {
             ret += 1;
@@ -35,32 +35,46 @@ pub fn ways_to_make_fair(nums: Vec<i32>) -> i32 {
 // simplify version
 pub fn ways_to_make_fair_1(nums: Vec<i32>) -> i32 {
     let n = nums.len();
-    let (o_sum, e_sum) = (0..n).fold((0, 0), |(odd, even), i| if i & 1 == 0 {(odd, even + nums[i])} else {(odd + nums[i], even)});
-    (0..n).fold((0, 0, 0), |(ret, o_pre, e_pre), i|
+    let (o_sum, e_sum) = (0..n).fold((0, 0), |(odd, even), i| {
         if i & 1 == 0 {
-            if e_pre + (o_sum - o_pre) == o_pre + (e_sum - e_pre - nums[i]) {
-                (ret + 1, o_pre, e_pre + nums[i])
-            } else {
-                (ret, o_pre, e_pre + nums[i])
-            }
-        }  else {
-            if  o_pre + (e_sum - e_pre) == e_pre + (o_sum - o_pre - nums[i]) {
-                (ret + 1, o_pre + nums[i], e_pre)
-            } else {
-                (ret, o_pre + nums[i], e_pre)
-            }
+            (odd, even + nums[i])
+        } else {
+            (odd + nums[i], even)
         }
-    ).0
+    });
+    (0..n)
+        .fold((0, 0, 0), |(ret, o_pre, e_pre), i| {
+            if i & 1 == 0 {
+                if e_pre + (o_sum - o_pre) == o_pre + (e_sum - e_pre - nums[i]) {
+                    (ret + 1, o_pre, e_pre + nums[i])
+                } else {
+                    (ret, o_pre, e_pre + nums[i])
+                }
+            } else {
+                if o_pre + (e_sum - e_pre) == e_pre + (o_sum - o_pre - nums[i]) {
+                    (ret + 1, o_pre + nums[i], e_pre)
+                } else {
+                    (ret, o_pre + nums[i], e_pre)
+                }
+            }
+        })
+        .0
 }
 
 // easy
 pub fn ways_to_make_fair_2(nums: Vec<i32>) -> i32 {
     let (mut pre, mut sum, mut cnt) = ([0, 0], [0, 0], 0);
     // 将奇、偶索引对应值的累加和填入 sum[0](偶数位置) 和 sum[1] (奇数位置)；
-    for i in 0..nums.len() { sum[i % 2] += nums[i]; }
+    for i in 0..nums.len() {
+        sum[i % 2] += nums[i];
+    }
     for i in 0..nums.len() {
         sum[i % 2] -= nums[i];
-        cnt += if pre[0] + sum[1] == pre[1] + sum[0] { 1 } else { 0 };
+        cnt += if pre[0] + sum[1] == pre[1] + sum[0] {
+            1
+        } else {
+            0
+        };
         pre[i % 2] += nums[i];
     }
     cnt

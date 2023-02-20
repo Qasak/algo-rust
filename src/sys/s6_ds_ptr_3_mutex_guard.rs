@@ -1,3 +1,5 @@
+use lazy_static::lazy_static;
+use once_cell::sync::Lazy;
 use std::borrow::{Borrow, Cow};
 use std::collections::HashMap;
 use std::ops::DerefMut;
@@ -5,8 +7,6 @@ use std::os::unix::raw::mode_t;
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration;
-use lazy_static::lazy_static;
-use once_cell::sync::Lazy;
 
 // lazy_static 宏可以生成复杂的 static 对象
 // 其生命周期是静态的，不需要 Arc
@@ -16,7 +16,8 @@ use once_cell::sync::Lazy;
 // }
 
 // 用once_cell::sync::Lazy取代lazy_static
-static METRICS: Lazy<Mutex<HashMap<Cow<'static, str>, usize>>> = Lazy::new(|| Mutex::new(HashMap::new()));
+static METRICS: Lazy<Mutex<HashMap<Cow<'static, str>, usize>>> =
+    Lazy::new(|| Mutex::new(HashMap::new()));
 
 #[test]
 fn f() {
@@ -40,5 +41,4 @@ fn f() {
     thread::sleep(Duration::from_millis(100));
     println!("metrics: {:?}", METRICS.lock().unwrap());
     // println!("metrics: {:?}", metrics.lock().unwrap());
-
 }

@@ -1,4 +1,3 @@
-
 use std::cell::RefCell;
 use std::rc::Rc;
 
@@ -28,9 +27,9 @@ impl Node {
 
 #[cfg(test)]
 mod test {
+    use crate::sys::s3_ownership_dag_refcell::Node;
     use std::cell::RefCell;
     use std::rc::Rc;
-    use crate::sys::s3_ownership_dag_refcell::Node;
 
     #[test]
     fn f() {

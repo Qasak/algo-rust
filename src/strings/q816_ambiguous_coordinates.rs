@@ -3,10 +3,20 @@ pub fn ambiguous_coordinates(s: String) -> Vec<String> {
     fn create_coord(arr: &str, idx: usize) -> Option<String> {
         if idx == 0 {
             // has prefix zero(s) => None
-            if arr.len() > 1 && arr.chars().nth(0) == Some('0') {None} else {Some(String::from(arr))}
+            if arr.len() > 1 && arr.chars().nth(0) == Some('0') {
+                None
+            } else {
+                Some(String::from(arr))
+            }
         } else {
             // pre has prefix zero(s) or suf has suffix zero(s) => None
-            if arr[0..idx].len() > 1 && arr.chars().nth(0) == Some('0') || arr.chars().nth(arr.len() - 1) == Some('0') {None} else {Some(format!("{}.{}", &arr[0..idx], &arr[idx..arr.len()]))}
+            if arr[0..idx].len() > 1 && arr.chars().nth(0) == Some('0')
+                || arr.chars().nth(arr.len() - 1) == Some('0')
+            {
+                None
+            } else {
+                Some(format!("{}.{}", &arr[0..idx], &arr[idx..arr.len()]))
+            }
         }
     }
     let v = &s[1..s.len() - 1];
@@ -27,7 +37,7 @@ pub fn ambiguous_coordinates(s: String) -> Vec<String> {
 }
 
 #[cfg(test)]
-mod test{
+mod test {
     use crate::strings::q816_ambiguous_coordinates::ambiguous_coordinates;
 
     #[test]
@@ -39,5 +49,4 @@ mod test{
         println!("{:?}", ambiguous_coordinates("(0010)".to_string()));
         println!("{:?}", ambiguous_coordinates("(0101)".to_string()));
     }
-
 }

@@ -28,8 +28,12 @@ pub fn merge_alternately_1(word1: String, word2: String) -> String {
     let mut i2 = word2.chars().peekable();
     let mut ret = "".to_string();
     while i1.peek().is_some() || i2.peek().is_some() {
-        if let Some(ch) = i1.next() {ret.push(ch)};
-        if let Some(ch) = i2.next() {ret.push(ch)};
+        if let Some(ch) = i1.next() {
+            ret.push(ch)
+        };
+        if let Some(ch) = i2.next() {
+            ret.push(ch)
+        };
     }
     ret
 }

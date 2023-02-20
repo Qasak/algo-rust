@@ -8,7 +8,6 @@ fn test_mut_ref_move() {
     *p = 2;
     let x = &*p;
     println!("{}", x);
-
 }
 
 #[test]
@@ -17,7 +16,6 @@ fn test_reborrow() {
     let b = &mut data;
     println!("sum:{}", sum(b));
     print!("{:?}", b);
-
 }
 
 fn sum(data: &Vec<u32>) -> u32 {

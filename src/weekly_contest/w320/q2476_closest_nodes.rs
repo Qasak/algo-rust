@@ -1,7 +1,6 @@
+use crate::tree::TreeNode;
 use std::cell::RefCell;
 use std::rc::Rc;
-use crate::tree::TreeNode;
-
 
 // NAIVE search: TLE
 // The question does not say that the BST is balanced;
@@ -9,7 +8,6 @@ use crate::tree::TreeNode;
 pub fn closest_nodes(root: Option<Rc<RefCell<TreeNode>>>, queries: Vec<i32>) -> Vec<Vec<i32>> {
     let mut ret = vec![];
     fn floor(root: &Option<Rc<RefCell<TreeNode>>>, val: i32, pre: i32) -> i32 {
-
         if let Some(node) = &root.as_ref() {
             let cur = node.borrow().val;
 
@@ -56,13 +54,17 @@ pub fn closest_nodes_1(root: Option<Rc<RefCell<TreeNode>>>, queries: Vec<i32>) -
     dfs(&root, &mut arr);
     let n = arr.len();
     for q in queries {
-        ret.push(
-            match arr.binary_search(&q) {
-                Ok(_) => vec![q ,q],
-                Err(0) => vec![-1, arr[0]],
-                Err(i) => if i == n {vec![arr[n - 1], -1]} else {vec![arr[i - 1], arr[i]]}
+        ret.push(match arr.binary_search(&q) {
+            Ok(_) => vec![q, q],
+            Err(0) => vec![-1, arr[0]],
+            Err(i) => {
+                if i == n {
+                    vec![arr[n - 1], -1]
+                } else {
+                    vec![arr[i - 1], arr[i]]
+                }
             }
-        );
+        });
     }
     ret
 }

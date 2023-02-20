@@ -10,5 +10,9 @@ pub fn minimum_length(s: String) -> i32 {
             r -= 1;
         }
     }
-    if (r - l) < 0 {0} else {r - l + 1}
+    if (r - l) < 0 {
+        0
+    } else {
+        r - l + 1
+    }
 }

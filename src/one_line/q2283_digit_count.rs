@@ -1,5 +1,13 @@
 pub fn digit_count(num: String) -> bool {
-    num.chars().map(|c| c.to_digit(10).unwrap() as usize).fold([0; 10], |mut v, i| {v[i] += 1; v}).iter().zip(num.chars().map(|c| c.to_digit(10).unwrap() as usize)).all(|(&c,i)| c==i)
+    num.chars()
+        .map(|c| c.to_digit(10).unwrap() as usize)
+        .fold([0; 10], |mut v, i| {
+            v[i] += 1;
+            v
+        })
+        .iter()
+        .zip(num.chars().map(|c| c.to_digit(10).unwrap() as usize))
+        .all(|(&c, i)| c == i)
 }
 
 #[cfg(test)]
@@ -11,7 +19,10 @@ mod test {
         let v = vec![0; 5];
         let w = vec![0; 2];
         // If two arrays are of different lengths, the shorter one prevails
-        let e = v.iter().zip(w.iter()).all(|(i, j)| { println!("{:?}", (i, j)); i == j });
+        let e = v.iter().zip(w.iter()).all(|(i, j)| {
+            println!("{:?}", (i, j));
+            i == j
+        });
         assert_eq!(true, e);
     }
 

@@ -23,7 +23,7 @@ pub fn middle_node(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     // equal to `let mid_addr = slow.unwrap().as_ref() as *const ListNode;`
     let mid_addr = if let Some(node) = slow {
         // node.as_ref() is a &ListNode
-        node.as_ref() as * const ListNode
+        node.as_ref() as *const ListNode
     } else {
         return None;
     };

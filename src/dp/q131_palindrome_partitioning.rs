@@ -11,15 +11,23 @@ pub fn partition(s: String) -> Vec<Vec<String>> {
     for len in 2..(n + 1) {
         for i in 0..n {
             let j = i + len - 1;
-            if j >= n {break;}
+            if j >= n {
+                break;
+            }
             if j - i == 1 {
                 f[i][j] = cs[i] == cs[j];
-            } else if j - i > 1{
+            } else if j - i > 1 {
                 f[i][j] = cs[i] == cs[j] && f[i + 1][j - 1];
             }
         }
     }
-    fn dfs(start: usize, cs: &Vec<char>, ret: &mut Vec<Vec<String>>, path: &mut Vec<String>, f: &Vec<Vec<bool>>) {
+    fn dfs(
+        start: usize,
+        cs: &Vec<char>,
+        ret: &mut Vec<Vec<String>>,
+        path: &mut Vec<String>,
+        f: &Vec<Vec<bool>>,
+    ) {
         let n = cs.len();
         if start == n {
             ret.push(path.clone());

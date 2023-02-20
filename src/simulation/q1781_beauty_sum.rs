@@ -4,7 +4,7 @@ pub fn beauty_sum(s: String) -> i32 {
     let mut cnt = vec![vec![0; 26]; n + 1];
     for i in 0..n {
         for k in 0..26 {
-            cnt[i + 1][k] = cnt[i][k] + if cs[i] == k as u8 + b'a' {1} else {0};
+            cnt[i + 1][k] = cnt[i][k] + if cs[i] == k as u8 + b'a' { 1 } else { 0 };
         }
     }
     let mut ret = 0;

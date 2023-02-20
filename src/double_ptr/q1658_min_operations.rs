@@ -17,5 +17,9 @@ pub fn min_operations(nums: Vec<i32>, x: i32) -> i32 {
             max_len = max_len.max(j as i32 - i as i32 + 1);
         }
     }
-    if max_len == 0 {-1} else {n - max_len as i32}
+    if max_len == 0 {
+        -1
+    } else {
+        n - max_len as i32
+    }
 }

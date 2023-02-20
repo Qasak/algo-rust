@@ -4,7 +4,7 @@
 // 2. convert valid string to int with bitwise op, then count
 pub fn max_length(arr: Vec<String>) -> i32 {
     // use String, in each level of recursion, we have to clone it
-    fn dfs(i: usize, cur: String,  arr: &Vec<String>) -> i32 {
+    fn dfs(i: usize, cur: String, arr: &Vec<String>) -> i32 {
         if i == arr.len() {
             return cur.len() as i32;
         }
@@ -33,15 +33,14 @@ pub fn max_length(arr: Vec<String>) -> i32 {
     dfs(0, "".to_string(), &arr)
 }
 
-
 pub fn max_length_bit(arr: Vec<String>) -> i32 {
     let mut ret: u32 = 0;
     let mut masks: Vec<u32> = vec![0];
     for s in arr {
         // convert valid strings to bit masks
-        let mut mask: u32 = s.bytes().map(|c| 1<<(c-b'a')).sum();
+        let mut mask: u32 = s.bytes().map(|c| 1 << (c - b'a')).sum();
         if mask.count_ones() == s.len() as u32 {
-            masks.push(mask); 
+            masks.push(mask);
         } else {
             continue;
         }

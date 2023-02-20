@@ -1,5 +1,11 @@
 pub fn count_partitions(nums: Vec<i32>, k: i32) -> i32 {
-    let (mo, mut ret, n, sum, mut f) = (1e9 as i32 + 7, 1, nums.len(),  nums.iter().map(|&x| x as i64).sum::<i64>(), vec![0; k as usize]);
+    let (mo, mut ret, n, sum, mut f) = (
+        1e9 as i32 + 7,
+        1,
+        nums.len(),
+        nums.iter().map(|&x| x as i64).sum::<i64>(),
+        vec![0; k as usize],
+    );
     if sum < 2 * k as i64 {
         return 0;
     }
@@ -21,8 +27,8 @@ mod test {
     use crate::weekly_contest::w325::q2518_num_of_great_partitions::count_partitions;
 
     #[test]
-    fn f () {
-        let nums = vec![1,2,3,4];
+    fn f() {
+        let nums = vec![1, 2, 3, 4];
         let k = 4;
         let ret = count_partitions(nums, k);
         assert_eq!(ret, 6);

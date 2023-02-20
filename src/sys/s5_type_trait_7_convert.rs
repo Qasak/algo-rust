@@ -1,5 +1,3 @@
-
-
 struct MyString(String);
 impl From<MyString> for i32 {
     fn from(value: MyString) -> Self {
@@ -30,7 +28,6 @@ fn convert_test() {
     println!("{}", y);
 }
 
-
 use std::fmt;
 use std::fs::File;
 use std::io::Read;
@@ -43,7 +40,10 @@ fn print(v: impl Into<IpAddr>) {
 #[test]
 fn test_ip_convert() {
     let v4: Ipv4Addr = "2.2.2.2".to_string().parse().unwrap();
-    if let Ok(ip) = "2001:db8:85a3:0::8a2E:0370:7334".to_string().parse::<Ipv6Addr>() {
+    if let Ok(ip) = "2001:db8:85a3:0::8a2E:0370:7334"
+        .to_string()
+        .parse::<Ipv6Addr>()
+    {
         println!("{}", ip.to_string());
     }
     let v6: Ipv6Addr = "::1".parse().unwrap();
@@ -57,8 +57,6 @@ fn test_ip_convert() {
     // IPAddr 实现了 From<Ipv6Addr>
     print(v6);
 }
-
-
 
 ///# Examples
 ///```no_run
@@ -75,7 +73,7 @@ fn test_ip_convert() {
 /// ```
 ///
 #[test]
-fn test_open_ref()  {
+fn test_open_ref() {
     use std::fs::File;
     if let Ok(f) = File::open("/tmp/test.txt".to_string()) {
         let mut bytes_iter = f.bytes();
@@ -124,7 +122,7 @@ fn print_ref(v: impl AsRef<str>) {
 }
 
 #[test]
-fn test_enum_ref()  {
+fn test_enum_ref() {
     let lang = Language::Rust;
     // &str 实现了 AsRef<str>
     print_ref("Hello world!");
@@ -136,7 +134,7 @@ fn test_enum_ref()  {
 }
 
 #[test]
-fn test_deref_rc()  {
+fn test_deref_rc() {
     let a = Rc::new(1);
     let b = a.clone();
     let y = b.deref();
@@ -144,7 +142,6 @@ fn test_deref_rc()  {
     println!("{}", *b);
     println!("{}", b.deref());
 }
-
 
 #[derive(Debug)]
 struct Buffer<T>(Vec<T>);
@@ -169,7 +166,6 @@ impl<T> DerefMut for Buffer<T> {
     }
 }
 
-
 #[test]
 fn test_my_deref() {
     let mut buf = Buffer::new([1, 3, 2, 4]);
@@ -178,9 +174,6 @@ fn test_my_deref() {
     buf.sort();
     println!("buf: {:?}", buf);
 }
-
-
-
 
 // Debug Display Default all
 
@@ -191,8 +184,6 @@ struct Developer {
     age: u8,
     lang: Language,
 }
-
-
 
 // 手工实现 Default
 impl Default for Language {

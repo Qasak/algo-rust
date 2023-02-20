@@ -28,11 +28,14 @@ pub fn min_operations_1(boxes: String) -> Vec<i32> {
             f[0] += i as i32;
         }
     }
-    if cs[0] == b'1' {l = 1;}
+    if cs[0] == b'1' {
+        l = 1;
+    }
     for i in 1..n {
         f[i] = f[i - 1] + l - r;
         if cs[i] == b'1' {
-            l += 1; r -= 1;
+            l += 1;
+            r -= 1;
         }
     }
     f

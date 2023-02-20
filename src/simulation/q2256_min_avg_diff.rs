@@ -10,7 +10,11 @@ pub fn minimum_average_difference(nums: Vec<i32>) -> i32 {
     for i in 0..nums.len() {
         let front_avg = pre_sums[i + 1] / (i as i64 + 1);
 
-        let back_avg = if i == n - 1 {0} else {(pre_sums[n] - pre_sums[i + 1]) / (n as i64 - i as i64 - 1)};
+        let back_avg = if i == n - 1 {
+            0
+        } else {
+            (pre_sums[n] - pre_sums[i + 1]) / (n as i64 - i as i64 - 1)
+        };
 
         let avg_diff = (front_avg - back_avg).abs();
 

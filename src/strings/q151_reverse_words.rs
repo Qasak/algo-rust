@@ -1,13 +1,18 @@
-
 // manual handle
 pub fn reverse_words(s: String) -> String {
     let mut cs = s.chars().collect::<Vec<char>>();
     let mut ret = vec![];
     let mut i = 0;
     while i < cs.len() {
-        while i < cs.len() && cs[i] == ' ' {i += 1; continue;}
+        while i < cs.len() && cs[i] == ' ' {
+            i += 1;
+            continue;
+        }
         let mut cur = vec![];
-        while i < cs.len() && cs[i] != ' ' {cur.push(cs[i]); i += 1;}
+        while i < cs.len() && cs[i] != ' ' {
+            cur.push(cs[i]);
+            i += 1;
+        }
         ret.push(cur.into_iter().collect::<String>());
     }
     let mut ans = vec![];

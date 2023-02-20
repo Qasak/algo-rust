@@ -21,10 +21,7 @@ fn f() {
     let (addr4, vtable4): (usize, usize) = unsafe { transmute(w4) };
 
     // s 和 s1 在栈上的地址，以及 f 在 TEXT 段的地址
-    println!(
-        "s1: {:p}, s2: {:p}, f(): {:p}",
-        &s1, &s2, f as *const ()
-    );
+    println!("s1: {:p}, s2: {:p}, f(): {:p}", &s1, &s2, f as *const ());
     // trait object(s1 / Display) 的 ptr 地址和 vtable 地址
     println!("addr1: 0x{:x}, vtable1: 0x{:x}", addr1, vtable1);
     // trait object(s1 / Debug) 的 ptr 地址和 vtable 地址

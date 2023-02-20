@@ -13,7 +13,6 @@ pub fn subdomain_visits(s: Vec<String>) -> Vec<String> {
                 } else {
                     map.insert(domain[j + 1..].to_string(), cnt);
                 }
-
             }
         }
         // insert main domain's count
@@ -23,21 +22,31 @@ pub fn subdomain_visits(s: Vec<String>) -> Vec<String> {
             map.insert(domain, cnt);
         }
     }
-    map.into_iter().map(|(i, v)| format!("{} {}", v, i)).collect::<Vec<_>>()
+    map.into_iter()
+        .map(|(i, v)| format!("{} {}", v, i))
+        .collect::<Vec<_>>()
 }
 pub fn subdomain_visits_1(cpdomains: Vec<String>) -> Vec<String> {
     use std::collections::HashMap;
     let mut cnt_cache = HashMap::new();
     for cpdomain in cpdomains {
         let i = cpdomain.find(" ").unwrap();
-        let (cnt, domain) = (cpdomain[..i].parse::<i32>().unwrap(), cpdomain[i + 1..].to_string());
+        let (cnt, domain) = (
+            cpdomain[..i].parse::<i32>().unwrap(),
+            cpdomain[i + 1..].to_string(),
+        );
 
         for (j, ch) in domain.as_bytes().into_iter().enumerate() {
-            if ch == &b'.' { *cnt_cache.entry((&domain[j + 1..]).to_string()).or_insert(0) += cnt; }
+            if ch == &b'.' {
+                *cnt_cache.entry((&domain[j + 1..]).to_string()).or_insert(0) += cnt;
+            }
         }
         *cnt_cache.entry(domain).or_insert(0) += cnt;
     }
-    cnt_cache.into_iter().map(|(i, v)| format!("{} {}", v, i)).collect::<Vec<_>>()
+    cnt_cache
+        .into_iter()
+        .map(|(i, v)| format!("{} {}", v, i))
+        .collect::<Vec<_>>()
 }
 
 pub fn subdomain_visits_2(s: Vec<String>) -> Vec<String> {
@@ -47,15 +56,19 @@ pub fn subdomain_visits_2(s: Vec<String>) -> Vec<String> {
         for (i, c) in ss.as_bytes().iter().enumerate() {
             if *c == b' ' {
                 cnt = ss[..i].parse().unwrap();
-                map.entry(&ss[i + 1..]).and_modify(|c| *c += cnt).or_insert(cnt);
+                map.entry(&ss[i + 1..])
+                    .and_modify(|c| *c += cnt)
+                    .or_insert(cnt);
                 continue;
             }
-            if *c == b'.'{
-                map.entry(&ss[i + 1..]).and_modify(|c| *c += cnt).or_insert(cnt);
+            if *c == b'.' {
+                map.entry(&ss[i + 1..])
+                    .and_modify(|c| *c += cnt)
+                    .or_insert(cnt);
             }
         }
     }
-    map.into_iter().map(|(k, v)| {
-        format!("{} {}", v, k)
-    }).collect()
+    map.into_iter()
+        .map(|(k, v)| format!("{} {}", v, k))
+        .collect()
 }

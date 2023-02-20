@@ -1,6 +1,6 @@
-use std::rc::Rc;
-use std::cell::RefCell;
 use crate::tree::TreeNode;
+use std::cell::RefCell;
+use std::rc::Rc;
 
 type T = Option<Rc<RefCell<TreeNode>>>;
 
@@ -10,15 +10,14 @@ pub fn leaf_similar(root1: T, root2: T) -> bool {
 }
 fn iterative(root: T) -> Vec<i32> {
     let mut stack = vec![root];
-    let mut leaf  = vec![];
+    let mut leaf = vec![];
 
     while let Some(node) = stack.pop() {
         if let Some(node) = node {
             let node = node.borrow();
             if node.left.is_none() && node.right.is_none() {
                 leaf.push(node.val);
-            }
-            else {
+            } else {
                 stack.push(node.right.clone());
                 stack.push(node.left.clone());
             }
@@ -46,4 +45,3 @@ pub fn leaf_similar_1(root1: T, root2: T) -> bool {
     get_leafs(&root2, &mut arr2);
     arr1 == arr2
 }
-

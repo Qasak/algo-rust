@@ -1,15 +1,14 @@
 use std::cell::RefCell;
 use std::rc::Rc;
 
-pub mod q222_count_complete_tree_nodes;
-mod q124_max_path_sum;
-mod q938_range_sum_bst;
-mod q872_leaf_similar;
-mod q124_binary_tree_max_path_sum;
 mod q1145_tree_winning_move;
+mod q124_binary_tree_max_path_sum;
+mod q124_max_path_sum;
+pub mod q222_count_complete_tree_nodes;
 mod q2331_evaluate_bool;
+mod q872_leaf_similar;
+mod q938_range_sum_bst;
 mod q94_in_order;
-
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct TreeNode {
@@ -24,7 +23,7 @@ impl TreeNode {
         TreeNode {
             val,
             left: None,
-            right: None
+            right: None,
         }
     }
 }

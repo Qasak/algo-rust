@@ -7,8 +7,10 @@ fn arc_rwlock_test() {
     let t = s.clone();
     std::thread::spawn(move || {
         t.as_ref().write().unwrap().push_str(" asd");
-        println!("from thread {:?}",t.as_ref().read().unwrap());
-    }).join().unwrap();
+        println!("from thread {:?}", t.as_ref().read().unwrap());
+    })
+    .join()
+    .unwrap();
 
     println!("main : {:?}", s.as_ref().read().unwrap());
 }
@@ -73,7 +75,8 @@ pub fn strtok<'a>(s: &mut &'a str, delimiter: char) -> &'a str {
         let suffix = &s[(i + delimiter.len_utf8())..];
         *s = suffix;
         prefix
-    } else { // 如果没找到，返回整个字符串，把原字符串指针 s 指向空串
+    } else {
+        // 如果没找到，返回整个字符串，把原字符串指针 s 指向空串
         let prefix = *s;
         *s = "";
         prefix
@@ -96,7 +99,8 @@ pub fn strtok_same<'b, 'a>(s: &'b mut &'a str, delimiter: char) -> &'a str {
         let suffix = &s[(i + delimiter.len_utf8())..];
         *s = suffix;
         prefix
-    } else { // 如果没找到，返回整个字符串，把原字符串指针 s 指向空串
+    } else {
+        // 如果没找到，返回整个字符串，把原字符串指针 s 指向空串
         let prefix = *s;
         *s = "";
         prefix
@@ -120,10 +124,10 @@ pub fn strtok_tricky_lifetime<'a>(s: &'a mut &str, delimiter: char) -> &'a str {
         let suffix = &s[(i + delimiter.len_utf8())..];
         *s = suffix;
         prefix
-    } else { // 如果没找到，返回整个字符串，把原字符串指针 s 指向空串
+    } else {
+        // 如果没找到，返回整个字符串，把原字符串指针 s 指向空串
         let prefix = *s;
         *s = "";
         prefix
     }
 }
-

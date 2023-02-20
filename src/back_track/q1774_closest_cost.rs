@@ -1,7 +1,8 @@
 // naive dfs
 pub fn closest_cost(mut arr1: Vec<i32>, mut arr2: Vec<i32>, target: i32) -> i32 {
     let (n, m) = (arr1.len(), arr2.len());
-    arr1.sort(); arr2.sort();
+    arr1.sort();
+    arr2.sort();
     arr1.dedup();
     let mut cache = vec![];
     fn dfs(i: usize, arr2: &Vec<i32>, cache: &mut Vec<i32>, path_sum: i32, target: i32) {
@@ -24,7 +25,8 @@ pub fn closest_cost(mut arr1: Vec<i32>, mut arr2: Vec<i32>, target: i32) -> i32 
             cur -= j;
         }
     }
-    arr3.sort(); arr3.dedup();
+    arr3.sort();
+    arr3.dedup();
     for i in arr3 {
         if (i - target).abs() < diff {
             ret = i;

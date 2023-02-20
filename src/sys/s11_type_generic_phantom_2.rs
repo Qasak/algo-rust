@@ -1,4 +1,3 @@
-
 use std::marker::PhantomData;
 
 #[derive(Debug, Default)]
@@ -60,9 +59,4 @@ mod tests {
         assert_eq!(Some(4), equation.next());
         assert_eq!(Some(9), equation.next());
     }
-
-
-    
-
-    
 }

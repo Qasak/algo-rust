@@ -22,7 +22,6 @@ pub fn largest_overlap(img1: Vec<Vec<i32>>, img2: Vec<Vec<i32>>) -> i32 {
                         cur += 1;
                     }
                 }
-
             }
             ret = ret.max(cur);
         }
@@ -33,11 +32,11 @@ pub fn largest_overlap(img1: Vec<Vec<i32>>, img2: Vec<Vec<i32>>) -> i32 {
 // O(n^4)
 pub fn largest_overlap_n2(img1: Vec<Vec<i32>>, img2: Vec<Vec<i32>>) -> i32 {
     let n = img1.len();
-    let idx1: Vec<(usize, usize)> = (0..n*n)
+    let idx1: Vec<(usize, usize)> = (0..n * n)
         .filter(|i| img1[i / n][i % n] == 1)
         .map(|i| (i / n, i % n))
         .collect();
-    let idx2: Vec<(usize, usize)> = (0..n*n)
+    let idx2: Vec<(usize, usize)> = (0..n * n)
         .filter(|i| img2[i / n][i % n] == 1)
         .map(|i| (i / n, i % n))
         .collect();
@@ -60,8 +59,8 @@ mod tests {
     pub fn t() {
         // let img1  = [vec![1,1,0],vec![0,1,0],vec![0,1,0]].to_vec();
         // let img2  = [vec![0,0,0],vec![0,1,1],vec![0,0,1]].to_vec();
-        let img1  = [vec![1]].to_vec();
-        let img2  = [vec![1]].to_vec();
+        let img1 = [vec![1]].to_vec();
+        let img2 = [vec![1]].to_vec();
         println!("{:?}", largest_overlap(img1, img2));
     }
 }
