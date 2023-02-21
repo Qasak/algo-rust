@@ -6,3 +6,4 @@ mod q1775_min_operations;
 mod q1798_max_num_of_consecutive;
 mod q2131_longest_palindrome;
 mod q754_reach_number;
+mod q1326_min_tap;
