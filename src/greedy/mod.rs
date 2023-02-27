@@ -8,3 +8,4 @@ mod q2131_longest_palindrome;
 mod q754_reach_number;
 mod q1326_min_tap;
 mod q1247_min_swap;
+mod q1144_decrease_elem_to_make_zigzag;
