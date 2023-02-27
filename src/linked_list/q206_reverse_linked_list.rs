@@ -31,10 +31,4 @@ pub fn reverse_list_rec(head: OptNode) -> OptNode {
 #[test]
 fn test() {
     let v = vec![1, 2, 3, 4, 5];
-    let vv = v.clone();
-    let list1: ListNode = vv.into();
-    list1.print_list();
-    let list: ListNode = v.into();
-    let new_head = reverse_list(Some(Box::new(list)));
-    new_head.unwrap().print_list();
 }

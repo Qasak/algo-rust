@@ -34,9 +34,8 @@ impl ListNode {
         current_node.next = Some(Box::new(ListNode::new(val)));
     }
 
-    pub fn print_list(self) {
-        let mut current = &Some(Box::new(self));
-        while let Some(node) = current {
+    pub fn print_list(mut current: &Option<Box<ListNode>>) {
+        while let Some(node) = current.as_ref() {
             print!("{} ", node.val);
             current = &node.next;
         }
@@ -44,16 +43,17 @@ impl ListNode {
     }
 }
 
-impl From<Vec<i32>> for ListNode {
+type OptBoxNode = Option<Box<ListNode>>;
+pub struct MyOptBoxNode (pub OptBoxNode);
+impl From<Vec<i32>> for MyOptBoxNode {
     fn from(vec: Vec<i32>) -> Self {
         let mut current = None;
         for &val in vec.iter().rev() {
             let node = ListNode { val, next: current };
             current = Some(Box::new(node));
         }
-        ListNode {
-            val: 0,
-            next: current,
-        }
+        MyOptBoxNode(
+            current
+        )
     }
 }

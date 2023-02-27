@@ -1,42 +1,57 @@
-use crate::linked_list::ListNode;
+use crate::linked_list::*;
 
 pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-    let mut cur = head;
-    let mut pre = None;
-
-    while let Some(mut cur_node) = cur {
-        let nex = cur_node.next.take();
-        cur_node.next = pre;
-        pre = Some(cur_node);
-        cur = nex;
+    let mut prev = None;
+    let mut curr = head;
+    while let Some(mut node) = curr {
+        let next = node.next.take();
+        node.next = prev;
+        prev = Some(node);
+        curr = next;
     }
-    pre
+    prev
 }
+
+pub fn reverse_list_rec(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+    reverse(None, head)
+}
+
+pub fn reverse(pre: Option<Box<ListNode>>, cur: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+    if let Some(mut cur) = cur {
+        let next = cur.next.take();
+        cur.next = pre;
+        reverse(Some(cur), next)
+    } else {
+        pre
+    }
+}
+
 #[cfg(test)]
 mod test {
-    use crate::linked_list::ListNode;
-    use crate::top_cn::f2_q206_reverse_list::reverse_list;
+    use super::*;
 
     #[test]
     pub fn t() {
-        let h = Some(Box::from(ListNode {
-            val: 1,
-            next: Some(Box::from(ListNode {
-                val: 2,
-                next: Some(Box::from(ListNode {
-                    val: 3,
-                    next: Some(Box::from(ListNode {
-                        val: 4,
-                        next: Some(Box::from(ListNode { val: 5, next: None })),
-                    })),
-                })),
-            })),
-        }));
+        let list1: MyOptBoxNode = vec![1,2,3,4,5].into();
+        let list2: MyOptBoxNode = vec![1,2].into();
+        let list3: MyOptBoxNode = vec![].into();
 
-        let mut cur = reverse_list(h);
-        while let Some(mut cur_node) = cur {
-            println!("{}", cur_node.val);
-            cur = cur_node.next;
-        }
+
+        let l1 = list1.0;
+        let l2 = list2.0;
+        let l3 = list3.0;
+
+
+        ListNode::print_list(&l1);
+        ListNode::print_list(&l2);
+        ListNode::print_list(&l3);
+
+        let rl1 = reverse_list(l1);
+        let rl2 = reverse_list(l2);
+        let rl3 = reverse_list(l3);
+
+        ListNode::print_list(&rl1);
+        ListNode::print_list(&rl2);
+        ListNode::print_list(&rl3);
     }
 }
