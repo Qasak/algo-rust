@@ -44,7 +44,7 @@ impl ListNode {
 }
 
 type OptBoxNode = Option<Box<ListNode>>;
-pub struct MyOptBoxNode (pub OptBoxNode);
+pub struct MyOptBoxNode(pub OptBoxNode);
 impl From<Vec<i32>> for MyOptBoxNode {
     fn from(vec: Vec<i32>) -> Self {
         let mut current = None;
@@ -52,8 +52,6 @@ impl From<Vec<i32>> for MyOptBoxNode {
             let node = ListNode { val, next: current };
             current = Some(Box::new(node));
         }
-        MyOptBoxNode(
-            current
-        )
+        MyOptBoxNode(current)
     }
 }

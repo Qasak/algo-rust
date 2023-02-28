@@ -6,7 +6,7 @@ pub fn min_taps(n: i32, ranges: Vec<i32>) -> i32 {
     }
     for i in 0..=n {
         let start = 0.max(i as i32 - ranges[i]);
-        let end = (n as i32).min(i as i32 + ranges[i] );
+        let end = (n as i32).min(i as i32 + ranges[i]);
         let start = start as usize;
         let end = end as usize;
         right_most[start] = right_most[start].max(end);

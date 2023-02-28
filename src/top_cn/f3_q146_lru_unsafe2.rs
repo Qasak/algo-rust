@@ -24,7 +24,7 @@ impl DListNode {
             next: ptr::null_mut(),
         }
     }
-    
+
     fn new_init() -> Self {
         Self {
             key: 0,
@@ -34,7 +34,6 @@ impl DListNode {
         }
     }
 }
-
 
 /**
  * `&self` means the method takes an immutable reference.
@@ -71,7 +70,7 @@ impl LRUCache {
             (*(*node).prev).next = (*node).next;
         }
     }
-    
+
     fn get(&mut self, key: i32) -> i32 {
         let mut entry = self
             .map
@@ -80,21 +79,19 @@ impl LRUCache {
         if let Some(mut node) = entry {
             self.cut_off(node);
             self.link_in(node);
-            unsafe {
-                (*node).val
-            }
+            unsafe { (*node).val }
         } else {
             -1
         }
     }
-    
+
     fn put(&mut self, key: i32, value: i32) {
         let mut entry = self
             .map
             .get_mut(&key)
             .map(|node| (&mut **node) as *mut DListNode);
         //存在key, 修改value即可
-        if let Some(mut old_node_entry) = entry  {
+        if let Some(mut old_node_entry) = entry {
             self.cut_off(old_node_entry);
             self.link_in(old_node_entry);
             unsafe {
@@ -104,7 +101,7 @@ impl LRUCache {
         } else {
             // 找到老节点并更新值
             if self.map.len() == self.cap {
-                let old_key = unsafe{(*(*self.tail).prev).key};
+                let old_key = unsafe { (*(*self.tail).prev).key };
                 // 通过remove获得旧节点
                 let mut old_node = self.map.remove(&old_key).unwrap();
                 old_node.key = key;
@@ -117,7 +114,6 @@ impl LRUCache {
                 self.link_in((&mut *node) as *mut DListNode);
                 self.map.insert(key, node);
             }
-
 
             // 获取node（获取所有权并维护关系）
             // let mut node = if self.map.len() == self.cap {

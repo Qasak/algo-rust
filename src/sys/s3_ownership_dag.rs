@@ -59,8 +59,6 @@ mod test {
         println!("data: {:?}", data.borrow());
     }
 
-
-
     #[test]
     fn strong_count_work() {
         use std::rc::Rc;
@@ -73,10 +71,10 @@ mod test {
 
         let p1 = Rc::new(Point { x: 1.0, y: 2.0 });
         let p2 = p1.clone();
-        
+
         let p_ref1 = &*p1;
         let p_ref2 = p1.clone();
-        
+
         println!("p1: {:?}, refcount: {}", p1, Rc::strong_count(&p1));
         println!("p2: {:?}, refcount: {}", p2, Rc::strong_count(&p2));
         println!("p_ref1: {:?}", p_ref1);

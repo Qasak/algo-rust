@@ -1,3 +1,6 @@
+mod q1144_decrease_elem_to_make_zigzag;
+mod q1247_min_swap;
+mod q1326_min_tap;
 mod q1657_close_strings;
 mod q1703_min_moves;
 mod q1710_maximum_units;
@@ -6,6 +9,3 @@ mod q1775_min_operations;
 mod q1798_max_num_of_consecutive;
 mod q2131_longest_palindrome;
 mod q754_reach_number;
-mod q1326_min_tap;
-mod q1247_min_swap;
-mod q1144_decrease_elem_to_make_zigzag;

@@ -2,7 +2,7 @@
 pub fn stone_game_ii(mut piles: Vec<i32>) -> i32 {
     let n = piles.len();
     // (i, m) (从下标i开始, 取m个)
-    let mut cache = vec![vec![0; n];n];
+    let mut cache = vec![vec![0; n]; n];
     let mut suf = piles;
     if n == 1 {
         return suf[0];

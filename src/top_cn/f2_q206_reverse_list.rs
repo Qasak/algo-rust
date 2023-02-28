@@ -32,15 +32,13 @@ mod test {
 
     #[test]
     pub fn t() {
-        let list1: MyOptBoxNode = vec![1,2,3,4,5].into();
-        let list2: MyOptBoxNode = vec![1,2].into();
+        let list1: MyOptBoxNode = vec![1, 2, 3, 4, 5].into();
+        let list2: MyOptBoxNode = vec![1, 2].into();
         let list3: MyOptBoxNode = vec![].into();
-
 
         let l1 = list1.0;
         let l2 = list2.0;
         let l3 = list3.0;
-
 
         ListNode::print_list(&l1);
         ListNode::print_list(&l2);

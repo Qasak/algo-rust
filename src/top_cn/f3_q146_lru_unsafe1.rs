@@ -30,7 +30,7 @@ impl DListNode {
 
 struct LRUCache {
     map: HashMap<i32, Box<DListNode>>, // 结点由哈希表存储，形式为Box<LRUEntry>
-    cap: usize,                       // 容量
+    cap: usize,                        // 容量
     head: *mut DListNode,              // 头结点（哑）
     tail: *mut DListNode,              // 尾结点（哑）
 }
@@ -119,7 +119,6 @@ impl LRUCache {
             self.link_in((&mut *node) as *mut DListNode); // 重新构建联系
 
             self.map.insert(key, node); // 处理完毕，所有权转交给map
-  
         }
     }
 }
@@ -139,4 +138,3 @@ fn lru_work() {
     lru.get(3);
     lru.get(4);
 }
-

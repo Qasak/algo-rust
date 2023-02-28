@@ -1,6 +1,7 @@
 mod q1000_merge_stones;
 mod q1049_last_stone_weight_ii;
 mod q1139_max_square_boarder;
+mod q1140_stone_II;
 mod q1223_roll_dice;
 mod q1235_job_scheduling;
 mod q131_palindrome_partitioning;
@@ -24,4 +25,3 @@ mod q805_split_array_same_average;
 mod q813_largest_sum_of_averages;
 mod q887_egg_drop;
 mod q915_partition_disjoint;
-mod q1140_stone_II;
