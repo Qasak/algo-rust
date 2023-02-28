@@ -123,3 +123,20 @@ impl LRUCache {
         }
     }
 }
+
+#[test]
+fn lru_work() {
+    let mut lru = LRUCache::new(2);
+    // ["LRUCache","put","put","get","put","get","put","get","get","get"]
+    // [[2],[1,0],[2,2],[1],[3,3],[2],[4,4],[1],[3],[4]]
+    lru.put(1, 2);
+    lru.put(2, 2);
+    lru.get(1);
+    lru.put(3, 3);
+    lru.get(2);
+    lru.put(4, 4);
+    lru.get(1);
+    lru.get(3);
+    lru.get(4);
+}
+
