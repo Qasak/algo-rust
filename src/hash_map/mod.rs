@@ -5,3 +5,4 @@ mod q1817_users_active_minutes;
 mod q49_group_anagrams;
 mod q811_subdomain_visits;
 mod q895_freq_stack;
+mod q2363_merge_similar;
