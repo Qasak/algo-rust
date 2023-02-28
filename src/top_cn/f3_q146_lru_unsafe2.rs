@@ -1,4 +1,6 @@
 use std::{collections::HashMap, ptr};
+
+use crate::linked_list::ListNode;
 struct LRUCache {
     map: HashMap<i32, Box<DListNode>>,
     cap: usize,
@@ -154,4 +156,8 @@ fn lru_work() {
     lru.get(1);
     lru.get(3);
     lru.get(4);
+    unsafe {
+        Box::from_raw(lru.head);
+        Box::from_raw(lru.tail);
+    }
 }
