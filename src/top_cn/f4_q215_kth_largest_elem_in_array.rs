@@ -5,12 +5,11 @@ pub fn find_kth_largest_heap(nums: Vec<i32>, k: i32) -> i32 {
     use std::collections::BinaryHeap;
     let mut q = BinaryHeap::new();
     nums.iter().for_each(|&i| q.push(i));
-    (1..k).for_each(|_| {
+    (1..k).into_iter().for_each(|_| {
         q.pop();
     });
     *q.peek().unwrap()
 }
-
 
 pub fn find_kth_largest(mut nums: Vec<i32>, k: i32) -> i32 {
     fn qss(arr: &mut Vec<i32>, l: usize, r: usize, k: usize) {
@@ -70,6 +69,8 @@ pub fn find_kth_largest(mut nums: Vec<i32>, k: i32) -> i32 {
 
 #[cfg(test)]
 mod test {
+    use std::{rc::Rc, sync::Arc};
+
     use rand::Rng;
 
     use crate::top_cn::f4_q215_kth_largest_elem_in_array::find_kth_largest;

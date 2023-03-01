@@ -19,6 +19,7 @@ mod q223_rectangle_area;
 mod q2256_min_avg_diff;
 mod q2347_poker_hand;
 mod q2357_make_array_zero;
+mod q2373_sub_rectangle;
 mod q263_ugly_number;
 mod q451_frequency_sort;
 mod q764_plus_sign_in_matrix;
