@@ -3,4 +3,6 @@ pub mod f2_q206_reverse_list;
 mod f3_q146_lru_unsafe1;
 mod f3_q146_lru_unsafe2;
 
+mod f0_q912_sort_arr;
 mod f4_q215_kth_largest_elem_in_array;
+mod f5_q25_k_group_reverse;
