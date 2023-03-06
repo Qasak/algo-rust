@@ -14,13 +14,13 @@ pub fn three_sum_dup(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
                     ret.insert(vec![nums[i], nums[l], nums[r]]);
                     l += 1;
                     r -= 1;
-                },
+                }
                 Ordering::Less => {
                     l += 1;
-                },
+                }
                 Ordering::Greater => {
                     r -= 1;
-                },
+                }
             }
         }
     }
@@ -51,13 +51,13 @@ pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
                     }
                     l += 1;
                     r -= 1;
-                },
+                }
                 Ordering::Less => {
                     l += 1;
-                },
+                }
                 Ordering::Greater => {
                     r -= 1;
-                },
+                }
             }
         }
     }
