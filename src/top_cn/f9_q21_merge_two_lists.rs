@@ -19,38 +19,23 @@ pub fn merge_two_lists(
     }
 }
 
-pub fn merge_two_lists_iter(l1: Option<Box<ListNode>>, l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-    let mut dummy_head = ListNode::new(0);
-    let mut tail = &mut dummy_head;
-    let (mut p1, mut p2) = (l1, l2);
-
-    while p1.is_some() && p2.is_some() {
-        let mut n1 = p1.unwrap();
-        let mut n2 = p2.unwrap();
-        if n1.val < n2.val {
-            let next = n1.next.take();
-            tail.next = Some(n1);
-            p1 = next;
-            p2 = Some(n2);
-        } else {
-            let next = n2.next.take();
-            tail.next = Some(n2);
-            p2 = next;
-            p1 = Some(n1);
-        }
-        tail = tail.next.as_mut().unwrap();
-
+pub fn merge_two_lists_iter(
+    mut list1: Option<Box<ListNode>>,
+    mut list2: Option<Box<ListNode>>,
+) -> Option<Box<ListNode>> {
+    let mut dummy = ListNode::new(-1);
+    let mut cur = &mut dummy;
+    while let (Some(n1), Some(n2)) = (list1.as_ref(), list2.as_ref()) {
+        let (v1, v2) = (n1.val, n2.val);
+        let l = if v1 < v2 { &mut list1 } else { &mut list2 };
+        cur.next = l.take();
+        cur = cur.next.as_mut().unwrap();
+        *l = cur.next.take();
     }
-
-    if p1.is_some() {
-        tail.next = p1;
-    }
-    if p2.is_some() {
-        tail.next = p2;
-    }
-
-    dummy_head.next
+    cur.next = list1.or(list2);
+    dummy.next
 }
+
 #[test]
 fn test_merge() {
     let l1 = Some(Box::new(ListNode {
