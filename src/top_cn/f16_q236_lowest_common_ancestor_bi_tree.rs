@@ -17,7 +17,7 @@ pub fn lowest_common_ancestor(root: Option<Rc<RefCell<TreeNode>>>, p: Option<Rc<
         q.clone(),
     );
     match (l, r) {
-        (Some(l), Some(r)) => root,
+        (Some(_l), Some(_r)) => root,
         (Some(n), None) | (None, Some(n)) => Some(n),
         _ => None
     }
