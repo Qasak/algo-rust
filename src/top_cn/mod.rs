@@ -10,3 +10,8 @@ mod f6_3sum;
 mod f7_q53_max_subarray;
 mod f8_q121_stock1;
 mod f9_q21_merge_two_lists;
+mod f10_q102_binary_tree_level_order;
+mod f11_q33_search_in_rotated_sorted_arr;
+mod f12_q5_longest_sub_palindrom;
+mod f13_q141_linked_list_cycle;
+mod f14_q88_merge_sorted_arr;
