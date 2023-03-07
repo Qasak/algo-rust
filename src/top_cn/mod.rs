@@ -17,3 +17,5 @@ mod f13_q141_linked_list_cycle;
 mod f14_q88_merge_sorted_arr;
 mod f15_q103_zigzag_level_binary_tree;
 mod f16_q236_lowest_common_ancestor_bi_tree;
+mod f17_q46_permute;
+mod f18_q160_intersection_list;
