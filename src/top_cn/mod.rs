@@ -20,3 +20,4 @@ mod f16_q236_lowest_common_ancestor_bi_tree;
 mod f17_q46_permute;
 mod f18_q160_intersection_list;
 mod f19_q54_spiral_matrix;
+mod f20_q23_merge_k_sorted_lists;
