@@ -28,7 +28,7 @@ pub fn merge_k_lists(lists: Vec<Option<Box<ListNode>>>) -> Option<Box<ListNode>>
         if next.is_some() {
             heap.push(next);
         }
-    };
+    }
     dummy.next
 }
 
@@ -52,7 +52,10 @@ fn merge(lists: &mut [Option<Box<ListNode>>]) -> Option<Box<ListNode>> {
     let l2 = merge(&mut lists[m..]);
     merge_2_lists(l1, l2)
 }
-fn merge_2_lists(mut list1: Option<Box<ListNode>>, mut list2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+fn merge_2_lists(
+    mut list1: Option<Box<ListNode>>,
+    mut list2: Option<Box<ListNode>>,
+) -> Option<Box<ListNode>> {
     match (list1, list2) {
         (Some(n), None) | (None, Some(n)) => Some(n),
         (Some(mut n1), Some(mut n2)) => {
@@ -64,7 +67,7 @@ fn merge_2_lists(mut list1: Option<Box<ListNode>>, mut list2: Option<Box<ListNod
                 Some(n2)
             }
         }
-        _ => None
+        _ => None,
     }
 }
 
@@ -77,7 +80,7 @@ mod test {
         } else if node2.is_none() {
             return Ordering::Greater;
         }
-        
+
         // 获取两个节点的值，并比较它们
         let val1 = node1.as_ref().unwrap().val;
         let val2 = node2.as_ref().unwrap().val;
@@ -86,16 +89,15 @@ mod test {
     #[test]
     fn bh_work() {
         let mut heap = BinaryHeap::new();
-    
+
         let node1 = Some(Box::new(ListNode { val: 1, next: None }));
         let node2 = Some(Box::new(ListNode { val: 2, next: None }));
         let node3 = Some(Box::new(ListNode { val: 3, next: None }));
-        
 
         heap.push(&node2);
         heap.push(&node1);
         heap.push(&node3);
-    
+
         while let Some(node) = heap.pop() {
             println!("{:?}", node);
         }

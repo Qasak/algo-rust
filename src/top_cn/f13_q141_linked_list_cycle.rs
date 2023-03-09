@@ -1,19 +1,14 @@
-use std::rc::Rc;
 use std::cell::RefCell;
 use std::collections::HashSet;
-pub struct ListNode{
+use std::rc::Rc;
+pub struct ListNode {
     val: i32,
     next: Option<Rc<RefCell<ListNode>>>,
 }
 
-
-
-impl ListNode{
+impl ListNode {
     pub fn new(val: i32) -> ListNode {
-        ListNode { 
-            val, 
-            next: None,
-        }
+        ListNode { val, next: None }
     }
 }
 
@@ -26,7 +21,9 @@ pub fn has_cycle(head: Option<Rc<RefCell<ListNode>>>) -> bool {
     };
 
     loop {
-        if set.contains(&Rc::as_ptr(&h)) { return true; }
+        if set.contains(&Rc::as_ptr(&h)) {
+            return true;
+        }
         set.insert(Rc::as_ptr(&h));
         let next = match h.borrow().next {
             Some(ref node) => Rc::clone(node),

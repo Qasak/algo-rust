@@ -1,8 +1,12 @@
-use std::{rc::Rc, cell::RefCell};
+use std::{cell::RefCell, rc::Rc};
 
 use crate::tree::TreeNode;
 
-pub fn lowest_common_ancestor(root: Option<Rc<RefCell<TreeNode>>>, p: Option<Rc<RefCell<TreeNode>>>, q: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
+pub fn lowest_common_ancestor(
+    root: Option<Rc<RefCell<TreeNode>>>,
+    p: Option<Rc<RefCell<TreeNode>>>,
+    q: Option<Rc<RefCell<TreeNode>>>,
+) -> Option<Rc<RefCell<TreeNode>>> {
     if root.is_none() || p == root || q == root {
         return root;
     }
@@ -19,10 +23,9 @@ pub fn lowest_common_ancestor(root: Option<Rc<RefCell<TreeNode>>>, p: Option<Rc<
     match (l, r) {
         (Some(_l), Some(_r)) => root,
         (Some(n), None) | (None, Some(n)) => Some(n),
-        _ => None
+        _ => None,
     }
 }
-
 
 #[test]
 fn refcell_work() {
@@ -31,19 +34,19 @@ fn refcell_work() {
     impl TheDarkKnight {
         fn nothing_is_true(self) {}
     }
-    
+
     struct Batcave {
-        knight: TheDarkKnight
+        knight: TheDarkKnight,
     }
-    
+
     fn main() {
         use std::mem;
 
         let mut cave = Batcave {
-            knight: TheDarkKnight
+            knight: TheDarkKnight,
         };
         let borrowed = &mut cave;
-        
+
         // borrowed.knight.nothing_is_true(); // E0507
         mem::replace(&mut borrowed.knight, TheDarkKnight).nothing_is_true(); // ok!
     }

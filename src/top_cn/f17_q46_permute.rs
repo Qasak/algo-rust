@@ -8,7 +8,13 @@ pub fn permute(nums: Vec<i32>) -> Vec<Vec<i32>> {
     ret
 }
 
-fn dfs(ret: &mut Vec<Vec<i32>>, line: &mut Vec<i32>, vis: &mut HashSet<i32>, nums: &Vec<i32>, i: usize) {
+fn dfs(
+    ret: &mut Vec<Vec<i32>>,
+    line: &mut Vec<i32>,
+    vis: &mut HashSet<i32>,
+    nums: &Vec<i32>,
+    i: usize,
+) {
     if i == nums.len() {
         ret.push(line.clone());
         return;

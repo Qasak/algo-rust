@@ -22,7 +22,7 @@ pub fn zigzag_level_order(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> 
             };
             if let Some(ref right) = node.borrow().right {
                 dq.push_back(right.clone());
-            // 加上分号";"让临时变量在这里被drop
+                // 加上分号";"让临时变量在这里被drop
             };
         }
         if cnt % 2 == 1 {
@@ -36,7 +36,7 @@ pub fn zigzag_level_order(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> 
 
 #[test]
 fn reverse_work() {
-    let mut v = vec![1,2,3];
+    let mut v = vec![1, 2, 3];
     v.reverse();
     eprintln!("v = {:?}", v);
 }
@@ -49,5 +49,4 @@ fn borrow_work() {
 
     eprintln!("borrowed_five = {:?}", borrowed_five);
     eprintln!("borrowed_five2 = {:?}", borrowed_five2);
-
 }

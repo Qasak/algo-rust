@@ -4,7 +4,11 @@ pub fn longest_palindrome(s: String) -> String {
     let mut max_len = 0;
     for i in 0..cs.len() {
         let (palin_1, palin_2) = (check(&cs, i, i), check(&cs, i, i + 1));
-        let palin = if palin_1.len() > palin_2.len() {palin_1} else {palin_2};
+        let palin = if palin_1.len() > palin_2.len() {
+            palin_1
+        } else {
+            palin_2
+        };
         if palin.len() > max_len {
             ret = palin;
             max_len = palin.len();
