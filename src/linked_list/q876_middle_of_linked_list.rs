@@ -3,6 +3,7 @@ use crate::linked_list::ListNode;
 pub fn middle_node(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     let mut slow = head.as_ref();
     let mut fast = head.as_ref();
+
     loop {
         if let Some(node) = fast {
             fast = node.next.as_ref();
@@ -32,6 +33,39 @@ pub fn middle_node(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         let addr = node.as_ref() as *const ListNode;
         if addr != mid_addr {
             head = head.unwrap().next;
+        } else {
+            break;
+        }
+    }
+    head
+}
+pub fn middle_node_4(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+    let mut fast = &head;
+    let mut slow = &head;
+    loop {
+        if let Some(node) = fast {
+            fast = &node.next;
+        } else {
+            break;
+        }
+        if let Some(node) = fast {
+            fast = &node.next;
+        } else {
+            break;
+        }
+        if let Some(node) = slow {
+            slow = &node.next;
+        }
+    }
+    let mid_addr = if let Some(node) = slow {
+        node.as_ref() as *const ListNode
+    } else {
+        return None;
+    };
+    while let Some(node) = &head {
+        let addr = node.as_ref() as *const ListNode;
+        if addr != mid_addr {
+            head = head.unwrap().next.take();
         } else {
             break;
         }
@@ -83,3 +117,5 @@ pub fn middle_node_3(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     }
     p.clone()
 }
+
+
