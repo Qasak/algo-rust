@@ -25,3 +25,12 @@ pub fn search_range(nums: Vec<i32>, target: i32) -> Vec<i32> {
         },
     ]
 }
+
+pub fn search_range_std_partition_point(nums: Vec<i32>, target: i32) -> Vec<i32> {
+    if let Err(l) = nums.binary_search(&target) {
+        return vec![-1, -1];
+    }
+    let low = nums.partition_point(|x| x < &target);
+    let high = nums.partition_point(|x| x <= &target) - 1;
+    vec![low as i32, high as i32]
+}
