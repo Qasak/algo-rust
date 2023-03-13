@@ -3,6 +3,8 @@ use crate::linked_list::{ListNode, MyOptBoxNode};
 pub fn remove_nth_from_end(mut head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
     let mut fast = &mut head;
     for _ in 0..=n {
+        // 如果去掉else
+        // cannot borrow `*fast` as mutable more than once at a time (solution.rs)
         if let Some(node) = fast.as_mut() {
             fast = &mut node.next;
         } else {
