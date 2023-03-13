@@ -15,22 +15,43 @@ pub fn inorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
     ret
 }
 
+// Option.take()
 pub fn inorder_traversal_iter(mut root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
     // stk: Vec<Rc<RefCell<TreeNode>>>
     let mut stk = vec![];
     let mut ret = vec![];
     let mut cur = root.take();
     while !stk.is_empty() || cur.is_some() {
-        // Rc
+        // node: Rc
         while let Some(node) = cur {
             cur = node.borrow_mut().left.take();
             stk.push(node);
         };
-        // Rc
+        //node: Rc
         if let Some(node) = stk.pop() {
             ret.push(node.borrow().val);
             cur = node.borrow_mut().right.take();
         };
+    }
+    ret
+}
+
+// Rc.clone()
+pub fn inorder_traversal_iter_1(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+    let mut ret = vec![];
+    let mut stk = vec![];
+    let mut cur = root;
+    while !stk.is_empty() || !cur.is_none() {
+        // n: Rc
+        while let Some(n) = cur {
+            stk.push(n.clone());
+            cur = n.borrow().left.clone();
+        }
+        // n: Rc
+        if let Some(n) = stk.pop() {
+            ret.push(n.borrow().val);
+            cur = n.borrow().right.clone();
+        }
     }
     ret
 }
