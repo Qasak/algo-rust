@@ -25,3 +25,4 @@ mod f8_q121_stock1;
 mod f9_q21_merge_two_lists;
 mod f23_q42_trapping_rain;
 mod f24_q300_LIS;
+mod f25_q143_reorder_list;
