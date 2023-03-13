@@ -14,3 +14,23 @@ pub fn inorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
     in_order_dfs(&root, &mut ret);
     ret
 }
+
+pub fn inorder_traversal_iter(mut root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+    // stk: Vec<Rc<RefCell<TreeNode>>>
+    let mut stk = vec![];
+    let mut ret = vec![];
+    let mut cur = root.take();
+    while !stk.is_empty() || cur.is_some() {
+        // Rc
+        while let Some(node) = cur {
+            cur = node.borrow_mut().left.take();
+            stk.push(node);
+        };
+        // Rc
+        if let Some(node) = stk.pop() {
+            ret.push(node.borrow().val);
+            cur = node.borrow_mut().right.take();
+        };
+    }
+    ret
+}
