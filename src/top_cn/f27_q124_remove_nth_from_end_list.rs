@@ -5,6 +5,7 @@ pub fn remove_nth_from_end(mut head: Option<Box<ListNode>>, n: i32) -> Option<Bo
     for _ in 0..=n {
         // 如果去掉else
         // cannot borrow `*fast` as mutable more than once at a time (solution.rs)
+        // 因为此时编译器认为fast有可能同时被借用：指向了None
         if let Some(node) = fast.as_mut() {
             fast = &mut node.next;
         } else {
