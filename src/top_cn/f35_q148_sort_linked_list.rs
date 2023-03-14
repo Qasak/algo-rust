@@ -58,3 +58,30 @@ fn merge(mut l1: Option<Box<ListNode>>, mut l2: Option<Box<ListNode>>) -> Option
         (None, None) => None
     }
 }
+
+fn sort_list_merge_unsafe(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+    if head.is_none() || head.as_ref().map(|x| x.next.is_none()).unwrap() {
+        return head;
+    }
+
+    let mut fast = head.as_ref();
+    let mut slow = head.as_ref();
+    let mut pre = slow.clone();
+    while fast.is_some() {
+        pre = slow.clone();
+        fast = fast.map(|x| x.next.as_ref()).flatten();
+        if fast.is_none() {
+            break;
+        }
+        fast = fast.map(|x| x.next.as_ref()).flatten();
+        slow = slow.map(|x| x.next.as_ref()).flatten();
+    }
+
+    let pre =
+        unsafe { std::mem::transmute::<Option<&Box<ListNode>>, Option<&mut Box<ListNode>>>(pre) };
+    let mid = pre.map(|x| x.next.take()).flatten();
+
+    let l1 = sort_list_merge_unsafe(head);
+    let l2 = sort_list_merge_unsafe(mid);
+    merge(l1, l2)
+}
