@@ -16,7 +16,7 @@ pub fn min_distance(word1: String, word2: String) -> i32 {
             if bs1[i - 1] == bs2[j - 1] {
                 f[i][j] = f[i - 1][j - 1];
             } else {
-                // 修改其中一个 / (插入/删除)其中一个
+                // 修改其中一个 / (删除/插入)其中一个
                 f[i][j] = f[i - 1][j - 1].min(f[i - 1][j].min(f[i][j - 1])) + 1;
             }
         }
@@ -25,6 +25,4 @@ pub fn min_distance(word1: String, word2: String) -> i32 {
     f[n][m] as i32
 }
 
-
 // rec
-

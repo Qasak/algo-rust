@@ -1,4 +1,4 @@
-use std::{rc::Rc, cell::RefCell, collections::VecDeque};
+use std::{cell::RefCell, collections::VecDeque, rc::Rc};
 
 use crate::tree::TreeNode;
 
@@ -25,7 +25,6 @@ pub fn right_side_view(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
                 dq.push_back(right_node);
             }
         }
-        
     }
     ret
 }

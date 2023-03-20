@@ -39,7 +39,7 @@ pub fn find_median_sorted_arrays_1(nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {
 // 分割点+二分： 约束：两个分割点，四个数之间的大小关系
 // 即：nums1[i-1] <= nums2[j] && nums2[j-1] <= nums1[i]
 // 当 m+n 是奇数时，中位数是两个有序数组中的第 (m+n)/2 个元素，
-// 当 m+n 是偶数时，中位数是两个有序数组中的第 (m+n)/2 个元素和第 (m+n)/2+1 个元素的平均值 
+// 当 m+n 是偶数时，中位数是两个有序数组中的第 (m+n)/2 个元素和第 (m+n)/2+1 个元素的平均值
 pub fn find_median_sorted_arrays_2(nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {
     let (n, m) = (nums1.len(), nums2.len());
     if n > m {

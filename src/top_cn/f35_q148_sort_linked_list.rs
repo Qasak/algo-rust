@@ -20,7 +20,6 @@ pub fn sort_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     dummy.next
 }
 
-
 pub fn sort_list_merge(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     if head.is_none() || head.as_ref().unwrap().next.is_none() {
         return head;
@@ -43,7 +42,7 @@ pub fn sort_list_merge(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>>
     merge(l1, l2)
 }
 
-fn merge(mut l1: Option<Box<ListNode>>, mut l2: Option<Box<ListNode>>) -> Option<Box<ListNode>>{
+fn merge(mut l1: Option<Box<ListNode>>, mut l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     match (l1, l2) {
         (None, Some(n)) | (Some(n), None) => Some(n),
         (Some(mut n1), Some(mut n2)) => {
@@ -54,8 +53,8 @@ fn merge(mut l1: Option<Box<ListNode>>, mut l2: Option<Box<ListNode>>) -> Option
                 n2.next = merge(Some(n1), n2.next.take());
                 Some(n2)
             }
-        },
-        (None, None) => None
+        }
+        (None, None) => None,
     }
 }
 

@@ -1,5 +1,5 @@
-use std::collections::VecDeque;
 use crate::linked_list::ListNode;
+use std::collections::VecDeque;
 
 pub fn reorder_list(head: &mut Option<Box<ListNode>>) {
     let mut dq = VecDeque::new();

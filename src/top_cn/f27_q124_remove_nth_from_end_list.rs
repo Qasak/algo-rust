@@ -16,7 +16,7 @@ pub fn remove_nth_from_end(mut head: Option<Box<ListNode>>, n: i32) -> Option<Bo
     while let Some(mut fast_node) = fast.as_mut() {
         fast = &mut fast_node.next;
         cnt += 1;
-    };
+    }
     // NLL规则
     let mut slow = &mut head;
     for _ in 0..cnt {
@@ -27,9 +27,11 @@ pub fn remove_nth_from_end(mut head: Option<Box<ListNode>>, n: i32) -> Option<Bo
     head
 }
 
-
 pub fn remove_nth_from_end_1(mut head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
-    let mut dummy = ListNode{val: -1, next: head};
+    let mut dummy = ListNode {
+        val: -1,
+        next: head,
+    };
     let mut fast = &mut dummy;
     for _ in 0..n {
         if let Some(ref mut fast_node) = fast.next {
@@ -56,7 +58,7 @@ pub fn remove_nth_from_end_1(mut head: Option<Box<ListNode>>, n: i32) -> Option<
 #[test]
 fn remove_nth_from_end_work() {
     // test remove_nth_from_end
-    let mut list: MyOptBoxNode = vec![1,2,3,4,5].into();
+    let mut list: MyOptBoxNode = vec![1, 2, 3, 4, 5].into();
     let mut head = list.0;
     let ret = remove_nth_from_end(head, 5);
     ListNode::print_list(&ret);

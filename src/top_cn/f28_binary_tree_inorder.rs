@@ -1,4 +1,4 @@
-use std::{rc::Rc, cell::RefCell};
+use std::{cell::RefCell, rc::Rc};
 
 use crate::tree::TreeNode;
 
@@ -26,7 +26,7 @@ pub fn inorder_traversal_iter(mut root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i3
         while let Some(node) = cur {
             cur = node.borrow_mut().left.take();
             stk.push(node);
-        };
+        }
         //node: Rc
         if let Some(node) = stk.pop() {
             ret.push(node.borrow().val);

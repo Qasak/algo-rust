@@ -18,13 +18,11 @@ pub fn merge(mut intervals: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
     ret
 }
 
-
 #[test]
 fn test_merge() {
     let mut intervals = vec![vec![1, 3], vec![2, 6], vec![8, 10], vec![15, 18]];
     let mut ans = vec![vec![1, 6], vec![8, 10], vec![15, 18]];
     assert_eq!(merge(intervals), ans);
-
 
     let mut intervals = vec![vec![1, 4], vec![4, 5]];
     let mut ans = vec![vec![1, 5]];

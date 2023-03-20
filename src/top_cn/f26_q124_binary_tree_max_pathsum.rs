@@ -1,4 +1,4 @@
-use std::{rc::Rc, cell::RefCell};
+use std::{cell::RefCell, rc::Rc};
 
 use crate::tree::TreeNode;
 
@@ -16,7 +16,9 @@ pub fn max_path_sum(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
             // 3. select current node
             *ans = (*ans).max(cur_contrib).max(cross);
             cur_contrib
-        } else {0}
+        } else {
+            0
+        }
     }
     let mut ans = root.as_ref().unwrap().borrow().val;
     get_subtree_contribute(&root, &mut ans);
