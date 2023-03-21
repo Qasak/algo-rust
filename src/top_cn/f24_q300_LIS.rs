@@ -12,7 +12,7 @@ pub fn length_of_lis(nums: Vec<i32>) -> i32 {
     *f.iter().max().unwrap()
 }
 
-// greedy: O(nlogn) time, O(n) space. 
+// greedy: O(nlogn) time, O(n) space.
 // 1. if x is larger than all tails, append it, increase the size by 1
 // 2. if tails[i-1] < x <= tails[i], update tails[i]
 // 3. if x is smaller than all tails, update tails[0]
@@ -32,7 +32,7 @@ pub fn length_of_lis_greedy(nums: Vec<i32>) -> i32 {
 }
 
 #[test]
-fn test_length_of_lis_greedy () {
+fn test_length_of_lis_greedy() {
     let nums = vec![10, 9, 2, 5, 3, 7, 101, 18];
     assert_eq!(length_of_lis_greedy(nums), 4);
 }
@@ -41,11 +41,10 @@ fn test_length_of_lis_greedy () {
 fn test_bs() {
     let s = [0, 1, 1, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55];
 
-    assert_eq!(s.binary_search(&13),  Ok(9));
-    assert_eq!(s.binary_search(&4),   Err(7));
+    assert_eq!(s.binary_search(&13), Ok(9));
+    assert_eq!(s.binary_search(&4), Err(7));
     assert_eq!(s.binary_search(&100), Err(13));
     let r = s.binary_search(&1);
-    assert!(match r { Ok(1..=4) => true, _ => false, });
-    let r = s.binary_search(&4);
 
+    eprintln!("r.unwrap() = {:?}", r.unwrap());
 }

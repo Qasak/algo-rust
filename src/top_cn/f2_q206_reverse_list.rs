@@ -26,6 +26,15 @@ pub fn reverse(pre: Option<Box<ListNode>>, cur: Option<Box<ListNode>>) -> Option
     }
 }
 
+pub fn reverse_list_1(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+    let mut prev = None;
+    let mut curr = head;
+    while let Some(mut node) = curr {
+        curr = node.next.replace(prev.unwrap());
+        prev = Some(node);
+    }
+    prev
+}
 #[cfg(test)]
 mod test {
     use super::*;
