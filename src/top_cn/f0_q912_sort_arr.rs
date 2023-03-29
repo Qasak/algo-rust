@@ -28,3 +28,6 @@ pub fn sort_array(mut nums: Vec<i32>) -> Vec<i32> {
     quicksort(&mut nums);
     nums
 }
+
+// merge_sort
+// TODO
