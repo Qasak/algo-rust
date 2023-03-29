@@ -1,3 +1,4 @@
+mod q1096_brace_exp_ii;
 mod q1210_python_out_of_the_maze;
 mod q1293_shortest_path_with_block;
 mod q1926_maze;
