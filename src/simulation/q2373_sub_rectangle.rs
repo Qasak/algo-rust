@@ -16,19 +16,15 @@ pub fn largest_local_1(grid: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
     let n = grid.len();
     let mut ret = vec![vec![0; n - 2]; n - 2];
     (0..(n - 2)).for_each(|i| {
-            (0..(n - 2)).for_each(|j| {
-                ret[i][j] = get_max_1(i, j, &grid);
-            })
-        });
+        (0..(n - 2)).for_each(|j| {
+            ret[i][j] = get_max_1(i, j, &grid);
+        })
+    });
     ret
 }
 
 fn get_max_1(i: usize, j: usize, grid: &[Vec<i32>]) -> i32 {
     let mut ret = 0;
-    (i..(i + 3)).for_each(|ii| {
-            (j..(j + 3)).for_each(|jj| {
-                ret = ret.max(grid[ii][jj])
-            })
-        });
+    (i..(i + 3)).for_each(|ii| (j..(j + 3)).for_each(|jj| ret = ret.max(grid[ii][jj])));
     ret
 }
