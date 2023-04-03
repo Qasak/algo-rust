@@ -1,4 +1,3 @@
-
 use std::fs::File;
 use std::io::{BufReader, Read, Result};
 
@@ -41,9 +40,9 @@ where
 }
 #[cfg(test)]
 mod test {
+    use crate::sys::s5_type_generic_1::MyReader;
     use std::fs::File;
     use std::io::BufReader;
-    use crate::sys::s5_type_generic_1::MyReader;
 
     #[test]
     fn read_it() {

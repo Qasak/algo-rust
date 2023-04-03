@@ -117,5 +117,3 @@ pub fn middle_node_3(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     }
     p.clone()
 }
-
-
