@@ -43,7 +43,7 @@ impl ListNode {
     }
 }
 
-type OptBoxNode = Option<Box<ListNode>>;
+pub type OptBoxNode = Option<Box<ListNode>>;
 pub struct MyOptBoxNode(pub OptBoxNode);
 impl From<Vec<i32>> for MyOptBoxNode {
     fn from(vec: Vec<i32>) -> Self {
