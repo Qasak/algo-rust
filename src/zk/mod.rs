@@ -1,0 +1,1 @@
+mod z1_magic_square_zk_snark;
