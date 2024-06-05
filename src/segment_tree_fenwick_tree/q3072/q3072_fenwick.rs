@@ -5,12 +5,14 @@ struct BinaryIndexedTree {
 impl BinaryIndexedTree {
     // 给你一个下标从 1 开始、长度为 n 的整数数组 nums 。
     // 提示这是个线段树的题，下标从 1 开始
+    // 严格大于：n-小于等于
     fn new(n: usize) -> Self {
         BinaryIndexedTree {
             tree: vec![0; n + 1],
         }
     }
-    // # 把下标为 i 的元素增加 1
+    // # 把下标为 i 的元素个数增加 1
+    // 更新：从子到根
     fn add(&mut self, mut i: usize) {
         while i < self.tree.len() {
             self.tree[i] += 1;
@@ -18,7 +20,8 @@ impl BinaryIndexedTree {
             i += i & (!i + 1);
         }
     }
-    // # 返回下标在 [1,i] 的元素之和
+    // # 返回下标在 [1,i] 的元素个数之和
+    // 查询：从特定点到1
     fn get(&self, mut i: usize) -> i32 {
         let mut sum = 0;
         while i > 0 {
@@ -42,6 +45,7 @@ impl Solution {
 
         let mut arr1 = vec![nums[0]];
         let mut arr2 = vec![nums[1]];
+        // 用n初始化，因为会出现查询当前满足条件元素==0的情况
         let mut tree1 = BinaryIndexedTree::new(n);
         let mut tree2 = BinaryIndexedTree::new(n);
         tree1.add(index[&nums[0]]);
