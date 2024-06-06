@@ -37,5 +37,6 @@ mod weekly_contest;
 mod zk;
 
 fn main() {
-    println!("Hello algo-rust!")
+    println!("Hello algo-rust!");
+
 }
