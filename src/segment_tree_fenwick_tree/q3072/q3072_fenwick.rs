@@ -47,7 +47,7 @@ impl Solution {
 
         let mut arr1 = vec![nums[0]];
         let mut arr2 = vec![nums[1]];
-        // 用n初始化，因为会出现查询当前满足条件元素==0的情况
+        // 用n初始化，因为有可能元素相同，也有可能不同
         let mut tree1 = BinaryIndexedTree::new(n);
         let mut tree2 = BinaryIndexedTree::new(n);
         tree1.add(index[&nums[0]]);
