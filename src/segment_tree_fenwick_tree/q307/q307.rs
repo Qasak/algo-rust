@@ -11,21 +11,17 @@ struct NumArray {
 impl NumArray {
 
     fn new(nums: Vec<i32>) -> Self {
+        // 原数组无需扩展长度，fenwick数组增加1长度
         let n = nums.len();
         let mut tree = vec![0; n + 1];
-        let mut a = vec![0; n + 1];
-
-        for i in 0..n {
-            a[i + 1] = nums[i];
-        }
         let mut num_array = NumArray {
-            nums: a,
-            tree: tree
+            nums,
+            tree
         };
         for i in 0..n {
             let mut index = i + 1;
-            while index < num_array.nums.len() {
-                num_array.tree[index] += nums[i];
+            while index < num_array.tree.len() {
+                num_array.tree[index] += num_array.nums[i];
                 index += index & (!index + 1);
             }
         }
@@ -34,10 +30,11 @@ impl NumArray {
     
     // &self -> &mut self
     fn update(&mut self, index: i32, val: i32) {
-        let mut index = index as usize + 1;
+        let mut index = index as usize;
         let delta = val - self.nums[index];
         self.nums[index] = val;
-        while index < self.nums.len() {
+        index += 1;
+        while index < self.tree.len() {
             self.tree[index] += delta;
             index += index & (!index + 1);
         }
