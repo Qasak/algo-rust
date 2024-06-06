@@ -38,7 +38,9 @@ impl Solution {
         let n = nums.len();
         let mut sorted_nums = nums.clone();
         sorted_nums.sort();
+        // 记录最后一个num的下标
         let mut index = HashMap::new();
+        // 使用insert()修改。如果键已经存在，insert 方法会更新对应的值，并返回旧的值；如果键不存在，则插入新的键值对，并返回 None
         for i in 0..n {
             index.insert(sorted_nums[i], i + 1);
         }
