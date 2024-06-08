@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/wangjingsen/Documents/project_algo/algo-rust/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++   -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -std=gnu++14 -o CMakeFiles/algo_rust.dir/src/sys/s4_mem.cpp.o -c /Users/wangjingsen/Documents/project_algo/algo-rust/src/sys/s4_mem.cpp",
+  "file": "/Users/wangjingsen/Documents/project_algo/algo-rust/src/sys/s4_mem.cpp"
+}
+]
