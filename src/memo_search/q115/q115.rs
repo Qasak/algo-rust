@@ -41,4 +41,29 @@ impl Solution {
         }
         dfs(0, 0, &ss, &tt, &mut cache)
     }
+
+
+    pub fn num_distinct_dp(s: String, t: String) -> i32 {
+        let ss: Vec<char> = s.chars().collect();
+        let tt: Vec<char> = t.chars().collect();
+        let (n, m) = (ss.len(), tt.len());
+        if n < m {
+            return 0;
+        }
+        let mut dp = vec![vec![0; m + 1]; n + 1];
+        // 初始化'递归终点'
+        for i in 0..=n {
+            dp[i][m] = 1;
+        }
+        for i in (0..n).rev() {
+            for j in (0..m).rev() {
+                if ss[i] == tt[j] {
+                    dp[i][j] = dp[i + 1][j + 1] + dp[i + 1][j];
+                } else {
+                    dp[i][j] = dp[i + 1][j];
+                }
+            }
+        }
+        dp[0][0]
+    }
 }
