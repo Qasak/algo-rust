@@ -138,3 +138,25 @@ fn lru_work() {
     lru.get(3);
     lru.get(4);
 }
+
+#[test]
+fn test_raw() {
+        // 创建一个HashMap，键是i32，值是*mut i32类型的裸指针  
+        let mut map: HashMap<i32, *mut i32> = HashMap::new();  
+  
+        // 分配一些内存  
+        let value = Box::new(42);  
+        let ptr = Box::into_raw(value); // 转换为裸指针  
+      
+        // 将裸指针存入HashMap  
+        map.insert(1, ptr);  
+      
+        // 使用HashMap中的值（裸指针）  
+        if let Some(ptr) = map.get(&1) {  
+            let x = unsafe { **ptr };
+            println!("Value: {:?}", x); // 需要unsafe块来解引用裸指针  
+        }  
+        // 注意：这里需要手动释放内存，因为我们使用了Box::into_raw  
+        // 如果没有释放，将会导致内存泄漏  
+        drop(unsafe{Box::from_raw(ptr)});
+}

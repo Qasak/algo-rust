@@ -30,6 +30,7 @@ fn reorder_list_test() {
         ptr.as_mut().unwrap().next = Some(Box::new(ListNode::new(i)));
         ptr = &mut ptr.as_mut().unwrap().next;
     }
+    eprintln!("head = {:?}", head);
     reorder_list(&mut head);
     ListNode::print_list(&head);
     eprintln!("head = {:?}", head);

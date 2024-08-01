@@ -2,6 +2,8 @@ mod f1_q3_longest_substring;
 pub mod f2_q206_reverse_list;
 mod f3_q146_lru_unsafe1;
 mod f3_q146_lru_unsafe2;
+mod f3_q146_lru_unsafe3;
+
 
 mod f0_q912_sort_arr;
 mod f10_q102_binary_tree_level_order;

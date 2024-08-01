@@ -1,4 +1,4 @@
-use regex::internal::Input;
+// use regex::internal::Input;
 use std::collections::HashSet;
 
 pub fn remove_subfolders(mut folder: Vec<String>) -> Vec<String> {
